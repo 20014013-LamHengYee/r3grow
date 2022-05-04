@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   // regan lee comment
   // heng yee comment 2
   // test
+  // regan lee comment 2
 
   @override
   Widget build(BuildContext context) {

@@ -329,12 +329,11 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                       );
                     },
                     child: const Text('Redeem',
-                        style: TextStyle(fontSize: 18)), // text
+                        style: TextStyle(fontSize: 20)), // text
                     style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(130, 40),
+                        minimumSize: const Size(350, 40),
                         primary: Color(0xFF226E44),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(500))),
+                        ),
                   ),
                 ),
               ],

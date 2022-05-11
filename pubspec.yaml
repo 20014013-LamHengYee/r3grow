@@ -65,7 +65,10 @@ flutter:
   - assets/images/achievement.png
   - assets/images/hero.png
   - assets/images/scanner.png
-  - assets/images/vou.png
+  - assets/images/freedrinks.png
+  - assets/images/upsize.png
+  - assets/images/freegift.png
+  - assets/images/discount.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

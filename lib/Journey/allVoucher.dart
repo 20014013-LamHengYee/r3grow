@@ -62,73 +62,18 @@ class _AllVoucherWidgetState extends State<AllVoucherWidget> {
                     ),
                     scrollDirection: Axis.vertical,
                     children: [
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const VoucherRedemptionWidget(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/images/vou.png',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
+                      Image.asset(
+                        'assets/images/WhatsApp_Image_2022-04-27_at_11.57.02_AM.jpeg',
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
                       ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const VoucherRedemptionWidget(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/images/vou.png',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const VoucherRedemptionWidget(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/images/vou.png',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const VoucherRedemptionWidget(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/images/vou.png',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
+                      const Text(
+                        '(name of voucher)\n\nPoints Required: 50 points',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),

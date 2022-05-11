@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:r3grow/Journey/allVoucher.dart';
 import 'package:r3grow/Journey/voucherRedemption.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({Key key}) : super(key: key);
@@ -21,11 +23,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   // PROGRESS BAR - STEPS
   double step = 0.00;
+  // double step;
   // 0.001 - 1 STEP
   // 0.025 - 25 STEP
 
-  // POINTS
+  // POINTS 
   int point = 0;
+  // int point;
+
+  // final _firestore = FirebaseFirestore.instance;
+  final Stream<QuerySnapshot> account =
+      FirebaseFirestore.instance.collection('Account').snapshots();
 
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[];
@@ -137,6 +145,29 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    // StreamBuilder<QuerySnapshot>(
+                    //   stream: account,
+                    //   builder: (
+                    //     BuildContext context,
+                    //     AsyncSnapshot<QuerySnapshot> snapshot,
+                    //   ) {
+                    //     if (snapshot.hasError) {
+                    //       return Text('Something went wrong');
+                    //     }
+
+                    //     if (snapshot.connectionState ==
+                    //         ConnectionState.waiting) {
+                    //       return Text('Loading');
+                    //     }
+
+                    //     final data =
+                    //         snapshot.requireData.docs[0]; // take data from the snapshot
+                        
+                    //     step = data['Steps'];
+
+                    //     return Text(step.toString());
+                    //   },
+                    // ),
                     Expanded(
                       child: new Stack(children: <Widget>[
                         LinearProgressIndicator(
@@ -401,8 +432,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.event),
-            label: 'Events',
+            icon: Icon(Icons.map),
+            label: 'Nearest Bin',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today_sharp),

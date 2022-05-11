@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, unnecessary_new
 
 import 'package:flutter/material.dart';
+import 'package:r3grow/Journey/allVoucher.dart';
 import 'package:r3grow/Journey/voucherRedemption.dart';
-
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({Key key}) : super(key: key);
@@ -22,14 +22,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   // PROGRESS BAR - STEPS
   double step = 0.00;
   // 0.001 - 1 STEP
-  // 0.025 - 25 STEP 
+  // 0.025 - 25 STEP
 
   // POINTS
   int point = 0;
 
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-  ];
+  static const List<Widget> _widgetOptions = <Widget>[];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -72,7 +71,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ],
                       ),
                     ),
-                    // QR CODE SCANNER 
+                    // QR CODE SCANNER
                     Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -83,22 +82,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         //   height: 30,
                         //   fit: BoxFit.cover,
                         // ),
-                      // TEMPORARY ONLY
-                      ButtonTheme(
-                        child: ElevatedButton(
-                          onPressed: () async {
+                        // TEMPORARY ONLY
+                        ButtonTheme(
+                          child: ElevatedButton(
+                            onPressed: () async {
                               step = step + 0.001;
                               point = point + 1;
-                          },
-                          child: Text('S' + point.toString(), style: TextStyle(fontSize: 10)), // text
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(30, 30),
-                            primary: Color(0xFF226E44),
-                            shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(500))
+                            },
+                            child: Text('S' + point.toString(),
+                                style: TextStyle(fontSize: 10)), // text
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(30, 30),
+                                primary: Color(0xFF226E44),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(500))),
+                          ),
                         ),
-                        ),
-                      ),
                       ],
                     ),
                   ],
@@ -112,23 +111,23 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     'Your Hero Journey',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 30, 
-                      color: Color(0xFFF95F62), 
-                      fontWeight: FontWeight.w600),
+                        fontSize: 30,
+                        color: Color(0xFFF95F62),
+                        fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(10, 20, 10, 0),
                 child: Align(
-                    alignment :Alignment.lerp(Alignment.topLeft, Alignment.topRight, step),
-                    child:
-                    Image.asset(
-                      'assets/images/hero.png',
-                      width: 150,
-                      height: 150,
-                      fit: BoxFit.cover,
-                    ),
+                  alignment: Alignment.lerp(
+                      Alignment.topLeft, Alignment.topRight, step),
+                  child: Image.asset(
+                    'assets/images/hero.png',
+                    width: 150,
+                    height: 150,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               // PROGRESS BAR (DETERMINATE)
@@ -138,171 +137,267 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(                     
-                    child: new Stack(
-                    children: <Widget>[
-                      LinearProgressIndicator(
-                        value: step,
-                        color: Color(0xFF226E44),
-                        minHeight: 15,
-                        backgroundColor: Colors.green,
-                      ),
+                    Expanded(
+                      child: new Stack(children: <Widget>[
+                        LinearProgressIndicator(
+                          value: step,
+                          color: Color(0xFF226E44),
+                          minHeight: 15,
+                          backgroundColor: Colors.green,
+                        ),
+                        Padding(
+                          // padding between label and bar
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                          child: Align(
+                            alignment: Alignment.lerp(
+                                Alignment.topLeft, Alignment.topRight, step),
+                            // use .truncate() to remove decimal place | progress bar label is initiate with double
+                            child: Text(
+                                (step * 1000).truncate().toString() + " STEPS",
+                                style: TextStyle(fontSize: 18)),
+                          ),
+                        ),
+                      ]),
+                    )
+                  ],
+                ),
+              ),
               Padding(
-                  // padding between label and bar
-                padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                child: Align(
-                  alignment :Alignment.lerp(Alignment.topLeft, Alignment.topRight, step),
-                  // use .truncate() to remove decimal place | progress bar label is initiate with double
-                  child: Text((step*1000).truncate().toString() + " STEPS", style: TextStyle(fontSize: 18)),
-                      ),
-                    ),
-                    ]
-                  ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 25),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                ButtonTheme(
-                    minWidth: 330.0,
-                    height: 50.0,
-                    child: ElevatedButton(
-                      onPressed: null,
-                      child: Text('Points: ' + point.toString(), style: TextStyle(fontSize: 18)), // text
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(130, 40),
-                        primary: Color(0xFF226E44),
-                        shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(500))
-                    ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 25),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Rewards Available',
-                      style: TextStyle(
-                        fontSize: 18, 
-                        color: Colors.black, 
-                        fontWeight: FontWeight.w600),
+                    ButtonTheme(
+                      minWidth: 330.0,
+                      height: 50.0,
+                      child: ElevatedButton(
+                        onPressed: null,
+                        child: Text('Points: ' + point.toString(),
+                            style: TextStyle(fontSize: 18)), // text
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(130, 40),
+                            primary: Color(0xFF226E44),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(500))),
+                      ),
                     ),
                   ],
                 ),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(160, 0, 0, 0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  'See All',
-                  style: TextStyle(
-                    fontSize: 15, 
-                    color: Colors.grey, 
-                    fontWeight: FontWeight.w600),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ),
-        Divider(
-          thickness: 1,
-          color: Color(0xFF656565),
-        ),
-        Expanded(
-          child: GridView(
-            padding: EdgeInsets.zero,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1,
-            ),
-            scrollDirection: Axis.vertical,
-            children: [
-              InkWell(
-                onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const VoucherRedemptionWidget(),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Rewards Available',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
                     ),
-                  );
-                },
-                child: Image.asset(
-                  'assets/images/vou.png',
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(160, 0, 0, 0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          // Text(
+                          //   'See All',
+                          //   style: TextStyle(
+                          //       fontSize: 15,
+                          //       color: Colors.grey,
+                          //       fontWeight: FontWeight.w600),
+                          // ),
+                          GestureDetector(
+                            child: Text("See All",
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 15)),
+                            onTap: () async {
+                              // go to
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AllVoucherWidget(),
+                                ),
+                              );
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Image.network(
-                'https://picsum.photos/seed/500/600',
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
+              Divider(
+                thickness: 1,
+                color: Color(0xFF656565),
               ),
-              Image.network(
-                'https://picsum.photos/seed/783/600',
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
-              Image.network(
-                'https://picsum.photos/seed/493/600',
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
-              Image.network(
-                'https://picsum.photos/seed/951/600',
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
-              Image.network(
-                'https://picsum.photos/seed/257/600',
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
-              Image.network(
-                'https://picsum.photos/seed/464/600',
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
-              Image.network(
-                'https://picsum.photos/seed/793/600',
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                  child: GridView(
+                    padding: EdgeInsets.zero,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 1,
+                    ),
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VoucherRedemptionWidget(),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          'assets/images/vou.png',
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VoucherRedemptionWidget(),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          'assets/images/vou.png',
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VoucherRedemptionWidget(),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          'assets/images/vou.png',
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VoucherRedemptionWidget(),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          'assets/images/vou.png',
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VoucherRedemptionWidget(),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          'assets/images/vou.png',
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VoucherRedemptionWidget(),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          'assets/images/vou.png',
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VoucherRedemptionWidget(),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          'assets/images/vou.png',
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VoucherRedemptionWidget(),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          'assets/images/vou.png',
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
         ),
-        
-      ],
-    ),
-  ),
-),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -333,5 +428,4 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       ),
     );
   }
-
 }

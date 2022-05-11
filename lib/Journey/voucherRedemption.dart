@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-
 class VoucherRedemptionWidget extends StatefulWidget {
   const VoucherRedemptionWidget({Key key}) : super(key: key);
 
@@ -13,7 +12,7 @@ class VoucherRedemptionWidget extends StatefulWidget {
 
 class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
- 
+
   int points = 100;
   int voucherPoints = 50;
   int pointsUpdated;
@@ -25,11 +24,26 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor:  const Color(0xFF0F4D40),
-        automaticallyImplyLeading: true,
-        // actions: [],
-        // centerTitle: false,
-        // elevation: 0,
+        backgroundColor: Colors.white,
+        // automaticallyImplyLeading: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.keyboard_arrow_left,
+              color: Colors.grey, size: 40),
+        ),
+        title: const Text(
+          'Redeem Vouchers',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 30,
+              color: Color(0xFF226E44),
+              fontWeight: FontWeight.w600),
+        ),
+        // actions: const [],
+        centerTitle: true,
+        elevation: 5,
       ),
       backgroundColor: const Color(0xFFF1FDFB),
       body: SafeArea(
@@ -40,34 +54,32 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 25, 0, 25),
+                  padding: EdgeInsetsDirectional.fromSTEB(10, 40, 10, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'Redeem Voucher',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 30, 
-                          color: Color(0xFFF95F62), 
-                          fontWeight: FontWeight.w600),
-                          ),
+                    children: [
+                      Image.asset(
+                        'assets/images/vou.png',
+                        width: 300,
+                        height: 150,
+                        fit: BoxFit.cover,
+                      ),
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/vou.png',
-                      width: 300,
-                      height: 150,
-                      fit: BoxFit.cover,
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisSize: MainAxisSize.max,
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Image.asset(
+                //       'assets/images/vou.png',
+                //       width: 300,
+                //       height: 150,
+                //       fit: BoxFit.cover,
+                //     ),
+                //   ],
+                // ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 30),
                   child: Row(
@@ -83,16 +95,16 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                             Text(
                               'Point',
                               style: TextStyle(
-                                fontSize: 18, 
-                                color: Colors.black, 
-                                fontWeight: FontWeight.w600),
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600),
                             ),
                             Text(
                               '50 points',
                               style: TextStyle(
-                                fontSize: 18, 
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400),
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400),
                             ),
                           ],
                         ),
@@ -103,16 +115,16 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                         children: [
                           Text(
                             'Valid Date',
-                              style: TextStyle(
-                                fontSize: 18, 
-                                color: Colors.black, 
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
                                 fontWeight: FontWeight.w600),
                           ),
                           Text(
                             '18 Apr 2022 to 01 May 2022',
                             style: TextStyle(
-                                fontSize: 18, 
-                                color: Colors.black, 
+                                fontSize: 18,
+                                color: Colors.black,
                                 fontWeight: FontWeight.w400),
                           ),
                         ],
@@ -130,10 +142,10 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                         child: Text(
                           'Description',
                           textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontSize: 18, 
-                                color: Colors.black, 
-                                fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
                     ],
@@ -150,9 +162,9 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                           'Enjoy a FREE upsize of any drinks when you purchase from Liho!',
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                                fontSize: 18, 
-                                color: Colors.black, 
-                                fontWeight: FontWeight.w400),
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400),
                         ),
                       ),
                     ],
@@ -168,10 +180,10 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                         child: Text(
                           'Terms & Condition',
                           textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontSize: 18, 
-                                color: Colors.black, 
-                                fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
                     ],
@@ -187,150 +199,144 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                         child: Text(
                           '- condition 1\n- condition 2\n- condition 3',
                           textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontSize: 18, 
-                                color: Colors.black, 
-                                fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400),
                         ),
                       ),
                     ],
                   ),
                 ),
                 ButtonTheme(
-                      minWidth: 130,
-                      height: 40,
-                      child: ElevatedButton(
+                  minWidth: 130,
+                  height: 40,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      // print('Button pressed ...');
+                      Widget yesButton = TextButton(
+                        child: Text("YES"),
                         onPressed: () async {
-                            // print('Button pressed ...');
-                            Widget yesButton = TextButton(
-                            child: Text("YES"),
-                            onPressed: () async {  
-                              if (points >= voucherPoints) {
-                                numOfVoucherBalance = numOfVoucher - 1; // not refreshing well.
-                                if (numOfVoucherBalance != -1) {
-                                  points = points - voucherPoints;
-                                  print("#: " + numOfVoucherBalance.toString());
+                          if (points >= voucherPoints) {
+                            numOfVoucherBalance =
+                                numOfVoucher - 1; // not refreshing well.
+                            if (numOfVoucherBalance != -1) {
+                              points = points - voucherPoints;
+                              print("#: " + numOfVoucherBalance.toString());
 
-                                  Widget okButton = TextButton(
-                                    child: Text("OK"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    //   Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (context) => VoucherRedemptionWidget()
-                                    //   )
-                                    // ); 
-                                    }, 
-                                  );
+                              Widget okButton = TextButton(
+                                child: Text("OK"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  //   Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => VoucherRedemptionWidget()
+                                  //   )
+                                  // );
+                                },
+                              );
 
-                                  AlertDialog alert = AlertDialog(
-                                    title: Text("Congratulation"),
-                                    content: Text("You have successfully redeem this voucher! Please use it as soon as possible."),
-                                    actions: [
-                                      okButton
-                                    ],
-                                  );
+                              AlertDialog alert = AlertDialog(
+                                title: Text("Congratulation"),
+                                content: Text(
+                                    "You have successfully redeem this voucher! Please use it as soon as possible."),
+                                actions: [okButton],
+                              );
 
-                                  // show the dialog
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return alert;
-                                    },
-                                  );
+                              // show the dialog
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                },
+                              );
 
-                                  // Navigator.of(context).pop();  
-                                }
-                                else {
-                                  // NOT ENOUGH VOUCHERS
-                                  Widget okButton = TextButton(
-                                    child: Text("OK"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  );
+                              // Navigator.of(context).pop();
+                            } else {
+                              // NOT ENOUGH VOUCHERS
+                              Widget okButton = TextButton(
+                                child: Text("OK"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              );
 
-                                  AlertDialog alert = AlertDialog(
-                                    title: Text("Sorry"),
-                                    content: Text("This voucher is fully redeemed."),
-                                    actions: [
-                                      okButton
-                                    ],
-                                  );
+                              AlertDialog alert = AlertDialog(
+                                title: Text("Sorry"),
+                                content:
+                                    Text("This voucher is fully redeemed."),
+                                actions: [okButton],
+                              );
 
-                                  // show the dialog
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return alert;
-                                    },
-                                  );
-                                  }
-                              }                 
-                              else {
-                                // NOT ENOUGH POINTS
-                                Widget okButton = TextButton(
-                                  child: Text("OK"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                );
+                              // show the dialog
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                },
+                              );
+                            }
+                          } else {
+                            // NOT ENOUGH POINTS
+                            Widget okButton = TextButton(
+                              child: Text("OK"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            );
 
-                                AlertDialog alert = AlertDialog(
-                                  title: Text("Oops"),
-                                  content: Text("You have insufficient points to redeem this voucher."),
-                                  actions: [
-                                    okButton
-                                  ],
-                                );
+                            AlertDialog alert = AlertDialog(
+                              title: Text("Oops"),
+                              content: Text(
+                                  "You have insufficient points to redeem this voucher."),
+                              actions: [okButton],
+                            );
 
-                                // show the dialog
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return alert;
-                                  },
-                                );
-                                // Navigator.of(context).pop();   
-                              }                                 
-                            },
-                          );
-                          
-                          Widget noButton = TextButton(
-                            child: Text("NO"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          );
-
-                          // Create AlertDialog
-                          AlertDialog alert = AlertDialog(
-                            title: Text("Confirmation"),
-                            content: Text("Are you sure you want to redeem this voucher?"),
-                            actions: [
-                              yesButton,
-                              noButton
-                            ],
-                          );
-
-                          // show the dialog
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return alert;
-                            },
-                          );
+                            // show the dialog
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return alert;
+                              },
+                            );
+                            // Navigator.of(context).pop();
+                          }
                         },
-                        child: const Text('Redeem', style: TextStyle(fontSize: 18)), // text
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(130, 40),
-                          primary: Color(0xFF226E44),
-                          shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(500))
-                      ),
-                      ),
-                    ),
+                      );
+
+                      Widget noButton = TextButton(
+                        child: Text("NO"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      );
+
+                      // Create AlertDialog
+                      AlertDialog alert = AlertDialog(
+                        title: Text("Confirmation"),
+                        content: Text(
+                            "Are you sure you want to redeem this voucher?"),
+                        actions: [yesButton, noButton],
+                      );
+
+                      // show the dialog
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return alert;
+                        },
+                      );
+                    },
+                    child: const Text('Redeem',
+                        style: TextStyle(fontSize: 18)), // text
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(130, 40),
+                        primary: Color(0xFF226E44),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(500))),
+                  ),
+                ),
               ],
             ),
           ),
@@ -339,5 +345,3 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
     );
   }
 }
-
-

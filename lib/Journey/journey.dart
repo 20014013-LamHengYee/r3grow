@@ -296,7 +296,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           );
                         },
                         child: Image.asset(
-                          'assets/images/vou.png',
+                          'assets/images/freegift.png',
                           width: 100,
                           height: 100,
                           fit: BoxFit.cover,
@@ -313,7 +313,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           );
                         },
                         child: Image.asset(
-                          'assets/images/vou.png',
+                          'assets/images/freedrinks.png',
                           width: 100,
                           height: 100,
                           fit: BoxFit.cover,
@@ -330,7 +330,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           );
                         },
                         child: Image.asset(
-                          'assets/images/vou.png',
+                          'assets/images/discount.png',
                           width: 100,
                           height: 100,
                           fit: BoxFit.cover,
@@ -347,7 +347,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           );
                         },
                         child: Image.asset(
-                          'assets/images/vou.png',
+                          'assets/images/upsize.png',
                           width: 100,
                           height: 100,
                           fit: BoxFit.cover,
@@ -364,7 +364,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           );
                         },
                         child: Image.asset(
-                          'assets/images/vou.png',
+                          'assets/images/freegift.png',
                           width: 100,
                           height: 100,
                           fit: BoxFit.cover,
@@ -381,7 +381,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           );
                         },
                         child: Image.asset(
-                          'assets/images/vou.png',
+                          'assets/images/freedrinks.png',
                           width: 100,
                           height: 100,
                           fit: BoxFit.cover,
@@ -398,7 +398,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           );
                         },
                         child: Image.asset(
-                          'assets/images/vou.png',
+                          'assets/images/discount.png',
                           width: 100,
                           height: 100,
                           fit: BoxFit.cover,
@@ -415,7 +415,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           );
                         },
                         child: Image.asset(
-                          'assets/images/vou.png',
+                          'assets/images/upsize.png',
                           width: 100,
                           height: 100,
                           fit: BoxFit.cover,

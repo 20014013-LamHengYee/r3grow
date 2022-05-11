@@ -60,9 +60,9 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/images/vou.png',
+                        'assets/images/freegift.png',
                         width: 300,
-                        height: 150,
+                        height: 220,
                         fit: BoxFit.cover,
                       ),
                     ],

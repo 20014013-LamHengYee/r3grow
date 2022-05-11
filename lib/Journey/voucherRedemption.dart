@@ -63,7 +63,7 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                         'assets/images/freegift.png',
                         width: 300,
                         height: 220,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fitWidth,
                       ),
                     ],
                   ),

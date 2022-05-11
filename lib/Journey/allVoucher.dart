@@ -50,29 +50,45 @@ class _AllVoucherWidgetState extends State<AllVoucherWidget> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(10, 20, 10, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                   child: GridView(
                     padding: EdgeInsets.zero,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
+                      mainAxisSpacing: 0,
                       childAspectRatio: 1,
                     ),
                     scrollDirection: Axis.vertical,
                     children: [
-                      Image.asset(
-                        'assets/images/freedrinks.png',
-                        fit: BoxFit.cover,
+                      InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const VoucherRedemptionWidget(),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          'assets/images/freedrinks.png',
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.fitWidth,
+                        ),
                       ),
-                      const Text(
-                        '(name of voucher)\n\nPoints Required: 50 points',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600),
-                      ),
+                      const Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
+                        child: Text(
+                          'Name/ Description of voucher\n\nPoints Required: 50 points',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      )
                     ],
                   ),
                 ),

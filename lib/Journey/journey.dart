@@ -279,8 +279,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     padding: EdgeInsets.zero,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10, // gap between the 2 photos in each rows
+                      mainAxisSpacing: 0,
                       childAspectRatio: 1,
                     ),
                     scrollDirection: Axis.vertical,
@@ -299,7 +299,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           'assets/images/freegift.png',
                           width: 100,
                           height: 100,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                       InkWell(
@@ -316,7 +316,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           'assets/images/freedrinks.png',
                           width: 100,
                           height: 100,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                       InkWell(
@@ -333,7 +333,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           'assets/images/discount.png',
                           width: 100,
                           height: 100,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                       InkWell(
@@ -350,7 +350,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           'assets/images/upsize.png',
                           width: 100,
                           height: 100,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                       InkWell(
@@ -367,7 +367,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           'assets/images/freegift.png',
                           width: 100,
                           height: 100,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                       InkWell(
@@ -384,7 +384,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           'assets/images/freedrinks.png',
                           width: 100,
                           height: 100,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                       InkWell(
@@ -401,7 +401,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           'assets/images/discount.png',
                           width: 100,
                           height: 100,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                       InkWell(
@@ -418,7 +418,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           'assets/images/upsize.png',
                           width: 100,
                           height: 100,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                     ],

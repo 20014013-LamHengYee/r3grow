@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:r3grow/Journey/journey.dart';
@@ -17,11 +18,26 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "R3GROW",
-      theme: ThemeData(
-        // primaryColor: kPrimaryColor,
-        scaffoldBackgroundColor: const Color(0x00f1fdfb),
+      home: AnimatedSplashScreen(
+        duration: 1500,
+        splash: Stack(
+          children: [
+            Image.asset('assets/images/R3grow.png'),
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Text(
+                  'R3grow',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ],
+        ),
+        nextScreen: HomePageWidget(),
+        splashTransition: SplashTransition.fadeTransition,
+        backgroundColor: Color(0xFFF1FDFB),
       ),
-      home: const HomePageWidget(),
     );
   }
 }

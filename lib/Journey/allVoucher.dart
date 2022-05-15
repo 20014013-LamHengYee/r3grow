@@ -1,7 +1,8 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:r3grow/Journey/voucherRedemption.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AllVoucherWidget extends StatefulWidget {
   const AllVoucherWidget({Key key}) : super(key: key);
@@ -12,6 +13,9 @@ class AllVoucherWidget extends StatefulWidget {
 
 class _AllVoucherWidgetState extends State<AllVoucherWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final Stream<QuerySnapshot> voucher =
+      FirebaseFirestore.instance.collection('Voucher').snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -42,56 +46,88 @@ class _AllVoucherWidgetState extends State<AllVoucherWidget> {
       ),
       // BODY
       backgroundColor: const Color(0xFFF1FDFB),
-      body: SafeArea(
+      body: SingleChildScrollView( // ensure scorllable
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-                  child: GridView(
-                    padding: EdgeInsets.zero,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 0,
-                      childAspectRatio: 1,
-                    ),
-                    scrollDirection: Axis.vertical,
-                    children: [
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const VoucherRedemptionWidget(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/images/freedrinks.png',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
-                        child: Text(
-                          'Name/ Description of voucher\n\nPoints Required: 50 points',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+              StreamBuilder<QuerySnapshot>(
+                stream: voucher,
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot,
+                ) {
+                  if (snapshot.hasError) {
+                    return const Text('Something went wrong');
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Text('Loading');
+                  }
+
+                  // final data = snapshot
+                  //     .requireData.docs; // take data from the snapshot
+
+                  return (snapshot.connectionState == ConnectionState.waiting)
+                      ? const Center(child: CircularProgressIndicator())
+                      : ListView.builder(
+                          physics:
+                              const NeverScrollableScrollPhysics(), // ensure can scroll
+                          itemCount: snapshot.data.docs.length,
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            DocumentSnapshot data = snapshot.data.docs[index];
+
+                            // return Text(data['voucherDesc']);
+                            return Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  10, 20, 10, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      InkWell(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const VoucherRedemptionWidget(),
+                                            ),
+                                          );
+                                        },
+                                        child: Image.asset(
+                                          'assets/images/freedrinks.png',
+                                          width: 165,
+                                          height: 165,
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 0, 0, 0),
+                                    child: Flexible(
+                                      child: Text(
+                                        '${data['voucherDesc']}\nPoints Required: ${data['voucherPoints']} points',
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                          });
+                },
               ),
             ],
           ),

@@ -310,13 +310,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          // Text(
-                          //   'See All',
-                          //   style: TextStyle(
-                          //       fontSize: 15,
-                          //       color: Colors.grey,
-                          //       fontWeight: FontWeight.w600),
-                          // ),
                           GestureDetector(
                             child: Text("See All",
                                 style: TextStyle(
@@ -342,6 +335,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 thickness: 1,
                 color: Color(0xFF656565),
               ),
+              //////////////////////////////////////////////////// VOUCHERS ////////////////////////////////////////////////////
               Expanded(
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),

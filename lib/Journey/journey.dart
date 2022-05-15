@@ -22,8 +22,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   // }
 
   // PROGRESS BAR - STEPS
-  double step = 0.00;
-  // double step;
+ double steps;
   // 0.001 - 1 STEP
   // 0.025 - 25 STEP
 
@@ -69,6 +68,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          //  BADGE ICON
                           Image.asset(
                             'assets/images/achievement.png',
                             width: 30,
@@ -78,11 +78,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ],
                       ),
                     ),
-                    // QR CODE SCANNER
+                    //////////////////////////////////////////////////// QR CODE SCANNER ////////////////////////////////////////////////////
                     Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
+                        // QR CODE ICON
                         // Image.asset(
                         //   'assets/images/scanner.png',
                         //   width: 30,
@@ -90,21 +91,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         //   fit: BoxFit.cover,
                         // ),
                         // TEMPORARY ONLY
-                        ButtonTheme(
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              step = step + 0.001;
-                              point = point + 1;
-                            },
-                            child: Text('S' + point.toString(),
-                                style: TextStyle(fontSize: 10)), // text
-                            style: ElevatedButton.styleFrom(
-                                minimumSize: const Size(30, 30),
-                                primary: Color(0xFF226E44),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(500))),
-                          ),
-                        ),
+                        // ButtonTheme(
+                        //   child: ElevatedButton(
+                        //     onPressed: () async {
+                        //       step = step + 0.001;
+                        //       point = point + 1;
+                        //     },
+                        //     child: Text('S' + point.toString(),
+                        //         style: TextStyle(fontSize: 10)), // text
+                        //     style: ElevatedButton.styleFrom(
+                        //         minimumSize: const Size(30, 30),
+                        //         primary: Color(0xFF226E44),
+                        //         shape: RoundedRectangleBorder(
+                        //             borderRadius: BorderRadius.circular(500))),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ],
@@ -124,74 +125,121 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 ],
               ),
+              //////////////////////////////////////////////////// HERO IMAGE ////////////////////////////////////////////////////
+              // Padding(
+              //   padding: EdgeInsetsDirectional.fromSTEB(10, 20, 10, 0),
+              //   child: Align(
+              //     alignment: Alignment.lerp(
+              //         Alignment.topLeft, Alignment.topRight, step),
+              //     child: Image.asset(
+              //       'assets/images/hero.png',
+              //       width: 150,
+              //       height: 150,
+              //       fit: BoxFit.cover,
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(10, 20, 10, 0),
-                child: Align(
-                  alignment: Alignment.lerp(
-                      Alignment.topLeft, Alignment.topRight, step),
-                  child: Image.asset(
-                    'assets/images/hero.png',
-                    width: 150,
-                    height: 150,
-                    fit: BoxFit.cover,
-                  ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    StreamBuilder<QuerySnapshot>(
+                      stream: account,
+                      builder: (
+                        BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot,
+                      ) {
+                        if (snapshot.hasError) {
+                          return Text('Something went wrong');
+                        }
+
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Text('Loading');
+                        }
+
+                        final data =
+                            snapshot.requireData; // take data from the snapshot
+                        steps = data.docs[1]['Steps'];
+                        // steps = steps + 0.01; [if steps == 0.99 | because firebase if = 1 will crash.]
+
+                        return Expanded(
+                          child: Align(
+                            alignment: Alignment.lerp(
+                                Alignment.topLeft, Alignment.topRight, steps),
+                          child: Image.asset(
+                            'assets/images/hero.png',
+                            width: 150,
+                            height: 150,
+                            fit: BoxFit.cover,
+                          ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
-              // PROGRESS BAR (DETERMINATE)
+              //////////////////////////////////////////////////// PROGRESS BAR (DETERMINATE) ////////////////////////////////////////////////////
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // StreamBuilder<QuerySnapshot>(
-                    //   stream: account,
-                    //   builder: (
-                    //     BuildContext context,
-                    //     AsyncSnapshot<QuerySnapshot> snapshot,
-                    //   ) {
-                    //     if (snapshot.hasError) {
-                    //       return Text('Something went wrong');
-                    //     }
+                    StreamBuilder<QuerySnapshot>(
+                      stream: account,
+                      builder: (
+                        BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot,
+                      ) {
+                        if (snapshot.hasError) {
+                          return Text('Something went wrong');
+                        }
 
-                    //     if (snapshot.connectionState ==
-                    //         ConnectionState.waiting) {
-                    //       return Text('Loading');
-                    //     }
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Text('Loading');
+                        }
 
-                    //     final data =
-                    //         snapshot.requireData.docs; // take data from the snapshot
+                        final data =
+                            snapshot.requireData; // take data from the snapshot
 
-                    //     step = data['Steps'];
+                        // because the progress bar only double decimal parameter type.
+                        steps = data.docs[1]['Steps'];
+                        // steps = steps + 0.01; [if steps == 0.99 | because firebase if = 1 will crash.]
 
-                    //     return Text(step.toString());
-                    //   },
-                    // ),
-                    Expanded(
-                      child: new Stack(children: <Widget>[
-                        LinearProgressIndicator(
-                          value: step,
-                          color: Color(0xFF226E44),
-                          minHeight: 15,
-                          backgroundColor: Colors.green,
-                        ),
-                        Padding(
-                          // padding between label and bar
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                          child: Align(
-                            alignment: Alignment.lerp(
-                                Alignment.topLeft, Alignment.topRight, step),
-                            // use .truncate() to remove decimal place | progress bar label is initiate with double
-                            child: Text(
-                                (step * 1000).truncate().toString() + " STEPS",
-                                style: TextStyle(fontSize: 18)),
-                          ),
-                        ),
-                      ]),
-                    )
+                        return Expanded(
+                          child: new Stack(children: <Widget>[
+                            LinearProgressIndicator(
+                              value: steps,
+                              color: Color(0xFF226E44),
+                              minHeight: 15,
+                              backgroundColor: Colors.green,
+                            ),
+                            Padding(
+                              // padding between label and bar
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                              child: Align(
+                                alignment: Alignment.lerp(Alignment.topLeft,
+                                    Alignment.topRight, steps),
+                                // use .truncate() to remove decimal place | progress bar label is initiate with double
+                                child: Text(
+                                    (steps * 1000).truncate().toString() +
+                                        " STEPS",
+                                    style: TextStyle(fontSize: 18)),
+                              ),
+                            ),
+                          ]),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
+              //////////////////////////////////////////////////// POINTS ////////////////////////////////////////////////////
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 25),
                 child: Row(
@@ -237,6 +285,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ],
                 ),
               ),
+              //////////////////////////////////////////////////// BELOW POINTS ////////////////////////////////////////////////////
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
                 child: Row(

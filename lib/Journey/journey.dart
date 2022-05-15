@@ -27,9 +27,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   // 0.001 - 1 STEP
   // 0.025 - 25 STEP
 
-  // POINTS 
-  int point = 0;
-  // int point;
+  // POINTS
+  int point;
 
   // final _firestore = FirebaseFirestore.instance;
   final Stream<QuerySnapshot> account =
@@ -161,8 +160,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     //     }
 
                     //     final data =
-                    //         snapshot.requireData.docs[0]; // take data from the snapshot
-                        
+                    //         snapshot.requireData.docs; // take data from the snapshot
+
                     //     step = data['Steps'];
 
                     //     return Text(step.toString());
@@ -199,19 +198,41 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ButtonTheme(
-                      minWidth: 330.0,
-                      height: 50.0,
-                      child: ElevatedButton(
-                        onPressed: null,
-                        child: Text('Points: ' + point.toString(),
-                            style: TextStyle(fontSize: 18)), // text
-                        style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(130, 40),
-                            primary: Color(0xFF226E44),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(500))),
-                      ),
+                    StreamBuilder<QuerySnapshot>(
+                      stream: account,
+                      builder: (
+                        BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot,
+                      ) {
+                        if (snapshot.hasError) {
+                          return Text('Something went wrong');
+                        }
+
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Text('Loading');
+                        }
+
+                        final data =
+                            snapshot.requireData; // take data from the snapshot
+
+                        point = data.docs[1]['Points'];
+
+                        return ButtonTheme(
+                          minWidth: 330.0,
+                          height: 50.0,
+                          child: ElevatedButton(
+                            onPressed: null,
+                            child: Text('Points: ' + point.toString(),
+                                style: TextStyle(fontSize: 18)), // text
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(130, 40),
+                                primary: Color(0xFF226E44),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(500))),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -279,7 +300,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     padding: EdgeInsets.zero,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      crossAxisSpacing: 10, // gap between the 2 photos in each rows
+                      crossAxisSpacing:
+                          10, // gap between the 2 photos in each rows
                       mainAxisSpacing: 0,
                       childAspectRatio: 1,
                     ),

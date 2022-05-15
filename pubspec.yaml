@@ -70,10 +70,7 @@ flutter:
   - assets/images/upsize.png
   - assets/images/freegift.png
   - assets/images/discount.png
-<<<<<<< HEAD
-=======
   - assets/images/R3grow.png
->>>>>>> f37db50 (Change code in Main from 21 onwards, added signUp file by HY)
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

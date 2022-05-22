@@ -1,41 +1,25 @@
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, prefer_const_constructors_in_immutables, use_key_in_widget_constructors, unnecessary_this
+
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:r3grow/Journey/journey.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Example Dialogflow Flutter',
-      theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: HomePageDialogflow(),
-    );
-  }
-}
-
-class HomePageDialogflow extends StatefulWidget {
-  HomePageDialogflow({Key key, this.title}) : super(key: key);
+class ChatBot extends StatefulWidget {
+  const ChatBot({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _HomePageDialogflow createState() => _HomePageDialogflow();
+  _ChatBot createState() => _ChatBot();
 }
 
-class _HomePageDialogflow extends State<HomePageDialogflow> {
+class _ChatBot extends State<ChatBot> {
   final List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = TextEditingController();
 
   Widget _buildTextComposer() {
     return IconTheme(
-      data: IconThemeData(color: Theme.of(context).accentColor),
+      // the send button will turn green
+      data: IconThemeData(color: Color(0xFF226E44)),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Row(
@@ -63,8 +47,7 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
   void Response(query) async {
     _textController.clear();
     AuthGoogle authGoogle =
-        await AuthGoogle(fileJson: "assets/credentials.json")
-            .build();
+        await AuthGoogle(fileJson: "assets/credentials.json").build();
     Dialogflow dialogflow =
         Dialogflow(authGoogle: authGoogle, language: Language.english);
     AIResponse response = await dialogflow.detectIntent(query);
@@ -98,6 +81,7 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
       appBar: AppBar(
         centerTitle: true,
         title: Text("R3GROW CHATBOT"),
+        backgroundColor: Color(0xFF226E44),
       ),
       body: Column(children: <Widget>[
         Flexible(
@@ -108,6 +92,7 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
           itemCount: _messages.length,
         )),
         Divider(height: 1.0),
+        // textfield color | textfield
         Container(
           decoration: BoxDecoration(color: Theme.of(context).cardColor),
           child: _buildTextComposer(),
@@ -129,14 +114,14 @@ class ChatMessage extends StatelessWidget {
       Container(
         margin: const EdgeInsets.only(right: 16.0),
         // PROFILE PICTURE (BOT)
-        child: CircleAvatar(child: Text('B')),
+        child: CircleAvatar(child: Text('B'))
       ),
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(this.name,
-                style: TextStyle(fontWeight: FontWeight.bold)),
+            // the text (message)
+            Text(this.name, style: TextStyle(fontWeight: FontWeight.bold)),
             Container(
               margin: const EdgeInsets.only(top: 5.0),
               child: Text(text),
@@ -153,7 +138,7 @@ class ChatMessage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Text(this.name),
+            Text(name),
             Container(
               margin: const EdgeInsets.only(top: 5.0),
               child: Text(text),

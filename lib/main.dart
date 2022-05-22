@@ -2,6 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:r3grow/Journey/journey.dart';
+import 'package:r3grow/chatbot.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
             ),
           ],
         ),
-        nextScreen: const HomePageWidget(),
+        nextScreen: const ChatBot(),
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: const Color(0xFFF1FDFB),
       ),

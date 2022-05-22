@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
             ),
           ],
         ),
-        nextScreen: const ChatBot(),
+        nextScreen: const HomePageWidget(),
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: const Color(0xFFF1FDFB),
       ),

@@ -112,10 +112,9 @@ class ChatMessage extends StatelessWidget {
   List<Widget> botMessage(context) {
     return <Widget>[
       Container(
-        margin: const EdgeInsets.only(right: 16.0),
-        // PROFILE PICTURE (BOT)
-        child: CircleAvatar(child: Text('B'))
-      ),
+          margin: const EdgeInsets.only(right: 16.0),
+          // PROFILE PICTURE (BOT)
+          child: CircleAvatar(child: Text('B'))),
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

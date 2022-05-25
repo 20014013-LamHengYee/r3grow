@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "R3GROW",
       home: AnimatedSplashScreen(
-        duration: 1500,
+        duration: 1300,
         splash: Image.asset(
           'assets/images/regrowsslogo.png',
           height: 200,

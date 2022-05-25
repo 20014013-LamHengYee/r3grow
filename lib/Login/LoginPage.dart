@@ -40,7 +40,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                       alignment: AlignmentDirectional(0, 0),
                       child: Image.asset(
                         'assets/images/LoginPage.jpg',
-                        width: 393,
+                        width: 380,
                         height: 320,
                         fit: BoxFit.fill,
                       ),
@@ -49,7 +49,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -148,35 +148,41 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 16),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 5),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ElevatedButton(
                             onPressed: () {},
-                            child: const Text("Forgot password?"),
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 120, vertical: 40),
-                              primary: Color(0xFFF1FDFB),
-                              textStyle: const TextStyle(
+                            child: Text(
+                              "Forgot password?",
+                              style: TextStyle(
                                   fontFamily: 'Lexend Deca',
                                   fontSize: 12,
-                                  fontWeight: FontWeight.w500),
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFF000000)),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              primary: Color(0xFFF1FDFB),
                             ),
                           ),
                           ElevatedButton(
                             onPressed: () {},
-                            child: const Text("LOGIN"),
+                            child: const Text(
+                              "LOGIN",
+                              style: const TextStyle(
+                                fontFamily: 'Lexend Deca',
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 130, vertical: 50),
-                              primary: Color(0xFFF1FDFB),
-                              textStyle: const TextStyle(
-                                  fontFamily: 'Lexend Deca',
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold),
+                                  horizontal: 30, vertical: 10),
+                              primary: Color(0xFF00e5FF),
                             ),
                           ),
                         ],
@@ -188,7 +194,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                       child: const Text("Create Account"),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 170, vertical: 40),
+                            horizontal: 170, vertical: 20),
                         primary: Color(0xFFF1FDFB),
                         textStyle: const TextStyle(fontFamily: 'Poppins'),
                       ),

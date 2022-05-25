@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:r3grow/Journey/allVoucher.dart';
 import 'package:r3grow/Journey/voucherRedemption.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:r3grow/chatbot.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePageWidget extends StatefulWidget {
@@ -106,6 +107,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         //             borderRadius: BorderRadius.circular(500))),
                         //   ),
                         // ),
+                        // TEMPORARY ONLY | CHATBOT BUTTON
+                        GestureDetector(
+                          child: Text("Chatbot",
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 10)),
+                          onTap: () async {
+                            // go to
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ChatBot(),
+                              ),
+                            );
+                          },
+                        )
                       ],
                     ),
                   ],
@@ -169,7 +185,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             alignment: Alignment.lerp(
                                 Alignment.topLeft, Alignment.topRight, steps),
                             child: Image.asset(
-                              'assets/images/hero.png',
+                              'assets/images/heroImg.png',
                               width: 150,
                               height: 150,
                               fit: BoxFit.cover,

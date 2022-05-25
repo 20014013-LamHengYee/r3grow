@@ -20,15 +20,10 @@ class MyApp extends StatelessWidget {
       title: "R3GROW",
       home: AnimatedSplashScreen(
         duration: 1500,
-        splash: Stack(
-          children: [
-            Image.asset(
-              'assets/images/regrowsslogo.png',
-              width: 200,
-              height: 150,
-              fit: BoxFit.fitHeight,
-            ),
-          ],
+        splash: Image.asset(
+          'assets/images/regrowsslogo.png',
+          height: 200,
+          width: 200,
         ),
         nextScreen: const HomePageWidget(),
         splashTransition: SplashTransition.fadeTransition,

@@ -22,7 +22,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   // }
 
   // PROGRESS BAR - STEPS
- double steps;
+  double steps;
   // 0.001 - 1 STEP
   // 0.025 - 25 STEP
 
@@ -168,12 +168,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           child: Align(
                             alignment: Alignment.lerp(
                                 Alignment.topLeft, Alignment.topRight, steps),
-                          child: Image.asset(
-                            'assets/images/hero.png',
-                            width: 150,
-                            height: 150,
-                            fit: BoxFit.cover,
-                          ),
+                            child: Image.asset(
+                              'assets/images/hero.png',
+                              width: 150,
+                              height: 150,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         );
                       },

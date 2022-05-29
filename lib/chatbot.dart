@@ -111,6 +111,7 @@ class ChatMessage extends StatelessWidget {
 
   List<Widget> botMessage(context) {
     return <Widget>[
+      // Since it's DP followed by username on the right
       Container(
           margin: const EdgeInsets.only(right: 16.0),
           // PROFILE PICTURE (BOT)
@@ -119,11 +120,12 @@ class ChatMessage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // the text (message)
+            // the BotName
             Text(this.name, style: TextStyle(fontWeight: FontWeight.bold)),
+            // the BotMessage
             Container(
               margin: const EdgeInsets.only(top: 5.0),
-              child: Text(text),
+              child: Text(text,  style: TextStyle(fontSize: 16))
             ),
           ],
         ),
@@ -131,28 +133,30 @@ class ChatMessage extends StatelessWidget {
     ];
   }
 
+  // User Message
   List<Widget> userMessage(context) {
     return <Widget>[
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
+            // the UserName
             Text(name),
             Container(
               margin: const EdgeInsets.only(top: 5.0),
-              child: Text(text),
+              // the UserMessage
+              child: Text(text,  style: TextStyle(fontSize: 16)),
             ),
           ],
         ),
       ),
+      // PROFILE PICTURE (USER)
+      // Since it's username followed by DP on the right
       Container(
         margin: const EdgeInsets.only(left: 16.0),
         child: CircleAvatar(
-            child: Text(
-          this.name[0],
-          style: TextStyle(fontWeight: FontWeight.bold),
+            child: Text("M"),
         )),
-      ),
     ];
   }
 

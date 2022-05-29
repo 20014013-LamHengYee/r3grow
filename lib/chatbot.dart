@@ -18,8 +18,8 @@ class _ChatBot extends State<ChatBot> {
 
   Widget _buildTextComposer() {
     return IconTheme(
-      // the send button will turn green
-      data: IconThemeData(color: Color(0xFF226E44)),
+      // the send button will turn green | this is for user input field
+      data: IconThemeData(color: Colors.green),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Row(
@@ -80,8 +80,8 @@ class _ChatBot extends State<ChatBot> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("R3GROW CHATBOT"),
-        backgroundColor: Color(0xFF226E44),
+        title: Text("CHATBOT"),
+        backgroundColor: Colors.green,
       ),
       body: Column(children: <Widget>[
         Flexible(
@@ -104,7 +104,7 @@ class _ChatBot extends State<ChatBot> {
 
 class ChatMessage extends StatelessWidget {
   ChatMessage({this.text, this.name, this.type});
-
+  
   final String text;
   final String name;
   final bool type;
@@ -114,7 +114,7 @@ class ChatMessage extends StatelessWidget {
       Container(
           margin: const EdgeInsets.only(right: 16.0),
           // PROFILE PICTURE (BOT)
-          child: CircleAvatar(child: Text('B'))),
+          child: CircleAvatar(child: Text('RB'))),
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

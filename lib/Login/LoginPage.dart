@@ -14,6 +14,7 @@ class LoginPageWidget extends StatefulWidget {
 class _LoginPageWidgetState extends State<LoginPageWidget> {
   TextEditingController textController1;
   TextEditingController textController2;
+  bool passwordVisibility1;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -21,6 +22,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     super.initState();
     textController1 = TextEditingController();
     textController2 = TextEditingController();
+    passwordVisibility1 = false;
   }
 
   @override
@@ -130,7 +132,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 //   () => setState(() {}),
                                 // ),
                                 autofocus: true,
-                                obscureText: false,
+                                obscureText: !passwordVisibility1,
                                 decoration: InputDecoration(
                                   labelText: 'Password',
                                   enabledBorder: OutlineInputBorder(
@@ -146,6 +148,20 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       width: 1,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  suffixIcon: InkWell(
+                                    onTap: () => setState(
+                                      () => passwordVisibility1 =
+                                          !passwordVisibility1,
+                                    ),
+                                    focusNode: FocusNode(skipTraversal: true),
+                                    child: Icon(
+                                      passwordVisibility1
+                                          ? Icons.visibility_outlined
+                                          : Icons.visibility_off_outlined,
+                                      color: Color(0xFF757575),
+                                      size: 22,
+                                    ),
                                   ),
                                 ),
                                 style: TextStyle(fontFamily: "Poppins"),

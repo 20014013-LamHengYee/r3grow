@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:r3grow/Journey/allVoucher.dart';
 import 'package:r3grow/Journey/voucherRedemption.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:r3grow/chatbot.dart';
+import 'package:r3grow/chatbot/chatbot.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePageWidget extends StatefulWidget {

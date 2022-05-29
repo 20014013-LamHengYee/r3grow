@@ -25,6 +25,8 @@ class _ChatBot extends State<ChatBot> {
         child: Row(
           children: <Widget>[
             Flexible(
+              // The TextField widget needs both a controller and onSubmitted attributes.
+              // The onSubmitted attribute calls the given method, _handleSubmitted in our case, once the user hits enter.
               child: TextField(
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
@@ -34,9 +36,25 @@ class _ChatBot extends State<ChatBot> {
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 4.0),
+              // The IconButton widget is another way to submit text to DialogFlow
+              // IconButton for submitting a query.
               child: IconButton(
-                  icon: Icon(Icons.send),
-                  onPressed: () => _handleSubmitted(_textController.text)),
+                icon: Icon(Icons.send),
+                // Its onPressed function calls _handleSubmitted as well.
+                // onPressed: () => _handleSubmitted(_textController.text)
+                onPressed: () async {
+                        // check if it's empty
+                        if ( _textController.text == null ||  _textController.text == "") {
+                          // empty
+                          // ensure no null is submitted > will crash
+                          print("empty");
+                          _handleSubmitted("empty");
+                        } 
+                        else {
+                          _handleSubmitted(_textController.text);
+                        }
+                }
+              ),
             ),
           ],
         ),
@@ -45,6 +63,7 @@ class _ChatBot extends State<ChatBot> {
   }
 
   void Response(query) async {
+    // first clears the input TextField to get it ready for the next user interaction.
     _textController.clear();
     AuthGoogle authGoogle =
         await AuthGoogle(fileJson: "assets/credentials.json").build();
@@ -62,8 +81,12 @@ class _ChatBot extends State<ChatBot> {
     });
   }
 
+  // when _handleSubmitted is called from IconButton's onPressed method,
+  // the text is retrieved from the _textController and passed to the _handleSubmitted method.
   void _handleSubmitted(String text) {
+    // first clears the input TextField to get it ready for the next user interaction.
     _textController.clear();
+    // takes the TextField text and creates a data structure, FactsMessage to display the interaction log.
     ChatMessage message = ChatMessage(
       text: text,
       name: "Me",
@@ -104,7 +127,7 @@ class _ChatBot extends State<ChatBot> {
 
 class ChatMessage extends StatelessWidget {
   ChatMessage({this.text, this.name, this.type});
-  
+
   final String text;
   final String name;
   final bool type;
@@ -124,9 +147,8 @@ class ChatMessage extends StatelessWidget {
             Text(this.name, style: TextStyle(fontWeight: FontWeight.bold)),
             // the BotMessage
             Container(
-              margin: const EdgeInsets.only(top: 5.0),
-              child: Text(text,  style: TextStyle(fontSize: 16))
-            ),
+                margin: const EdgeInsets.only(top: 5.0),
+                child: Text(text, style: TextStyle(fontSize: 16))),
           ],
         ),
       ),
@@ -145,7 +167,7 @@ class ChatMessage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 5.0),
               // the UserMessage
-              child: Text(text,  style: TextStyle(fontSize: 16)),
+              child: Text(text, style: TextStyle(fontSize: 16)),
             ),
           ],
         ),
@@ -153,10 +175,10 @@ class ChatMessage extends StatelessWidget {
       // PROFILE PICTURE (USER)
       // Since it's username followed by DP on the right
       Container(
-        margin: const EdgeInsets.only(left: 16.0),
-        child: CircleAvatar(
+          margin: const EdgeInsets.only(left: 16.0),
+          child: CircleAvatar(
             child: Text("M"),
-        )),
+          )),
     ];
   }
 

@@ -58,13 +58,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(15, 10, 15, 10),
+                padding: EdgeInsetsDirectional.fromSTEB(15, 20, 15, 15),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 280, 0),
+                      // space between acheievement badge and QR Code
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 270, 0),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +73,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           //  BADGE ICON
                           Image.asset(
                             'assets/images/achievement.png',
-                            width: 30,
+                            width: 50,
                             height: 50,
                             fit: BoxFit.cover,
                           ),
@@ -85,12 +86,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         // QR CODE ICON
-                        // Image.asset(
-                        //   'assets/images/scanner.png',
-                        //   width: 30,
-                        //   height: 30,
-                        //   fit: BoxFit.cover,
-                        // ),
+                        Image.asset(
+                          'assets/images/scanner.png',
+                          width: 35,
+                          height: 35,
+                          fit: BoxFit.cover,
+                        ),
                         // TEMPORARY ONLY
                         // ButtonTheme(
                         //   child: ElevatedButton(
@@ -107,21 +108,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         //             borderRadius: BorderRadius.circular(500))),
                         //   ),
                         // ),
-                        // TEMPORARY ONLY | CHATBOT BUTTON
-                        GestureDetector(
-                          child: Text("Chatbot",
-                              style:
-                                  TextStyle(color: Colors.blue, fontSize: 10)),
-                          onTap: () async {
-                            // go to
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const ChatBot(),
-                              ),
-                            );
-                          },
-                        )
                       ],
                     ),
                   ],
@@ -136,7 +122,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 30,
-                        color: Color(0xFFF95F62),
+                        color: Colors.red,
                         fontWeight: FontWeight.w600),
                   ),
                 ],
@@ -257,7 +243,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
               //////////////////////////////////////////////////// POINTS ////////////////////////////////////////////////////
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 25),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -299,6 +285,26 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       },
                     ),
                   ],
+                ),
+              ),
+              //////////////////////////////////////////////////// CHATBOT ////////////////////////////////////////////////////
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(270, 0, 0, 10),
+                child: InkWell(
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChatBot(),
+                      ),
+                    );
+                  },
+                  child: Image.asset(
+                    'assets/images/chatbotLogo.png',
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               //////////////////////////////////////////////////// BELOW POINTS ////////////////////////////////////////////////////

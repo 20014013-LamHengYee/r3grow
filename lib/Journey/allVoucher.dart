@@ -46,7 +46,8 @@ class _AllVoucherWidgetState extends State<AllVoucherWidget> {
       ),
       // BODY
       backgroundColor: const Color(0xFFF1FDFB),
-      body: SingleChildScrollView( // ensure scorllable
+      body: SingleChildScrollView(
+        // ensure scorllable
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Column(
@@ -79,7 +80,11 @@ class _AllVoucherWidgetState extends State<AllVoucherWidget> {
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             DocumentSnapshot data = snapshot.data.docs[index];
-                            
+
+                            // generate document id > so can know which voucher is selected
+                            var voucherDocumentID =
+                                snapshot.data.docs[index].reference.id;
+
                             // return Text(data['voucherDesc']);
                             return Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
@@ -92,16 +97,14 @@ class _AllVoucherWidgetState extends State<AllVoucherWidget> {
                                     children: [
                                       InkWell(
                                         onTap: () async {
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const VoucherRedemptionWidget(),
-                                            ),
-                                          );
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      VoucherRedemptionWidget(
+                                                          voucherDocumentID)));
                                         },
-                                        child: Image.asset(
-                                          'assets/images/freedrinks.png',
+                                        child: Image.network(
+                                          '${data['image']}',
                                           width: 165,
                                           height: 165,
                                           fit: BoxFit.fitWidth,

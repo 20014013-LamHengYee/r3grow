@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, unnecessary_new
+// ignore_for_file: unused_import, unused_field, prefer_const_constructors, unnecessary_new
 
 import 'package:flutter/material.dart';
 import 'package:r3grow/Journey/allVoucher.dart';
@@ -16,6 +16,9 @@ class HomePageWidget extends StatefulWidget {
 
 class _HomePageWidgetState extends State<HomePageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final Stream<QuerySnapshot> voucher =
+      FirebaseFirestore.instance.collection('Voucher').snapshots();
 
   // @override
   // void initState() {
@@ -47,7 +50,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFFF1FDFB),
+      backgroundColor: const Color(0xFFF1FDFB),
       // body: Center(
       //   child: _widgetOptions.elementAt(_selectedIndex),
       // ),
@@ -116,7 +119,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: const [
                   Text(
                     'Your Hero Journey',
                     textAlign: TextAlign.center,
@@ -316,7 +319,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         Text(
                           'Rewards Available',
                           style: TextStyle(
@@ -361,154 +364,54 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-                  child: GridView(
+                  child: GridView.count(
                     padding: EdgeInsets.zero,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing:
-                          10, // gap between the 2 photos in each rows
-                      mainAxisSpacing: 0,
-                      childAspectRatio: 1,
-                    ),
+                    crossAxisCount: 2,
+                    childAspectRatio: 1,
                     scrollDirection: Axis.vertical,
-                    children: [
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const VoucherRedemptionWidget(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/images/freegift.png',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const VoucherRedemptionWidget(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/images/freedrinks.png',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const VoucherRedemptionWidget(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/images/discount.png',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const VoucherRedemptionWidget(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/images/upsize.png',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const VoucherRedemptionWidget(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/images/freegift.png',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const VoucherRedemptionWidget(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/images/freedrinks.png',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const VoucherRedemptionWidget(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/images/discount.png',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const VoucherRedemptionWidget(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(
-                          'assets/images/upsize.png',
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                    ],
+                    // 4 items only, so 4
+                    // this # must be <= to the total
+                    // num of voucher ava
+                    children: List.generate(4, (index) {
+                      return Center(
+                          child: StreamBuilder<QuerySnapshot>(
+                              stream: voucher,
+                              builder: (
+                                BuildContext context,
+                                AsyncSnapshot<QuerySnapshot> snapshot,
+                              ) {
+                                if (snapshot.hasError) {
+                                  return const Text('Something went wrong');
+                                }
+
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Text('Loading');
+                                }
+
+                                DocumentSnapshot data =
+                                    snapshot.data.docs[index];
+
+                                var voucherDocumentID =
+                                    snapshot.data.docs[index].reference.id;
+
+                                return InkWell(
+                                  onTap: () async {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                VoucherRedemptionWidget(
+                                                    voucherDocumentID)));
+                                  },
+                                  child: Image.network(
+                                    '${data['image']}',
+                                    width: 180,
+                                    height: 200,
+                                    fit: BoxFit.fitWidth,
+                                  ),
+                                );
+                              }));
+                    }),
                   ),
                 ),
               ),

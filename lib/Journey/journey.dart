@@ -35,6 +35,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       FirebaseFirestore.instance.collection('Account').snapshots();
 
   int _selectedIndex = 0;
+  // ignore: unused_field
   static const List<Widget> _widgetOptions = <Widget>[];
 
   void _onItemTapped(int index) {

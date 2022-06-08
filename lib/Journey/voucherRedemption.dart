@@ -3,11 +3,19 @@
 import 'package:flutter/material.dart';
 
 class VoucherRedemptionWidget extends StatefulWidget {
-  const VoucherRedemptionWidget({Key key}) : super(key: key);
+  // passed from allVoucher.dart
+  String voucherDocumentID;
+  VoucherRedemptionWidget(this.voucherDocumentID, {Key key}) : super(key: key);
 
+  // const VoucherRedemptionWidget({Key key}) : super(key: key);
+
+  // @override
+  // _VoucherRedemptionWidgetState createState() =>
+  //     _VoucherRedemptionWidgetState();
   @override
-  _VoucherRedemptionWidgetState createState() =>
-      _VoucherRedemptionWidgetState();
+  State<StatefulWidget> createState() {
+    return _VoucherRedemptionWidgetState(this.voucherDocumentID);
+  }
 }
 
 class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
@@ -18,6 +26,9 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
   int pointsUpdated;
   int numOfVoucher = 1;
   int numOfVoucherBalance;
+
+  String voucherDocumentID;
+  _VoucherRedemptionWidgetState(String voucherDocumentID);
 
   @override
   Widget build(BuildContext context) {
@@ -331,9 +342,9 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                     child: const Text('Redeem',
                         style: TextStyle(fontSize: 20)), // text
                     style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(350, 40),
-                        primary: Color(0xFF226E44),
-                        ),
+                      minimumSize: const Size(350, 40),
+                      primary: Color(0xFF226E44),
+                    ),
                   ),
                 ),
               ],

@@ -50,7 +50,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 12),
                       child: Text(
                         'Back',
                         style: TextStyle(

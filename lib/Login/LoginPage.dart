@@ -3,6 +3,7 @@
 // ignore_for_file: prefer_const_constructors, use_full_hex_values_for_flutter_colors, file_names
 
 import 'package:flutter/material.dart';
+import 'package:r3grow/Login/signUpPage.dart';
 
 class LoginPageWidget extends StatefulWidget {
   const LoginPageWidget({Key key}) : super(key: key);
@@ -212,7 +213,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpPageWidget()),
+                          );
+                        },
                         child: const Text(
                           "Create Account",
                           style: TextStyle(

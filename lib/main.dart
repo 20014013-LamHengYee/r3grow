@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:r3grow/Journey/journey.dart';
 import 'package:r3grow/Login/LoginPage.dart';
+import 'package:r3grow/Login/signUpPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           height: 200,
           width: 200,
         ),
-        nextScreen: const HomePageWidget(),
+        nextScreen: const LoginPageWidget(),
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: const Color(0xFFF1FDFB),
       ),

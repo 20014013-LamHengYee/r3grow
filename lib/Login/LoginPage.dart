@@ -5,6 +5,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:r3grow/Login/signUpPage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPageWidget extends StatefulWidget {
   const LoginPageWidget({Key key}) : super(key: key);
@@ -295,7 +296,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     if (_formKey.currentState.validate()) {
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {Fluttertoast.showToast(msg: "Login Successful")});
+          .then((uid) => {
+            Fluttertoast.showToast(msg: "Login Successful")});
+            //ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            //content: Text("Login Successful"),
+            // ));
     }
   }
 }

@@ -2,6 +2,7 @@
 // ignore: file_names
 // ignore_for_file: prefer_const_constructors, use_full_hex_values_for_flutter_colors, file_names
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:r3grow/Login/signUpPage.dart';
 
@@ -21,6 +22,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
   TextEditingController passwordController = TextEditingController();
   bool passwordVisibility1;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  //firebase
+  final _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
@@ -103,7 +107,18 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   autofocus: false,
                                   obscureText: false,
                                   keyboardType: TextInputType.emailAddress,
-                                  // validator: (){},
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return ("Please enter your email");
+                                    }
+                                    // reg expression for email validation
+                                    if (!RegExp(
+                                            "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9+_.-]+.[a-z]")
+                                        .hasMatch(value)) {
+                                      return ("Please Enter a valid email");
+                                    }
+                                    return null;
+                                  },
                                   onSaved: (value) {
                                     emailController.text = value;
                                   },
@@ -148,7 +163,17 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   // ),
                                   autofocus: false,
                                   obscureText: !passwordVisibility1,
-                                  // validator: (){},
+                                  // ignore: missing_return
+                                  validator: (value) {
+                                    RegExp regEx = new RegExp(r'^.{7,}$');
+                                    if (value.isEmpty) {
+                                      return ("Please enter password");
+                                    }
+
+                                    if (!regEx.hasMatch(value)) {
+                                      return ("Please enter valid password(Min. 7 character)");
+                                    }
+                                  },
                                   onSaved: (value) {
                                     passwordController.text = value;
                                   },
@@ -263,5 +288,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
         ),
       ),
     );
+  }
+
+  //login function
+  void signIn(String email, String password) async {
+    if (_formKey.currentState.validate()) {
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((uid) => {Fluttertoast.showToast(msg: "Login Successful")});
+    }
   }
 }

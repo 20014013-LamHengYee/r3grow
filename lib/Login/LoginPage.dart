@@ -4,6 +4,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:r3grow/Journey/journey.dart';
 import 'package:r3grow/Login/signUpPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -239,7 +240,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 ),
                               ),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  signIn((emailController.text),
+                                      passwordController.text);
+                                },
                                 child: const Text(
                                   "LOGIN",
                                   style: TextStyle(
@@ -295,7 +299,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     if (_formKey.currentState!.validate()) {
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {Fluttertoast.showToast(msg: "Login Successful")});
+          .then((uid) => {
+                Fluttertoast.showToast(msg: "Login Successful"),
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => HomePageWidget()))
+              })
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.message);
+      });
       //ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       //content: Text("Login Successful"),
       // ));

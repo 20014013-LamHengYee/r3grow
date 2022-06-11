@@ -317,6 +317,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               // ),
                               autofocus: false,
                               validator: (value) {
+                                if (value!.isEmpty) {
+                                  return ("Please enter your password");
+                                }
                                 if (confirmPasswordController.text !=
                                     passwordController.text) {
                                   return "Password don't match";

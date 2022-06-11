@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 
 class SignUpPageWidget extends StatefulWidget {
-  const SignUpPageWidget({Key key}) : super(key: key);
+  const SignUpPageWidget({Key? key}) : super(key: key);
 
   @override
   _SignUpPageWidgetState createState() => _SignUpPageWidgetState();
@@ -18,9 +18,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool passwordVisibility1;
+  late bool passwordVisibility1;
   TextEditingController confirmPasswordController = TextEditingController();
-  bool passwordVisibility2;
+  late bool passwordVisibility2;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -134,7 +134,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                 autofocus: false,
                                 keyboardType: TextInputType.name,
                                 onSaved: (value) {
-                                  usernameController.text = value;
+                                  usernameController.text = value!;
                                 },
                                 textInputAction: TextInputAction.next,
                                 obscureText: false,
@@ -181,7 +181,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               //validator: () {},
                               keyboardType: TextInputType.emailAddress,
                               onSaved: (value) {
-                                emailController.text = value;
+                                emailController.text = value!;
                               },
                               textInputAction: TextInputAction.next,
                               obscureText: false,
@@ -226,7 +226,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               autofocus: false,
                               //validator: () {},
                               onSaved: (value) {
-                                passwordController.text = value;
+                                passwordController.text = value!;
                               },
                               textInputAction: TextInputAction.next,
                               obscureText: !passwordVisibility1,
@@ -285,7 +285,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               autofocus: false,
                               //validator: () {},
                               onSaved: (value) {
-                                confirmPasswordController.text = value;
+                                confirmPasswordController.text = value!;
                               },
                               textInputAction: TextInputAction.done,
                               obscureText: !passwordVisibility2,

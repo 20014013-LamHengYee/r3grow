@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:r3grow/Login/signUpPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:r3grow/main.dart';
 
 class LoginPageWidget extends StatefulWidget {
   const LoginPageWidget({Key? key}) : super(key: key);

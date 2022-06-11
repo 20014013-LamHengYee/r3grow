@@ -164,9 +164,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   // ),
                                   autofocus: false,
                                   obscureText: !passwordVisibility1,
-                                  // ignore: missing_return
+                                  // ignore: missing_return, body_might_complete_normally_nullable
                                   validator: (value) {
-                                    RegExp regEx = new RegExp(r'^.{7,}$');
+                                    RegExp regEx = RegExp(r'^.{7,}$');
                                     if (value!.isEmpty) {
                                       return ("Please enter password");
                                     }

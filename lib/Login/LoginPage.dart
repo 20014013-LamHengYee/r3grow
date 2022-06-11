@@ -8,7 +8,7 @@ import 'package:r3grow/Login/signUpPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPageWidget extends StatefulWidget {
-  const LoginPageWidget({Key key}) : super(key: key);
+  const LoginPageWidget({Key? key}) : super(key: key);
 
   @override
   _LoginPageWidgetState createState() => _LoginPageWidgetState();
@@ -21,7 +21,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
   //editing controller
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool passwordVisibility1;
+  late bool passwordVisibility1;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   //firebase
@@ -109,7 +109,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   obscureText: false,
                                   keyboardType: TextInputType.emailAddress,
                                   validator: (value) {
-                                    if (value.isEmpty) {
+                                    if (value!.isEmpty) {
                                       return ("Please enter your email");
                                     }
                                     // reg expression for email validation
@@ -121,7 +121,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     return null;
                                   },
                                   onSaved: (value) {
-                                    emailController.text = value;
+                                    emailController.text = value!;
                                   },
                                   textInputAction: TextInputAction.next,
                                   decoration: InputDecoration(
@@ -167,7 +167,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   // ignore: missing_return
                                   validator: (value) {
                                     RegExp regEx = new RegExp(r'^.{7,}$');
-                                    if (value.isEmpty) {
+                                    if (value!.isEmpty) {
                                       return ("Please enter password");
                                     }
 
@@ -176,7 +176,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     }
                                   },
                                   onSaved: (value) {
-                                    passwordController.text = value;
+                                    passwordController.text = value!;
                                   },
                                   textInputAction: TextInputAction.done,
                                   decoration: InputDecoration(
@@ -262,8 +262,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const SignUpPageWidget()),
+                                  builder: (context) => SignUpPageWidget()),
                             );
                           },
                           child: const Text(
@@ -293,14 +292,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
 
   //login function
   void signIn(String email, String password) async {
-    if (_formKey.currentState.validate()) {
+    if (_formKey.currentState!.validate()) {
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {
-            Fluttertoast.showToast(msg: "Login Successful")});
-            //ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            //content: Text("Login Successful"),
-            // ));
+          .then((uid) => {Fluttertoast.showToast(msg: "Login Successful")});
+      //ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //content: Text("Login Successful"),
+      // ));
     }
   }
 }

@@ -1,7 +1,12 @@
 // ignore: duplicate_ignore
 // ignore: file_names
 // ignore_for_file: prefer_const_constructors, use_full_hex_values_for_flutter_colors, file_names
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:r3grow/databaseModel/user_model.dart';
+import 'package:r3grow/main.dart';
 
 class SignUpPageWidget extends StatefulWidget {
   const SignUpPageWidget({Key? key}) : super(key: key);
@@ -13,6 +18,8 @@ class SignUpPageWidget extends StatefulWidget {
 class _SignUpPageWidgetState extends State<SignUpPageWidget> {
   // form key
   final _formKey = GlobalKey<FormState>();
+
+  final _auth = FirebaseAuth.instance;
 
   //editing controller
   TextEditingController usernameController = TextEditingController();
@@ -133,6 +140,12 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                 // ),
                                 autofocus: false,
                                 keyboardType: TextInputType.name,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return ("Please enter Username");
+                                  }
+                                  return null;
+                                },
                                 onSaved: (value) {
                                   usernameController.text = value!;
                                 },
@@ -178,7 +191,18 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               //   () => setState(() {}),
                               // ),
                               autofocus: false,
-                              //validator: () {},
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return ("Please enter your email");
+                                }
+                                // reg expression for email validation
+                                if (!RegExp(
+                                        "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9+_.-]+.[a-z]")
+                                    .hasMatch(value)) {
+                                  return ("Please Enter a valid email");
+                                }
+                                return null;
+                              },
                               keyboardType: TextInputType.emailAddress,
                               onSaved: (value) {
                                 emailController.text = value!;
@@ -224,7 +248,16 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               //   () => setState(() {}),
                               // ),
                               autofocus: false,
-                              //validator: () {},
+                              validator: (value) {
+                                RegExp regEx = RegExp(r'^.{7,}$');
+                                if (value!.isEmpty) {
+                                  return ("Please enter password");
+                                }
+
+                                if (!regEx.hasMatch(value)) {
+                                  return ("Please enter valid password(Min. 7 character)");
+                                }
+                              },
                               onSaved: (value) {
                                 passwordController.text = value!;
                               },
@@ -283,7 +316,13 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               //   () => setState(() {}),
                               // ),
                               autofocus: false,
-                              //validator: () {},
+                              validator: (value) {
+                                if (confirmPasswordController.text !=
+                                    passwordController.text) {
+                                  return "Password don't match";
+                                }
+                                return null;
+                              },
                               onSaved: (value) {
                                 confirmPasswordController.text = value!;
                               },
@@ -332,7 +371,10 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(95, 15, 0, 0),
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              signUp(emailController.text,
+                                  passwordController.text);
+                            },
                             child: const Text(
                               "CREATE ACCOUNT",
                               style: TextStyle(
@@ -358,5 +400,42 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
         ),
       ),
     );
+  }
+
+  void signUp(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => {postDetailsToFirestore()})
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.message);
+      });
+    }
+  }
+
+  postDetailsToFirestore() async {
+    // calling our firestore
+    // calling our user model
+    // sending these values
+
+    // ignore: unused_local_variable
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+
+    UserModel userModel = UserModel();
+
+    // writing all the values
+    userModel.email = user!.email;
+    userModel.uid = user.uid;
+    userModel.username = usernameController.text;
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userModel.toMap());
+    Fluttertoast.showToast(msg: "Account created successfully!");
+
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (context) => MyApp()), (route) => false);
   }
 }

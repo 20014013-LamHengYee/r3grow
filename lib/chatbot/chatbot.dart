@@ -1,12 +1,15 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, prefer_const_constructors_in_immutables, use_key_in_widget_constructors, unnecessary_this
 
-import 'package:flutter_dialogflow/dialogflow_v2.dart';
+import 'package:dialogflow_flutter/googleAuth.dart';
+import 'package:dialogflow_flutter/language.dart';
+import 'package:dialogflow_flutter/message.dart';
 import 'package:flutter/material.dart';
+import 'package:dialogflow_flutter/dialogflowFlutter.dart';
 
 class ChatBot extends StatefulWidget {
-  const ChatBot({Key key, this.title}) : super(key: key);
+  const ChatBot({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
 
   @override
   _ChatBot createState() => _ChatBot();
@@ -67,12 +70,12 @@ class _ChatBot extends State<ChatBot> {
     _textController.clear();
     AuthGoogle authGoogle =
         await AuthGoogle(fileJson: "assets/credentials.json").build();
-    Dialogflow dialogflow =
-        Dialogflow(authGoogle: authGoogle, language: Language.english);
+    DialogFlow dialogflow =
+        DialogFlow(authGoogle: authGoogle, language: Language.english);
     AIResponse response = await dialogflow.detectIntent(query);
     ChatMessage message = ChatMessage(
       text: response.getMessage() ??
-          CardDialogflow(response.getListMessage()[0]).title,
+          (response.getListMessage()![0]).title,
       name: "R3Bot",
       type: false,
     );
@@ -126,7 +129,7 @@ class _ChatBot extends State<ChatBot> {
 }
 
 class ChatMessage extends StatelessWidget {
-  ChatMessage({this.text, this.name, this.type});
+  ChatMessage({required this.text, required this.name, required this.type});
 
   final String text;
   final String name;

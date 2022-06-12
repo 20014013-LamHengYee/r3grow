@@ -1,7 +1,7 @@
 class UserModel {
-  String? uid;
-  String? email;
-  String? username;
+  String uid;
+  String email;
+  String username;
 
   UserModel({this.uid, this.email, this.username});
 

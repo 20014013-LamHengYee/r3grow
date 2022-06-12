@@ -1,4 +1,6 @@
 // ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // ignore: unused_import
@@ -9,7 +11,7 @@ import 'package:r3grow/databaseModel/user_model.dart';
 
 // ignore: camel_case_types
 class accountPageWidget extends StatefulWidget {
-  const accountPageWidget({Key? key}) : super(key: key);
+  const accountPageWidget({Key key}) : super(key: key);
 
   @override
   _accountPageWidgetState createState() => _accountPageWidgetState();
@@ -17,7 +19,7 @@ class accountPageWidget extends StatefulWidget {
 
 // ignore: camel_case_types
 class _accountPageWidgetState extends State<accountPageWidget> {
-  User? user = FirebaseAuth.instance.currentUser;
+  User user = FirebaseAuth.instance.currentUser;
   UserModel userLogIn = UserModel();
 
   @override
@@ -25,7 +27,7 @@ class _accountPageWidgetState extends State<accountPageWidget> {
     super.initState();
     FirebaseFirestore.instance
         .collection("users")
-        .doc(user!.uid)
+        .doc(user.uid)
         .get()
         .then((value) {
       // ignore: unnecessary_this

@@ -4,6 +4,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:r3grow/Journey/journey.dart';
 import 'package:r3grow/Login/accountPage.dart';
 import 'package:r3grow/Login/signUpPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -302,7 +303,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
           .then((uid) => {
                 Fluttertoast.showToast(msg: "Login Successful"),
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => accountPageWidget()))
+                    builder: (context) => HomePageWidget()))
               })
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);

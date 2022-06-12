@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class VoucherRedemptionWidget extends StatefulWidget {
   // passed from allVoucher.dart
   String voucherDocumentID;
-  VoucherRedemptionWidget(this.voucherDocumentID, {Key key}) : super(key: key);
+  VoucherRedemptionWidget(this.voucherDocumentID, {Key? key}) : super(key: key);
 
   // const VoucherRedemptionWidget({Key key}) : super(key: key);
 
@@ -21,13 +21,13 @@ class VoucherRedemptionWidget extends StatefulWidget {
 class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  int points = 100;
-  int voucherPoints = 50;
-  int pointsUpdated;
-  int numOfVoucher = 1;
-  int numOfVoucherBalance;
+  late int points = 100;
+  late int voucherPoints = 50;
+  late int pointsUpdated;
+  late int numOfVoucher = 1;
+  late int numOfVoucherBalance;
 
-  String voucherDocumentID;
+  late String voucherDocumentID;
   _VoucherRedemptionWidgetState(String voucherDocumentID);
 
   @override

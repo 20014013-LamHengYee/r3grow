@@ -5,7 +5,7 @@ import 'package:r3grow/Journey/voucherRedemption.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AllVoucherWidget extends StatefulWidget {
-  const AllVoucherWidget({Key key}) : super(key: key);
+  const AllVoucherWidget({Key? key}) : super(key: key);
 
   @override
   _AllVoucherWidgetState createState() => _AllVoucherWidgetState();
@@ -75,15 +75,15 @@ class _AllVoucherWidgetState extends State<AllVoucherWidget> {
                       : ListView.builder(
                           physics:
                               const NeverScrollableScrollPhysics(), // ensure can scroll
-                          itemCount: snapshot.data.docs.length,
+                          itemCount: snapshot.data!.docs.length,
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
-                            DocumentSnapshot data = snapshot.data.docs[index];
+                            DocumentSnapshot data = snapshot.data!.docs[index];
 
                             // generate document id > so can know which voucher is selected
                             var voucherDocumentID =
-                                snapshot.data.docs[index].reference.id;
+                                snapshot.data!.docs[index].reference.id;
 
                             // return Text(data['voucherDesc']);
                             return Padding(

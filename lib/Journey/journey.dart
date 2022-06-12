@@ -8,7 +8,7 @@ import 'package:r3grow/chatbot/chatbot.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({Key key}) : super(key: key);
+  const HomePageWidget({Key? key}) : super(key: key);
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
@@ -26,12 +26,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   // }
 
   // PROGRESS BAR - STEPS
-  double steps;
+  late double steps;
   // 0.001 - 1 STEP
   // 0.025 - 25 STEP
 
   // POINTS
-  int point;
+  late int point;
 
   // final _firestore = FirebaseFirestore.instance;
   final Stream<QuerySnapshot> account =
@@ -172,8 +172,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
                         return Expanded(
                           child: Align(
-                            alignment: Alignment.lerp(
-                                Alignment.topLeft, Alignment.topRight, steps),
+                            alignment: Alignment(0.00,steps),
                             child: Image.asset(
                               'assets/images/heroImg.png',
                               width: 150,
@@ -229,8 +228,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                               child: Align(
-                                alignment: Alignment.lerp(Alignment.topLeft,
-                                    Alignment.topRight, steps),
+                                alignment: Alignment(0.00, steps),
                                 // use .truncate() to remove decimal place | progress bar label is initiate with double
                                 child: Text(
                                     (steps * 1000).truncate().toString() +
@@ -346,7 +344,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const AllVoucherWidget(),
+                                      AllVoucherWidget(),
                                 ),
                               );
                             },
@@ -391,10 +389,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 }
 
                                 DocumentSnapshot data =
-                                    snapshot.data.docs[index];
+                                    snapshot.data!.docs[index];
 
                                 var voucherDocumentID =
-                                    snapshot.data.docs[index].reference.id;
+                                    snapshot.data!.docs[index].reference.id;
 
                                 return InkWell(
                                   onTap: () async {

@@ -1,17 +1,14 @@
 // ignore_for_file: avoid_print, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable, unnecessary_this, no_logic_in_create_state
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // for the date
 
 class VoucherRedemptionWidget extends StatefulWidget {
   // passed from allVoucher.dart / journey.dart
   String voucherDocumentID;
-  VoucherRedemptionWidget(this.voucherDocumentID, {Key? key}) : super(key: key);
+  VoucherRedemptionWidget(this.voucherDocumentID);
 
-  // const VoucherRedemptionWidget({Key key}) : super(key: key);
-
-  // @override
-  // _VoucherRedemptionWidgetState createState() =>
-  //     _VoucherRedemptionWidgetState();
   @override
   State<StatefulWidget> createState() {
     return _VoucherRedemptionWidgetState(this.voucherDocumentID);
@@ -19,6 +16,9 @@ class VoucherRedemptionWidget extends StatefulWidget {
 }
 
 class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
+  String voucherDocumentID;
+  _VoucherRedemptionWidgetState(this.voucherDocumentID);
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   late int points = 100;
@@ -27,8 +27,8 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
   late int numOfVoucher = 1;
   late int numOfVoucherBalance;
 
-  late String voucherDocumentID;
-  _VoucherRedemptionWidgetState(String voucherDocumentID);
+  final Stream<QuerySnapshot> voucher =
+      FirebaseFirestore.instance.collection('Voucher').snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -70,155 +70,249 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        'assets/images/freegift.png',
-                        width: 300,
-                        height: 220,
-                        fit: BoxFit.fitWidth,
-                      ),
+                      StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                          stream: FirebaseFirestore.instance
+                              .collection('Voucher')
+                              .doc(
+                                  voucherDocumentID) // based on specific document id.
+                              .snapshots(),
+                          builder: (_, snapshot) {
+                            if (snapshot.hasError) {
+                              return Text('Something went wrong');
+                            }
+
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Text('Loading');
+                            }
+
+                            final data = snapshot
+                                .requireData; // take data from the snapshot
+
+                            return Image.network(
+                              '${data['image']}',
+                              width: 300,
+                              height: 220,
+                              fit: BoxFit.fitWidth,
+                            );
+                          }),
                     ],
                   ),
                 ),
-                // Row(
-                //   mainAxisSize: MainAxisSize.max,
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Image.asset(
-                //       'assets/images/vou.png',
-                //       width: 300,
-                //       height: 150,
-                //       fit: BoxFit.cover,
-                //     ),
-                //   ],
-                // ),
+                ////////////////////////////////////////////// POINTS & VALID DATE //////////////////////////////////////////////
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 30),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 50, 0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Point',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              '50 points',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Valid Date',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            '18 Apr 2022 to 01 May 2022',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  padding: EdgeInsetsDirectional.fromSTEB(15, 25, 0, 30),
+                  child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                      stream: FirebaseFirestore.instance
+                          .collection('Voucher')
+                          .doc(
+                              voucherDocumentID) // based on specific document id.
+                          .snapshots(),
+                      builder: (_, snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('Something went wrong');
+                        }
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Text('Loading');
+                        }
+                        final data =
+                            snapshot.requireData; // take data from the snapshot
+
+                        // Initialise the date
+                        Timestamp t = data['voucherExpiryDate'];
+                        DateTime d = t.toDate();
+                        DateFormat formatter = DateFormat('dd/MM/yyyy');
+                        final String formattedDate = formatter
+                            .format(d); // make the date into this format
+
+                        return Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                // Space between points & valid date
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 90, 0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Point',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    Text(
+                                      '${data['voucherPoints']}',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Valid Date',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  Text(
+                                    formattedDate.toString(),
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              )
+                            ]);
+                      }),
                 ),
+                ////////////////////////////////////////////// DESCRIPTION //////////////////////////////////////////////
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Description',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                      stream: FirebaseFirestore.instance
+                          .collection('Voucher')
+                          .doc(
+                              voucherDocumentID) // based on specific document id.
+                          .snapshots(),
+                      builder: (_, snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('Something went wrong');
+                        }
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Text('Loading');
+                        }
+                        final data =
+                            snapshot.requireData; // take data from the snapshot
+
+                        return Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Description',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        '${data['voucherDesc']}',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ]);
+                      }),
                 ),
+                ////////////////////////////////////////////// T & C //////////////////////////////////////////////
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Enjoy a FREE upsize of any drinks when you purchase from Liho!',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                      stream: FirebaseFirestore.instance
+                          .collection('Voucher')
+                          .doc(
+                              voucherDocumentID) // based on specific document id.
+                          .snapshots(),
+                      builder: (_, snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('Something went wrong');
+                        }
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Text('Loading');
+                        }
+                        final data =
+                            snapshot.requireData; // take data from the snapshot
+
+                        return Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0, 25, 15, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Terms & Condition',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0, 0, 15, 30),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        '${data['voucherTC']}',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]);
+                      }),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(15, 25, 15, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Terms & Condition',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 30),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          '- condition 1\n- condition 2\n- condition 3',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                ////////////////////////////////////////////// BUTTON //////////////////////////////////////////////
                 ButtonTheme(
                   minWidth: 130,
                   height: 40,

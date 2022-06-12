@@ -4,12 +4,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:r3grow/databaseModel/user_model.dart';
 import 'package:r3grow/main.dart';
 
 class SignUpPageWidget extends StatefulWidget {
-  const SignUpPageWidget({Key? key}) : super(key: key);
+  const SignUpPageWidget({Key key}) : super(key: key);
 
   @override
   _SignUpPageWidgetState createState() => _SignUpPageWidgetState();
@@ -25,9 +25,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  late bool passwordVisibility1;
+  bool passwordVisibility1;
   TextEditingController confirmPasswordController = TextEditingController();
-  late bool passwordVisibility2;
+  bool passwordVisibility2;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -141,13 +141,13 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                 autofocus: false,
                                 keyboardType: TextInputType.name,
                                 validator: (value) {
-                                  if (value!.isEmpty) {
+                                  if (value.isEmpty) {
                                     return ("Please enter Username");
                                   }
                                   return null;
                                 },
                                 onSaved: (value) {
-                                  usernameController.text = value!;
+                                  usernameController.text = value;
                                 },
                                 textInputAction: TextInputAction.next,
                                 obscureText: false,
@@ -192,7 +192,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               // ),
                               autofocus: false,
                               validator: (value) {
-                                if (value!.isEmpty) {
+                                if (value.isEmpty) {
                                   return ("Please enter your email");
                                 }
                                 // reg expression for email validation
@@ -205,7 +205,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               },
                               keyboardType: TextInputType.emailAddress,
                               onSaved: (value) {
-                                emailController.text = value!;
+                                emailController.text = value;
                               },
                               textInputAction: TextInputAction.next,
                               obscureText: false,
@@ -250,7 +250,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               autofocus: false,
                               validator: (value) {
                                 RegExp regEx = RegExp(r'^.{7,}$');
-                                if (value!.isEmpty) {
+                                if (value.isEmpty) {
                                   return ("Please enter password");
                                 }
 
@@ -259,7 +259,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                 }
                               },
                               onSaved: (value) {
-                                passwordController.text = value!;
+                                passwordController.text = value;
                               },
                               textInputAction: TextInputAction.next,
                               obscureText: !passwordVisibility1,
@@ -317,7 +317,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               // ),
                               autofocus: false,
                               validator: (value) {
-                                if (value!.isEmpty) {
+                                if (value.isEmpty) {
                                   return ("Please enter your password");
                                 }
                                 if (confirmPasswordController.text !=
@@ -327,7 +327,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                 return null;
                               },
                               onSaved: (value) {
-                                confirmPasswordController.text = value!;
+                                confirmPasswordController.text = value;
                               },
                               textInputAction: TextInputAction.done,
                               obscureText: !passwordVisibility2,
@@ -406,12 +406,12 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
   }
 
   void signUp(String email, String password) async {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState.validate()) {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => {postDetailsToFirestore()})
           .catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
+        // Fluttertoast.showToast(msg: e!.message);
       });
     }
   }
@@ -423,12 +423,12 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
 
     // ignore: unused_local_variable
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? user = _auth.currentUser;
+    User user = _auth.currentUser;
 
     UserModel userModel = UserModel();
 
     // writing all the values
-    userModel.email = user!.email;
+    userModel.email = user.email;
     userModel.uid = user.uid;
     userModel.username = usernameController.text;
 
@@ -436,7 +436,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Account created successfully!");
+    // Fluttertoast.showToast(msg: "Account created successfully!");
 
     Navigator.pushAndRemoveUntil(context,
         MaterialPageRoute(builder: (context) => MyApp()), (route) => false);

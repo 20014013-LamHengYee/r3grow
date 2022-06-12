@@ -2,7 +2,6 @@
 
 import 'package:dialogflow_flutter/googleAuth.dart';
 import 'package:dialogflow_flutter/language.dart';
-import 'package:dialogflow_flutter/message.dart';
 import 'package:flutter/material.dart';
 import 'package:dialogflow_flutter/dialogflowFlutter.dart';
 
@@ -47,10 +46,9 @@ class _ChatBot extends State<ChatBot> {
                 // onPressed: () => _handleSubmitted(_textController.text)
                 onPressed: () async {
                         // check if it's empty
-                        if ( _textController.text == null ||  _textController.text == "") {
+                        if ( _textController.text == "") {
                           // empty
                           // ensure no null is submitted > will crash
-                          print("empty");
                           _handleSubmitted("empty");
                         } 
                         else {

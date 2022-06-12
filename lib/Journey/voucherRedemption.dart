@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: avoid_print, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable, unnecessary_this, no_logic_in_create_state
 
 import 'package:flutter/material.dart';
 

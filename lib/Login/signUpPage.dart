@@ -248,6 +248,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               //   () => setState(() {}),
                               // ),
                               autofocus: false,
+                              // ignore: body_might_complete_normally_nullable
                               validator: (value) {
                                 RegExp regEx = RegExp(r'^.{7,}$');
                                 if (value!.isEmpty) {

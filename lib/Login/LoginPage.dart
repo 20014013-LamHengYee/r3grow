@@ -5,7 +5,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:r3grow/Journey/journey.dart';
-import 'package:r3grow/Login/accountPage.dart';
 import 'package:r3grow/Login/signUpPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           height: 200,
           width: 200,
         ),
-        nextScreen: const HomePageWidget(),
+        nextScreen: const LoginPageWidget(),
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: const Color(0xFFF1FDFB),
       ),

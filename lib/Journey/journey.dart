@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import, unused_field, prefer_const_constructors, unnecessary_new
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:r3grow/Journey/allVoucher.dart';
 import 'package:r3grow/Journey/voucherRedemption.dart';
@@ -16,6 +17,9 @@ class HomePageWidget extends StatefulWidget {
 
 class _HomePageWidgetState extends State<HomePageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  
+  late User loggedInUser;
 
   final Stream<QuerySnapshot> voucher =
       FirebaseFirestore.instance.collection('Voucher').snapshots();
@@ -35,7 +39,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   // final _firestore = FirebaseFirestore.instance;
   final Stream<QuerySnapshot> account =
-      FirebaseFirestore.instance.collection('Account').snapshots();
+      FirebaseFirestore.instance.collection('users')
+                                .where("email", isEqualTo: FirebaseAuth.instance.currentUser?.email.toString())
+                                .snapshots();
 
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[];
@@ -166,8 +172,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
                         final data =
                             snapshot.requireData; // take data from the snapshot
-                        steps = data.docs[1]['Steps'];
-                        // steps = steps + 0.01; [if steps == 0.99 | because firebase if = 1 will crash.]
+                        steps = (data.docs[0]['steps']).toDouble();
+                        // steps = steps + 0.01;
 
                         return Expanded(
                           child: Align(
@@ -211,8 +217,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             snapshot.requireData; // take data from the snapshot
 
                         // because the progress bar only double decimal parameter type.
-                        steps = data.docs[1]['Steps'];
-                        // steps = steps + 0.01; [if steps == 0.99 | because firebase if = 1 will crash.]
+                        steps = (data.docs[0]['steps']).toDouble();
+                        // steps = steps + 0.01;
 
                         return Expanded(
                           child: new Stack(children: <Widget>[
@@ -267,7 +273,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         final data =
                             snapshot.requireData; // take data from the snapshot
 
-                        point = data.docs[1]['Points'];
+                        point = data.docs[0]['points'];
 
                         return ButtonTheme(
                           minWidth: 330.0,

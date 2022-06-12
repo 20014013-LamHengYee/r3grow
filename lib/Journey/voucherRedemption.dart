@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class VoucherRedemptionWidget extends StatefulWidget {
-  // passed from allVoucher.dart
+  // passed from allVoucher.dart / journey.dart
   String voucherDocumentID;
   VoucherRedemptionWidget(this.voucherDocumentID, {Key? key}) : super(key: key);
 

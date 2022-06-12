@@ -171,7 +171,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
                         return Expanded(
                           child: Align(
-                            alignment: Alignment(0.00,steps),
+                            alignment: Alignment(steps,0),
                             child: Image.asset(
                               'assets/images/heroImg.png',
                               width: 150,
@@ -227,7 +227,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                               child: Align(
-                                alignment: Alignment(0.00, steps),
+                                alignment: Alignment(steps, 0),
                                 // use .truncate() to remove decimal place | progress bar label is initiate with double
                                 child: Text(
                                     (steps * 1000).truncate().toString() +
@@ -400,6 +400,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             builder: (context) =>
                                                 VoucherRedemptionWidget(
                                                     voucherDocumentID)));
+                                    // TEST IF IT CAN GET THEIR ID - YES
+                                    print(voucherDocumentID);
                                   },
                                   child: Image.network(
                                     '${data['image']}',

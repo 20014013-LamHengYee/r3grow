@@ -102,6 +102,8 @@ class _AllVoucherWidgetState extends State<AllVoucherWidget> {
                                                   builder: (context) =>
                                                       VoucherRedemptionWidget(
                                                           voucherDocumentID)));
+                                          // TEST IF IT CAN GET THEIR ID - YES
+                                          print(voucherDocumentID);
                                         },
                                         child: Image.network(
                                           '${data['image']}',

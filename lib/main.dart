@@ -1,6 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:r3grow/Journey/journey.dart';
 import 'package:r3grow/Login/LoginPage.dart';
 
 Future<void> main() async {
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           height: 200,
           width: 200,
         ),
-        nextScreen: const LoginPageWidget(),
+        nextScreen: const HomePageWidget(),
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: const Color(0xFFF1FDFB),
       ),

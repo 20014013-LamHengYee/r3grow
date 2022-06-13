@@ -177,7 +177,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
                         return Expanded(
                           child: Align(
-                            alignment: Alignment(steps,0),
+                            alignment: FractionalOffset(steps,0),
                             child: Image.asset(
                               'assets/images/heroImg.png',
                               width: 150,
@@ -233,7 +233,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                               child: Align(
-                                alignment: Alignment(steps, 0),
+                                alignment: FractionalOffset(steps, 0),
                                 // use .truncate() to remove decimal place | progress bar label is initiate with double
                                 child: Text(
                                     (steps * 1000).truncate().toString() +

@@ -1,7 +1,9 @@
 // ignore: file_names
 // ignore: file_names
 // ignore_for_file: use_full_hex_values_for_flutter_colors, file_names, duplicate_ignore
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ForgetPasswordPageWidget extends StatefulWidget {
   const ForgetPasswordPageWidget({Key? key}) : super(key: key);
@@ -13,7 +15,14 @@ class ForgetPasswordPageWidget extends StatefulWidget {
 
 class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
   late TextEditingController emailController;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -39,13 +48,14 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
               //   () => setState(() {}),
               // ),
               autofocus: false,
-              validator: (value) {
-                if (value!.isEmpty) {
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (email) {
+                if (email!.isEmpty) {
                   return ("Please enter your email");
                 }
                 // reg expression for email validation
                 if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9+_.-]+.[a-z]")
-                    .hasMatch(value)) {
+                    .hasMatch(email)) {
                   return ("Please Enter a valid email");
                 }
                 return null;
@@ -54,7 +64,7 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
               onSaved: (value) {
                 emailController.text = value!;
               },
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
               obscureText: false,
               decoration: InputDecoration(
                 labelText: 'Email Address',
@@ -90,7 +100,7 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
       // ignore: prefer_const_constructors
       padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 300),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: resetPassword,
         // ignore: prefer_const_constructors
         child: Text(
           "Reset Password",
@@ -111,7 +121,7 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
     );
 
     return Scaffold(
-      key: scaffoldKey,
+      key: formKey,
       appBar: PreferredSize(
         // ignore: prefer_const_constructors
         preferredSize: Size.fromHeight(100),
@@ -216,5 +226,26 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
         ),
       ),
     );
+  }
+
+  Future resetPassword() async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        // ignore: prefer_const_constructors
+        builder: (context) => Center(
+              // ignore: prefer_const_constructors
+              child: CircularProgressIndicator(),
+            ));
+    try {
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: emailController.text.trim());
+      Fluttertoast.showToast(msg: "Password reset email sent");
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    } on FirebaseAuthException catch (e) {
+      // ignore: avoid_print
+      print(e.message);
+      Navigator.of(context).pop();
+    }
   }
 }

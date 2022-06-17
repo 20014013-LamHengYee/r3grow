@@ -318,17 +318,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                       MaterialPageRoute(builder: (context) => HomePageWidget()))
                 })
             .catchError((e) {
+          emailController.clear();
+          passwordController.clear();
           Fluttertoast.showToast(msg: e!.message);
         });
         //ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         //content: Text("Login Successful"),
         // ));
-      }
-    } on FirebaseAuthException catch (e) {
-      emailController.clear();
-      passwordController.clear();
-      if (e.code == 'email-already-in-use') {
-        Fluttertoast.showToast(msg: "Please register this account!");
       }
     } catch (e) {
       // ignore: avoid_print

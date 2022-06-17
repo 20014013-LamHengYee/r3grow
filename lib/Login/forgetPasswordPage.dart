@@ -1,4 +1,6 @@
 // ignore: file_names
+// ignore_for_file: use_full_hex_values_for_flutter_colors
+
 import 'package:flutter/material.dart';
 
 class ForgetPasswordPageWidget extends StatefulWidget {
@@ -22,62 +24,88 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
   @override
   Widget build(BuildContext context) {
     //email address text field
-    final emailAddress = Expanded(
-      child: Align(
-        alignment: const AlignmentDirectional(0, 0),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-          child: TextFormField(
-            controller: emailController,
-            // onChanged: (_) => EasyDebounce.debounce(
-            //   'textController',
-            //   Duration(milliseconds: 2000),
-            //   () => setState(() {}),
-            // ),
-            autofocus: true,
-            obscureText: false,
-            decoration: InputDecoration(
-              labelText: 'Email Address',
-              enabledBorder: OutlineInputBorder(
-                // ignore: prefer_const_constructors
-                borderSide: BorderSide(
-                  // ignore: use_full_hex_values_for_flutter_colors
-                  color: const Color(0xFFBDBDBDBD),
-                  width: 1,
+    final emailAddress = Padding(
+      // ignore: prefer_const_constructors
+      padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Expanded(
+            child: TextFormField(
+              controller: emailController,
+              // onChanged: (_) => EasyDebounce.debounce(
+              //   'textController2',
+              //   Duration(milliseconds: 2000),
+              //   () => setState(() {}),
+              // ),
+              autofocus: false,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return ("Please enter your email");
+                }
+                // reg expression for email validation
+                if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9+_.-]+.[a-z]")
+                    .hasMatch(value)) {
+                  return ("Please Enter a valid email");
+                }
+                return null;
+              },
+              keyboardType: TextInputType.emailAddress,
+              onSaved: (value) {
+                emailController.text = value!;
+              },
+              textInputAction: TextInputAction.next,
+              obscureText: false,
+              decoration: InputDecoration(
+                labelText: 'Email Address',
+                enabledBorder: OutlineInputBorder(
+                  // ignore: prefer_const_constructors
+                  borderSide: BorderSide(
+                    // ignore: prefer_const_constructors
+                    color: Color(0xFFBDBDBDBD),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  // ignore: use_full_hex_values_for_flutter_colors
-                  color: Color(0xFFBDBDBDBD),
-                  width: 1,
+                focusedBorder: OutlineInputBorder(
+                  // ignore: prefer_const_constructors
+                  borderSide: BorderSide(
+                    // ignore: prefer_const_constructors
+                    color: Color(0xFFBDBDBDBD),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                borderRadius: BorderRadius.circular(8),
               ),
+              // ignore: prefer_const_constructors
+              style: TextStyle(fontFamily: "Poppins"),
             ),
-            style: const TextStyle(fontFamily: "Poppins"),
           ),
-        ),
+        ],
       ),
     );
 
     //reset password button
     final resetPasswordBtt = Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 400),
+      // ignore: prefer_const_constructors
+      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 300),
       child: ElevatedButton(
         onPressed: () {},
-        child: const Text(
+        // ignore: prefer_const_constructors
+        child: Text(
           "Reset Password",
+          // ignore: prefer_const_constructors
           style: TextStyle(
             fontFamily: 'Poppins',
-            fontSize: 14,
+            fontSize: 17,
             fontWeight: FontWeight.bold,
           ),
         ),
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-          primary: const Color(0xFF00e5FF),
+          // ignore: prefer_const_constructors
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          // ignore: prefer_const_constructors
+          primary: Color(0xFF00e5FF),
         ),
       ),
     );
@@ -85,10 +113,13 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(100),
+        // ignore: prefer_const_constructors
+        preferredSize: Size.fromHeight(100),
         child: AppBar(
-          backgroundColor: const Color(0xFFF1FDFB),
-          iconTheme: const IconThemeData(color: Color(0xFF212121)),
+          // ignore: prefer_const_constructors
+          backgroundColor: Color(0xFFF1FDFB),
+          // ignore: prefer_const_constructors
+          iconTheme: IconThemeData(color: Color(0xFF212121)),
           automaticallyImplyLeading: true,
           flexibleSpace: Column(
             mainAxisSize: MainAxisSize.max,
@@ -96,18 +127,21 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(42, 0, 0, 0),
+                // ignore: prefer_const_constructors
+                padding: EdgeInsetsDirectional.fromSTEB(42, 0, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     // ignore: prefer_const_constructors
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
+                      // ignore: prefer_const_constructors
+                      padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 12),
                       // ignore: prefer_const_constructors
                       child: Text(
                         'Back',
-                        style: const TextStyle(
+                        // ignore: prefer_const_constructors
+                        style: TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: 20,
                         ),
@@ -118,11 +152,13 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
               ),
               // ignore: prefer_const_constructors
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24, 10, 0, 0),
+                // ignore: prefer_const_constructors
+                padding: EdgeInsetsDirectional.fromSTEB(24, 10, 0, 0),
                 // ignore: prefer_const_constructors
                 child: Text(
-                  'Forget password',
-                  style: const TextStyle(
+                  'Forget Password',
+                  // ignore: prefer_const_constructors
+                  style: TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 32,
                   ),
@@ -134,32 +170,47 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
           elevation: 0,
         ),
       ),
-      backgroundColor: const Color(0xFFF1FDFB),
+      // ignore: prefer_const_constructors
+      backgroundColor: Color(0xFFF1FDFB),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // ignore: prefer_const_constructors
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 120, 0, 10),
-                  // ignore: prefer_const_constructors
-                  child: Text(
-                    'Receive an email to reset password:',
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 15,
+          child: Padding(
+            // ignore: prefer_const_constructors
+            padding: EdgeInsetsDirectional.fromSTEB(0, 160, 0, 0),
+            child: SingleChildScrollView(
+              child: Form(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        // ignore: prefer_const_constructors
+                        Padding(
+                          // ignore: prefer_const_constructors
+                          padding: EdgeInsetsDirectional.fromSTEB(45, 0, 0, 0),
+                          // ignore: prefer_const_constructors
+                          child: Text(
+                            'Receive an email to rest your password:',
+                            textAlign: TextAlign.start,
+                            // ignore: prefer_const_constructors
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
+                    //Email Address text field
+                    emailAddress,
+                    //reset password button
+                    resetPasswordBtt,
+                  ],
                 ),
-                //email address text field
-                emailAddress,
-                //reset password button
-                resetPasswordBtt,
-              ],
+              ),
             ),
           ),
         ),

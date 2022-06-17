@@ -18,7 +18,6 @@ class HomePageWidget extends StatefulWidget {
 class _HomePageWidgetState extends State<HomePageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  
   late User loggedInUser;
 
   final Stream<QuerySnapshot> voucher =
@@ -38,10 +37,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   late int point;
 
   // final _firestore = FirebaseFirestore.instance;
-  final Stream<QuerySnapshot> account =
-      FirebaseFirestore.instance.collection('users')
-                                .where("email", isEqualTo: FirebaseAuth.instance.currentUser?.email.toString())
-                                .snapshots();
+  final Stream<QuerySnapshot> account = FirebaseFirestore.instance
+      .collection('users')
+      .where("email",
+          isEqualTo: FirebaseAuth.instance.currentUser?.email.toString())
+      .snapshots();
 
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[];
@@ -177,7 +177,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
                         return Expanded(
                           child: Align(
-                            alignment: FractionalOffset(steps,0),
+                            alignment: FractionalOffset(steps, 0),
                             child: Image.asset(
                               'assets/images/heroImg.png',
                               width: 150,
@@ -348,8 +348,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               await Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      AllVoucherWidget(),
+                                  builder: (context) => AllVoucherWidget(),
                                 ),
                               );
                             },
@@ -407,6 +406,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 VoucherRedemptionWidget(
                                                     voucherDocumentID)));
                                     // TEST IF IT CAN GET THEIR ID - YES
+                                    // ignore: avoid_print
                                     print(voucherDocumentID);
                                   },
                                   child: Image.network(

@@ -1,6 +1,6 @@
 // ignore: file_names
-// ignore_for_file: use_full_hex_values_for_flutter_colors
-
+// ignore: file_names
+// ignore_for_file: use_full_hex_values_for_flutter_colors, file_names, duplicate_ignore
 import 'package:flutter/material.dart';
 
 class ForgetPasswordPageWidget extends StatefulWidget {

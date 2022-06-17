@@ -103,6 +103,7 @@ class _AllVoucherWidgetState extends State<AllVoucherWidget> {
                                                       VoucherRedemptionWidget(
                                                           voucherDocumentID)));
                                           // TEST IF IT CAN GET THEIR ID - YES
+                                          // ignore: avoid_print
                                           print(voucherDocumentID);
                                         },
                                         child: Image.network(

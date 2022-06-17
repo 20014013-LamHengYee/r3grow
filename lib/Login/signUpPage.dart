@@ -421,6 +421,10 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
       //   Fluttertoast.showToast(msg: e!.message);
       // });
     } on FirebaseAuthException catch (e) {
+      usernameController.clear();
+      emailController.clear();
+      passwordController.clear();
+      confirmPasswordController.clear();
       if (e.code == 'email-already-in-use') {
         Fluttertoast.showToast(msg: "The account already exists!");
       }

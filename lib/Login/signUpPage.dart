@@ -168,13 +168,13 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
               autofocus: false,
               // ignore: body_might_complete_normally_nullable
               validator: (value) {
-                RegExp regEx = RegExp(r'^.{7,}$');
+                RegExp regEx = RegExp(r'^.{6,}$');
                 if (value!.isEmpty) {
                   return ("Please enter password");
                 }
 
                 if (!regEx.hasMatch(value)) {
-                  return ("Please enter valid password(Min. 7 character)");
+                  return ("Please enter valid password(Min. 6 character)");
                 }
               },
               onSaved: (value) {
@@ -459,7 +459,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
     Navigator.pushAndRemoveUntil(context,
         MaterialPageRoute(builder: (context) => MyApp()), (route) => false);
 
-    // add score & steps for the user 
+    // add score & steps for the user
     await firebaseFirestore
         .collection("users")
         .doc(user.uid)

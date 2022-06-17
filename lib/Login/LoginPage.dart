@@ -110,13 +110,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               obscureText: !passwordVisibility1,
               // ignore: missing_return, body_might_complete_normally_nullable
               validator: (value) {
-                RegExp regEx = RegExp(r'^.{7,}$');
+                RegExp regEx = RegExp(r'^.{6,}$');
                 if (value!.isEmpty) {
                   return ("Please enter password");
                 }
 
                 if (!regEx.hasMatch(value)) {
-                  return ("Please enter valid password(Min. 7 character)");
+                  return ("Please enter valid password(Min. 6 character)");
                 }
               },
               onSaved: (value) {

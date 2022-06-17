@@ -240,7 +240,8 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
     try {
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: emailController.text.trim());
-      Fluttertoast.showToast(msg: "Password reset email sent");
+      Fluttertoast.showToast(
+          msg: "Password reset email sent (TAKE A LOOK AT SPAM)");
       Navigator.of(context).popUntil((route) => route.isFirst);
     } on FirebaseAuthException catch (e) {
       // ignore: avoid_print

@@ -43,6 +43,276 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    //Username text field
+    final username = Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+              child: TextFormField(
+                controller: usernameController,
+                autofocus: false,
+                keyboardType: TextInputType.name,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return ("Please enter Username");
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  usernameController.text = value!;
+                },
+                textInputAction: TextInputAction.next,
+                obscureText: false,
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xFFBDBDBDBD),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xFFBDBDBDBD),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                style: TextStyle(fontFamily: "Poppins"),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    //Email Address text field
+    final emailAddress = Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: TextFormField(
+              controller: emailController,
+              // onChanged: (_) => EasyDebounce.debounce(
+              //   'textController2',
+              //   Duration(milliseconds: 2000),
+              //   () => setState(() {}),
+              // ),
+              autofocus: false,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return ("Please enter your email");
+                }
+                // reg expression for email validation
+                if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9+_.-]+.[a-z]")
+                    .hasMatch(value)) {
+                  return ("Please Enter a valid email");
+                }
+                return null;
+              },
+              keyboardType: TextInputType.emailAddress,
+              onSaved: (value) {
+                emailController.text = value!;
+              },
+              textInputAction: TextInputAction.next,
+              obscureText: false,
+              decoration: InputDecoration(
+                labelText: 'Email Address',
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xFFBDBDBDBD),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xFFBDBDBDBD),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              style: TextStyle(fontFamily: "Poppins"),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    //Password text field
+    final passwordUser = Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: TextFormField(
+              controller: passwordController,
+              // onChanged: (_) => EasyDebounce.debounce(
+              //   'textController3',
+              //   Duration(milliseconds: 2000),
+              //   () => setState(() {}),
+              // ),
+              autofocus: false,
+              // ignore: body_might_complete_normally_nullable
+              validator: (value) {
+                RegExp regEx = RegExp(r'^.{7,}$');
+                if (value!.isEmpty) {
+                  return ("Please enter password");
+                }
+
+                if (!regEx.hasMatch(value)) {
+                  return ("Please enter valid password(Min. 7 character)");
+                }
+              },
+              onSaved: (value) {
+                passwordController.text = value!;
+              },
+              textInputAction: TextInputAction.next,
+              obscureText: !passwordVisibility1,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xFFBDBDBDBD),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xFFBDBDBDBD),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                suffixIcon: InkWell(
+                  onTap: () => setState(
+                    () => passwordVisibility1 = !passwordVisibility1,
+                  ),
+                  focusNode: FocusNode(skipTraversal: true),
+                  child: Icon(
+                    passwordVisibility1
+                        ? Icons.visibility_outlined
+                        : Icons.visibility_off_outlined,
+                    color: Color(0xFF757575),
+                    size: 22,
+                  ),
+                ),
+              ),
+              style: TextStyle(fontFamily: "Poppins"),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    //Confirm password text field
+    final confirmPasswordUser = Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 16),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: TextFormField(
+              controller: confirmPasswordController,
+              // onChanged: (_) => EasyDebounce.debounce(
+              //   'textController4',
+              //   Duration(milliseconds: 2000),
+              //   () => setState(() {}),
+              // ),
+              autofocus: false,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return ("Please enter your password");
+                }
+                if (confirmPasswordController.text != passwordController.text) {
+                  return "Password don't match";
+                }
+                return null;
+              },
+              onSaved: (value) {
+                confirmPasswordController.text = value!;
+              },
+              textInputAction: TextInputAction.done,
+              obscureText: !passwordVisibility2,
+              decoration: InputDecoration(
+                labelText: 'Confirm Password',
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xFFBDBDBDBD),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xFFBDBDBDBD),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                suffixIcon: InkWell(
+                  onTap: () => setState(
+                    () => passwordVisibility2 = !passwordVisibility2,
+                  ),
+                  focusNode: FocusNode(skipTraversal: true),
+                  child: Icon(
+                    passwordVisibility2
+                        ? Icons.visibility_outlined
+                        : Icons.visibility_off_outlined,
+                    color: Color(0xFF757575),
+                    size: 22,
+                  ),
+                ),
+              ),
+              style: TextStyle(fontFamily: "Poppins"),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    //create account button
+    final createAccountBtt = Row(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(95, 15, 0, 0),
+          child: ElevatedButton(
+            onPressed: () {
+              signUp(emailController.text, passwordController.text);
+            },
+            child: const Text(
+              "CREATE ACCOUNT",
+              style: TextStyle(
+                fontFamily: 'Lexend Deca',
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              primary: Color(0xFF00e5FF),
+            ),
+          ),
+        ),
+      ],
+    );
+
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
@@ -121,281 +391,15 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                       ],
                     ),
                     //Username text field
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                              child: TextFormField(
-                                controller: usernameController,
-                                // onChanged: (_) => EasyDebounce.debounce(
-                                //   'textController1',
-                                //   Duration(milliseconds: 2000),
-                                //   () => setState(() {}),
-                                // ),
-                                autofocus: false,
-                                keyboardType: TextInputType.name,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return ("Please enter Username");
-                                  }
-                                  return null;
-                                },
-                                onSaved: (value) {
-                                  usernameController.text = value!;
-                                },
-                                textInputAction: TextInputAction.next,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Username',
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFBDBDBDBD),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFBDBDBDBD),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                                style: TextStyle(fontFamily: "Poppins"),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    username,
                     //Email Address text field
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: emailController,
-                              // onChanged: (_) => EasyDebounce.debounce(
-                              //   'textController2',
-                              //   Duration(milliseconds: 2000),
-                              //   () => setState(() {}),
-                              // ),
-                              autofocus: false,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return ("Please enter your email");
-                                }
-                                // reg expression for email validation
-                                if (!RegExp(
-                                        "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9+_.-]+.[a-z]")
-                                    .hasMatch(value)) {
-                                  return ("Please Enter a valid email");
-                                }
-                                return null;
-                              },
-                              keyboardType: TextInputType.emailAddress,
-                              onSaved: (value) {
-                                emailController.text = value!;
-                              },
-                              textInputAction: TextInputAction.next,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: 'Email Address',
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFBDBDBDBD),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFBDBDBDBD),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                              style: TextStyle(fontFamily: "Poppins"),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    emailAddress,
                     //Password text field
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: passwordController,
-                              // onChanged: (_) => EasyDebounce.debounce(
-                              //   'textController3',
-                              //   Duration(milliseconds: 2000),
-                              //   () => setState(() {}),
-                              // ),
-                              autofocus: false,
-                              // ignore: body_might_complete_normally_nullable
-                              validator: (value) {
-                                RegExp regEx = RegExp(r'^.{7,}$');
-                                if (value!.isEmpty) {
-                                  return ("Please enter password");
-                                }
-
-                                if (!regEx.hasMatch(value)) {
-                                  return ("Please enter valid password(Min. 7 character)");
-                                }
-                              },
-                              onSaved: (value) {
-                                passwordController.text = value!;
-                              },
-                              textInputAction: TextInputAction.next,
-                              obscureText: !passwordVisibility1,
-                              decoration: InputDecoration(
-                                labelText: 'Password',
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFBDBDBDBD),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFBDBDBDBD),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                suffixIcon: InkWell(
-                                  onTap: () => setState(
-                                    () => passwordVisibility1 =
-                                        !passwordVisibility1,
-                                  ),
-                                  focusNode: FocusNode(skipTraversal: true),
-                                  child: Icon(
-                                    passwordVisibility1
-                                        ? Icons.visibility_outlined
-                                        : Icons.visibility_off_outlined,
-                                    color: Color(0xFF757575),
-                                    size: 22,
-                                  ),
-                                ),
-                              ),
-                              style: TextStyle(fontFamily: "Poppins"),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    passwordUser,
                     //Confirm password text field
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 16),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: confirmPasswordController,
-                              // onChanged: (_) => EasyDebounce.debounce(
-                              //   'textController4',
-                              //   Duration(milliseconds: 2000),
-                              //   () => setState(() {}),
-                              // ),
-                              autofocus: false,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return ("Please enter your password");
-                                }
-                                if (confirmPasswordController.text !=
-                                    passwordController.text) {
-                                  return "Password don't match";
-                                }
-                                return null;
-                              },
-                              onSaved: (value) {
-                                confirmPasswordController.text = value!;
-                              },
-                              textInputAction: TextInputAction.done,
-                              obscureText: !passwordVisibility2,
-                              decoration: InputDecoration(
-                                labelText: 'Confirm Password',
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFBDBDBDBD),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFBDBDBDBD),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                suffixIcon: InkWell(
-                                  onTap: () => setState(
-                                    () => passwordVisibility2 =
-                                        !passwordVisibility2,
-                                  ),
-                                  focusNode: FocusNode(skipTraversal: true),
-                                  child: Icon(
-                                    passwordVisibility2
-                                        ? Icons.visibility_outlined
-                                        : Icons.visibility_off_outlined,
-                                    color: Color(0xFF757575),
-                                    size: 22,
-                                  ),
-                                ),
-                              ),
-                              style: TextStyle(fontFamily: "Poppins"),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(95, 15, 0, 0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              signUp(emailController.text,
-                                  passwordController.text);
-                            },
-                            child: const Text(
-                              "CREATE ACCOUNT",
-                              style: TextStyle(
-                                fontFamily: 'Lexend Deca',
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 30, vertical: 10),
-                              primary: Color(0xFF00e5FF),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    confirmPasswordUser,
+                    //create account button
+                    createAccountBtt,
                   ],
                 ),
               ),

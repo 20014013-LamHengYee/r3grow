@@ -306,28 +306,33 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     );
   }
 
-  Future createAccount() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim());
-  }
-
   //login function
   void signIn(String email, String password) async {
-    if (_formKey.currentState!.validate()) {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {
-                Fluttertoast.showToast(msg: "Login Successful"),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => HomePageWidget()))
-              })
-          .catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
-      });
-      //ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //content: Text("Login Successful"),
-      // ));
+    try {
+      if (_formKey.currentState!.validate()) {
+        await _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((uid) => {
+                  Fluttertoast.showToast(msg: "Login Successful"),
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => HomePageWidget()))
+                })
+            .catchError((e) {
+          Fluttertoast.showToast(msg: e!.message);
+        });
+        //ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        //content: Text("Login Successful"),
+        // ));
+      }
+    } on FirebaseAuthException catch (e) {
+      emailController.clear();
+      passwordController.clear();
+      if (e.code == 'email-already-in-use') {
+        Fluttertoast.showToast(msg: "Please register this account!");
+      }
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
     }
   }
 }

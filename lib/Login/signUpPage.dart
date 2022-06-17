@@ -407,13 +407,22 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
   }
 
   void signUp(String email, String password) async {
-    if (_formKey.currentState!.validate()) {
-      await _auth
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) => {postDetailsToFirestore()})
-          .catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
-      });
+    try {
+      if (_formKey.currentState!.validate()) {
+        await _auth
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then((value) => {postDetailsToFirestore()});
+      }
+      //     .catchError((e) {
+      //   Fluttertoast.showToast(msg: e!.message);
+      // });
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        Fluttertoast.showToast(msg: "The account already exists!");
+      }
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
     }
   }
 

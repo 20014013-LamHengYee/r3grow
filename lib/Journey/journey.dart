@@ -18,15 +18,8 @@ class HomePageWidget extends StatefulWidget {
 class _HomePageWidgetState extends State<HomePageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  late User loggedInUser;
-
   final Stream<QuerySnapshot> voucher =
       FirebaseFirestore.instance.collection('Voucher').snapshots();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
 
   // PROGRESS BAR - STEPS
   late double steps;
@@ -43,6 +36,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           isEqualTo: FirebaseAuth.instance.currentUser?.email.toString())
       .snapshots();
 
+  // For navigation Bar
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[];
 

@@ -458,5 +458,16 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
 
     Navigator.pushAndRemoveUntil(context,
         MaterialPageRoute(builder: (context) => MyApp()), (route) => false);
+
+    // add score & steps for the user 
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .update({'points': 0});
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(user.uid)
+        .update({'steps': 0});
   }
 }

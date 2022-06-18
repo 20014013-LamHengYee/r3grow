@@ -1,7 +1,10 @@
-// ignore: file_names
+// ignore: duplicate_ignore
+// ignore_for_file: file_names
+
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+// ignore: unused_import
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -17,7 +20,8 @@ class VerifyEmailPageWidget extends StatefulWidget {
 class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
   final formKey = GlobalKey<ScaffoldState>();
 
-  bool isEmailVerify = false;
+  late bool isEmailVerify;
+  bool canResendEmail = false;
   Timer? timer;
 
   @override
@@ -42,6 +46,11 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
     try {
       final user = FirebaseAuth.instance.currentUser!;
       await user.sendEmailVerification();
+
+      setState(() => canResendEmail = false);
+      // ignore: prefer_const_constructors
+      await Future.delayed(Duration(seconds: 5));
+      setState(() => canResendEmail = true);
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
     }
@@ -93,6 +102,23 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
             primary: Color(0xFF00e5FF),
           ),
         ),
+      );
+
+      //cancel button
+      final cancelBtt = TextButton(
+        onPressed: () => FirebaseAuth.instance.signOut(),
+        child: const Text(
+          "Create Account",
+          style: TextStyle(
+              fontFamily: 'Poppins',
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              color: Color(0xFF212121)),
+        ),
+        style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            // ignore: prefer_const_constructors
+            primary: Color(0xFFF1FDFB)),
       );
 
       return Scaffold(
@@ -179,6 +205,8 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
                       ),
                       //resent email button
                       resentEmailBtt,
+                      //cancel button
+                      cancelBtt,
                     ],
                   ),
                 ),

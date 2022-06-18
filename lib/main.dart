@@ -1,8 +1,6 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:r3grow/Login/LoginPage.dart';
-import 'package:r3grow/Login/verifyEmailPage.dart';
+import 'package:r3grow/Login/spalshScreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,17 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "R3GROW",
-      home: AnimatedSplashScreen(
-        duration: 1300,
-        splash: Image.asset(
-          'assets/images/regrowsslogo.png',
-          height: 200,
-          width: 200,
-        ),
-        nextScreen: const LoginPageWidget(),
-        splashTransition: SplashTransition.fadeTransition,
-        backgroundColor: const Color(0xFFF1FDFB),
-      ),
+      home: SplashScreen(),
     );
   }
 }

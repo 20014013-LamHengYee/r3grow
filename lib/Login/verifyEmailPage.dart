@@ -20,7 +20,7 @@ class VerifyEmailPageWidget extends StatefulWidget {
 class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
   final formKey = GlobalKey<ScaffoldState>();
 
-  late bool isEmailVerify;
+  bool isEmailVerify = false;
   bool canResendEmail = false;
   Timer? timer;
 
@@ -30,7 +30,6 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
 
     //user needs to be created then only verify
     isEmailVerify = FirebaseAuth.instance.currentUser!.emailVerified;
-
     if (!isEmailVerify) {
       sendVerificationLink();
 

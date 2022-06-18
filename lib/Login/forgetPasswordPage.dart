@@ -20,7 +20,6 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
   @override
   void dispose() {
     emailController.dispose();
-
     super.dispose();
   }
 

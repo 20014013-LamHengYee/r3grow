@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:r3grow/Login/LoginPage.dart';
 import 'package:r3grow/databaseModel/user_model.dart';
-import 'package:r3grow/main.dart';
 
 class SignUpPageWidget extends StatefulWidget {
   const SignUpPageWidget({Key? key}) : super(key: key);
@@ -457,9 +456,11 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
         .set(userModel.toMap());
     Fluttertoast.showToast(msg: "Account created successfully!");
 
-   // once registered successfully go login
-    Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (context) => LoginPageWidget()), (route) => false);
+    // once registered successfully go login
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPageWidget()),
+        (route) => false);
 
     // add score & steps for the user
     await firebaseFirestore

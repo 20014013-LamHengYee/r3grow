@@ -32,11 +32,11 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: const Color(0xFFF1FDFB),
       // ignore: sized_box_for_whitespace
       body: Container(
+        padding: EdgeInsetsDirectional.fromSTEB(30, 80, 30, 80),
         height: double.infinity,
         width: double.infinity,
         child: Image.asset(
           'assets/images/regrowsslogo.png',
-          fit: BoxFit.fill,
         ),
       ),
     );

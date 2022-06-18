@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:r3grow/Login/LoginPage.dart';
+import 'package:r3grow/Login/verifyEmailPage.dart';
 import 'package:r3grow/databaseModel/user_model.dart';
 
 class SignUpPageWidget extends StatefulWidget {
@@ -294,7 +295,12 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
           padding: EdgeInsetsDirectional.fromSTEB(95, 15, 0, 0),
           child: ElevatedButton(
             onPressed: () {
-              signUp(emailController.text, passwordController.text);
+              signUp(
+                  emailController.text.trim(), passwordController.text.trim());
+              //     .then((_) {
+              //   Navigator.of(context).pushReplacement(MaterialPageRoute(
+              //       builder: (context) => VerifyEmailPageWidget()));
+              // });
             },
             child: const Text(
               "CREATE ACCOUNT",

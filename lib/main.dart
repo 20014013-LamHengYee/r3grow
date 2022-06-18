@@ -16,22 +16,11 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            SplashScreen();
-            if (snapshot.hasData) {
-              return VerifyEmailPageWidget();
-            } else {
-              return SplashScreen();
-            }
-          },
-        ),
-      );
-  // return MaterialApp(
-  //   debugShowCheckedModeBanner: false,
-  //   title: "R3GROW",
-  //   home: SplashScreen(),
-  // );
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "R3GROW",
+      home: SplashScreen(),
+    );
+  }
 }

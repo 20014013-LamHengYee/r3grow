@@ -19,19 +19,18 @@ class VerifyEmailPageWidget extends StatefulWidget {
 
 class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
   final formKey = GlobalKey<ScaffoldState>();
-
-  bool isEmailVerify = false;
-  bool canResendEmail = false;
+  bool? isEmailVerify = false;
+  bool? canResendEmail = false;
   Timer? timer;
 
   @override
   void initState() {
-    super.initState();
-
+    // user = _auth.currentUser;
+    // user?.sendEmailVerification();
     //user needs to be created then only verify
-    isEmailVerify = FirebaseAuth.instance.currentUser!.emailVerified;
-    if (!isEmailVerify) {
-      sendVerificationLink();
+    isEmailVerify = FirebaseAuth.instance.currentUser?.emailVerified;
+    if (!isEmailVerify!) {
+      //   sendVerificationLink();
 
       timer = Timer.periodic(
         // ignore: prefer_const_constructors
@@ -39,6 +38,11 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
         (_) => checkEmailVerify(),
       );
     }
+    // ignore: prefer_const_constructors
+    // timer = Timer.periodic(Duration(seconds: 5), (timer) {
+    //   checkEmailVerify();
+    // });
+    super.initState();
   }
 
   Future sendVerificationLink() async {
@@ -65,11 +69,20 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
     //call after email verified
     await FirebaseAuth.instance.currentUser!.reload();
 
+    // user = _auth.currentUser;
+    // await user?.reload();
+
+    // if (user!.emailVerified) {
+    //   timer?.cancel();
+    //   Navigator.of(context).pushReplacement(
+    //       // ignore: prefer_const_constructors
+    //       MaterialPageRoute(builder: (context) => HomePageWidget()));
+    // }
     setState(() {
-      isEmailVerify = FirebaseAuth.instance.currentUser!.emailVerified;
+      isEmailVerify = FirebaseAuth.instance.currentUser?.emailVerified;
     });
 
-    if (isEmailVerify) timer?.cancel();
+    if (isEmailVerify!) timer?.cancel();
   }
 
   @override

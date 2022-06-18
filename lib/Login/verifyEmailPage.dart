@@ -70,12 +70,12 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
       // ignore: prefer_const_constructors
       return HomePageWidget();
     } else {
-//reset password button
+      //reset email button
       final resentEmailBtt = Padding(
         // ignore: prefer_const_constructors
         padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 300),
         child: ElevatedButton(
-          onPressed: resetPassword,
+          onPressed: sendVerificationLink,
           // ignore: prefer_const_constructors
           child: Text(
             "Resent Email",

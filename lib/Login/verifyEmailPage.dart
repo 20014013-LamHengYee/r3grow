@@ -19,17 +19,21 @@ class VerifyEmailPageWidget extends StatefulWidget {
 
 class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
   final formKey = GlobalKey<ScaffoldState>();
-  bool? isEmailVerify = false;
-  bool? canResendEmail = false;
+  bool? isEmailVerify;
+
+  late bool canResendEmail;
+  // bool? isEmailVerify = false;
+  // bool? canResendEmail = false;
   Timer? timer;
 
   @override
   void initState() {
+    super.initState();
     // user = _auth.currentUser;
     // user?.sendEmailVerification();
     //user needs to be created then only verify
     isEmailVerify = FirebaseAuth.instance.currentUser?.emailVerified;
-    if (!isEmailVerify!) {
+    if (isEmailVerify == true) {
       //   sendVerificationLink();
 
       timer = Timer.periodic(
@@ -42,7 +46,6 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
     // timer = Timer.periodic(Duration(seconds: 5), (timer) {
     //   checkEmailVerify();
     // });
-    super.initState();
   }
 
   Future sendVerificationLink() async {
@@ -79,10 +82,10 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
     //       MaterialPageRoute(builder: (context) => HomePageWidget()));
     // }
     setState(() {
-      isEmailVerify = FirebaseAuth.instance.currentUser?.emailVerified;
+      isEmailVerify = FirebaseAuth.instance.currentUser!.emailVerified;
     });
 
-    if (isEmailVerify!) timer?.cancel();
+    if (isEmailVerify == false) timer?.cancel();
   }
 
   @override
@@ -94,7 +97,7 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
       //reset email button
       final resentEmailBtt = Padding(
         // ignore: prefer_const_constructors
-        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 300),
+        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
         child: ElevatedButton(
           onPressed: sendVerificationLink,
           // ignore: prefer_const_constructors
@@ -117,20 +120,24 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
       );
 
       //cancel button
-      final cancelBtt = TextButton(
-        onPressed: () => FirebaseAuth.instance.signOut(),
-        child: const Text(
-          "Create Account",
-          style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF212121)),
+      final cancelBtt = Padding(
+        // ignore: prefer_const_constructors
+        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 200),
+        child: TextButton(
+          onPressed: () => FirebaseAuth.instance.signOut(),
+          child: const Text(
+            "Cancel",
+            style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF212121)),
+          ),
+          style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+              // ignore: prefer_const_constructors
+              primary: Color(0xFFF1FDFB)),
         ),
-        style: TextButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-            // ignore: prefer_const_constructors
-            primary: Color(0xFFF1FDFB)),
       );
 
       return Scaffold(
@@ -201,7 +208,7 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
                           Padding(
                             padding:
                                 // ignore: prefer_const_constructors
-                                EdgeInsetsDirectional.fromSTEB(45, 0, 0, 0),
+                                EdgeInsetsDirectional.fromSTEB(56, 0, 0, 0),
                             // ignore: prefer_const_constructors
                             child: Text(
                               'Email verification link has been sent',

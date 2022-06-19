@@ -295,12 +295,12 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
           padding: EdgeInsetsDirectional.fromSTEB(95, 15, 0, 0),
           child: ElevatedButton(
             onPressed: () {
-              signUp(
-                  emailController.text.trim(), passwordController.text.trim());
-              //     .then((_) {
-              //   Navigator.of(context).pushReplacement(MaterialPageRoute(
-              //       builder: (context) => VerifyEmailPageWidget()));
-              // });
+              signUp(emailController.text.trim(),
+                      passwordController.text.trim())
+                  .then((_) {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => VerifyEmailPageWidget()));
+              });
             },
             child: const Text(
               "CREATE ACCOUNT",
@@ -416,12 +416,12 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
     );
   }
 
-  void signUp(String email, String password) async {
+  Future signUp(String email, String password) async {
     try {
       if (_formKey.currentState!.validate()) {
         await _auth
             .createUserWithEmailAndPassword(email: email, password: password)
-            .then((value) => {postDetailsToFirestore()});
+            .then((_) => {postDetailsToFirestore()});
       }
       //     .catchError((e) {
       //   Fluttertoast.showToast(msg: e!.message);

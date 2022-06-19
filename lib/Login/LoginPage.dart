@@ -185,14 +185,15 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     //forget password button
     final loginBtt = ElevatedButton(
       onPressed: () {
-        _auth
-            .signInWithEmailAndPassword(
-                email: emailController.text.trim(),
-                password: passwordController.text.trim())
-            .then((_) {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => HomePageWidget()));
-        });
+        // _auth
+        //     .signInWithEmailAndPassword(
+        //         email: emailController.text.trim(),
+        //         password: passwordController.text.trim())
+        //     .then((_) {
+        //   Navigator.of(context).pushReplacement(
+        //       MaterialPageRoute(builder: (context) => HomePageWidget()));
+        // });
+        signIn(emailController.text.trim(), passwordController.text.trim());
       },
       child: const Text(
         "LOGIN",

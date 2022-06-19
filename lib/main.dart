@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:r3grow/Journey/journey.dart';
 import 'package:r3grow/Login/splashScreen.dart';
 import 'package:r3grow/Login/verifyEmailPage.dart';
 
@@ -22,5 +23,16 @@ class MyApp extends StatelessWidget {
       title: "R3GROW",
       home: SplashScreen(),
     );
+    // return Scaffold(
+    //   body: StreamBuilder<User?>(
+    //       stream: FirebaseAuth.instance.authStateChanges(),
+    //       builder: (context, snapshot) {
+    //         if (snapshot.hasData) {
+    //           return HomePageWidget();
+    //         } else {
+    //           return SplashScreen();
+    //         }
+    //       }),
+    // );
   }
 }

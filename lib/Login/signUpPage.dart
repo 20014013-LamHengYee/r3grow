@@ -420,8 +420,10 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
     try {
       if (_formKey.currentState!.validate()) {
         await _auth
-            .createUserWithEmailAndPassword(email: email, password: password)
-            .then((_) => {postDetailsToFirestore()});
+            .createUserWithEmailAndPassword(
+                email: emailController.text.trim(),
+                password: passwordController.text.trim())
+            .then((value) => {postDetailsToFirestore()});
       }
       //     .catchError((e) {
       //   Fluttertoast.showToast(msg: e!.message);

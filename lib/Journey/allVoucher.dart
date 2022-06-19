@@ -118,14 +118,17 @@ class _AllVoucherWidgetState extends State<AllVoucherWidget> {
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         10, 0, 0, 0),
-                                    child: Flexible(
+                                    child: SizedBox(
+                                      width: 190,
                                       child: Text(
-                                        '${data['voucherDesc']}\nPoints Required: ${data['voucherPoints']} points',
-                                        overflow: TextOverflow.ellipsis,
+                                        '${data['voucherShortDesc']}\n\nPoints Required: ${data['voucherPoints']} points',
+                                        overflow: TextOverflow.clip,
+                                        maxLines: 5,
+                                        softWrap: true,
                                         style: TextStyle(
                                             fontSize: 16,
                                             color: Colors.black,
-                                            fontWeight: FontWeight.w400),
+                                            fontWeight: FontWeight.normal),
                                       ),
                                     ),
                                   )

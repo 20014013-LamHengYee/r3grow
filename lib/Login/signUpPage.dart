@@ -1,5 +1,3 @@
-// ignore: duplicate_ignore
-// ignore: file_names
 // ignore_for_file: prefer_const_constructors, use_full_hex_values_for_flutter_colors, file_names
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -297,10 +295,9 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
             onPressed: () {
               signUp(emailController.text.trim(),
                       passwordController.text.trim())
-                  .then((_) {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => VerifyEmailPageWidget()));
-              });
+                  .then((_) => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                          builder: (context) => VerifyEmailPageWidget())));
             },
             child: const Text(
               "CREATE ACCOUNT",
@@ -420,9 +417,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
     try {
       if (_formKey.currentState!.validate()) {
         await _auth
-            .createUserWithEmailAndPassword(
-                email: emailController.text.trim(),
-                password: passwordController.text.trim())
+            .createUserWithEmailAndPassword(email: email, password: password)
             .then((value) => {postDetailsToFirestore()});
       }
       //     .catchError((e) {

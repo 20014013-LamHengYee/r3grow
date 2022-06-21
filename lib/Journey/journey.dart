@@ -68,7 +68,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   children: [
                     Padding(
                       // space between acheievement badge and QR Code
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 270, 0),
+                      // change 100 back to 270
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 100, 0),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,28 +90,67 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         // QR CODE ICON
-                        Image.asset(
-                          'assets/images/scanner.png',
-                          width: 35,
-                          height: 35,
-                          fit: BoxFit.cover,
-                        ),
-                        // TEMPORARY ONLY
-                        // ButtonTheme(
-                        //   child: ElevatedButton(
-                        //     onPressed: () async {
-                        //       step = step + 0.001;
-                        //       point = point + 1;
-                        //     },
-                        //     child: Text('S' + point.toString(),
-                        //         style: TextStyle(fontSize: 10)), // text
-                        //     style: ElevatedButton.styleFrom(
-                        //         minimumSize: const Size(30, 30),
-                        //         primary: Color(0xFF226E44),
-                        //         shape: RoundedRectangleBorder(
-                        //             borderRadius: BorderRadius.circular(500))),
-                        //   ),
+                        // Image.asset(
+                        //   'assets/images/scanner.png',
+                        //   width: 35,
+                        //   height: 35,
+                        //   fit: BoxFit.cover,
                         // ),
+
+                        // INSERT LINK TO DB
+                        StreamBuilder<QuerySnapshot>(
+                          stream: account,
+                          builder: (
+                            BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot,
+                          ) {
+                            if (snapshot.hasError) {
+                              return Text('Something went wrong');
+                            }
+
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Text('Loading');
+                            }
+
+                            final data = snapshot
+                                .requireData; // take data from the snapshot
+                            steps = (data.docs[0]['steps']).toDouble();
+                            point = data.docs[0]['points'];
+
+                            // TEMPORARY ONLY
+                            return ButtonTheme(
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  // UPDATE DB PART
+                                  steps = steps + 0.001;
+                                  // steps = steps + 0.01;
+                                  point = point + 1;
+
+                                  FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser?.uid
+                                          .toString())
+                                      .update({'steps': steps});
+
+                                  FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser?.uid
+                                          .toString())
+                                      .update({'points': point});
+                                },
+                                child: Text('S' + point.toString(),
+                                    style: TextStyle(fontSize: 5)), // text
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: const Size(15, 15),
+                                  primary: Color(0xFF226E44),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ],

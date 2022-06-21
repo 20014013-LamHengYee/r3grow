@@ -460,10 +460,14 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
     Fluttertoast.showToast(msg: "Account created successfully!");
 
     // once registered successfully go login
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => LoginPageWidget()),
-        (route) => false);
+    if (mounted) {
+      setState(() {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPageWidget()),
+            (route) => false);
+      });
+    }
 
     // add score & steps for the user
     await firebaseFirestore

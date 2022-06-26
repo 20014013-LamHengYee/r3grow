@@ -47,7 +47,7 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
     //   checkEmailVerify();
     // });
     final user = FirebaseAuth.instance.currentUser;
-    user?.sendEmailVerification();
+    user!.sendEmailVerification();
     // ignore: prefer_const_constructors
     timer = Timer.periodic(Duration(seconds: 5), (timer) {
       checkEmailVerify();

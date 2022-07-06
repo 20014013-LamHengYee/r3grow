@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:r3grow/Login/splashScreen.dart';
+import 'package:r3grow/Map/map.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "R3GROW",
-      home: SplashScreen(),
+      home: MapPageWidget(),
     );
     // return Scaffold(
     //   body: StreamBuilder<User?>(

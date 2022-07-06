@@ -13,9 +13,52 @@ class _MapPageWidgetState extends State<MapPageWidget> {
   late GoogleMapController googleMapController;
 
   // make sure it's Singapore Map
-  static const CameraPosition initialCameraPosition = CameraPosition(target: LatLng(1.3437459,103.8240449), zoom: 14);
+  static const CameraPosition initialCameraPosition =
+      CameraPosition(target: LatLng(1.3437459, 103.8240449), zoom: 14);
 
-  Set<Marker> markers = {};
+  List<Marker> markers = [];
+
+  @override
+  void initState() {
+    intilize();
+    super.initState();
+  }
+
+  // add multiple markers to represent the recycle bin near them
+  intilize() {
+    Marker firstM = Marker(
+      markerId: const MarkerId('yishun'),
+      position: const LatLng(1.3437459, 103.8240449),
+      infoWindow: const InfoWindow(title: 'Yishun Natura'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(
+        BitmapDescriptor.hueBlue,
+      ),
+    );
+    Marker secondM = Marker(
+      markerId: const MarkerId('thomson plaza'),
+      position: const LatLng(1.3548, 103.8308),
+      infoWindow: const InfoWindow(title: 'Yishun Boyf'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(
+        BitmapDescriptor.hueBlue,
+      ),
+    );
+    Marker thirdM = Marker(
+      markerId: const MarkerId('yishun'),
+      position: const LatLng(1.3637459, 103.8240449),
+      infoWindow: const InfoWindow(title: 'ktph'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(
+        BitmapDescriptor.hueBlue,
+      ),
+    );
+
+    markers.add(firstM);
+    markers.add(secondM);
+    markers.add(thirdM);
+
+    setState(() {
+      
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +69,10 @@ class _MapPageWidgetState extends State<MapPageWidget> {
       ),
       body: GoogleMap(
         initialCameraPosition: initialCameraPosition,
-        markers: markers,
+        markers: markers.map((e) => e).toSet(),
         // + /- button
         zoomControlsEnabled: true,
         mapType: MapType.normal,
-        
         onMapCreated: (GoogleMapController controller) {
           googleMapController = controller;
         },
@@ -41,23 +83,30 @@ class _MapPageWidgetState extends State<MapPageWidget> {
           // position is returned here if it's not denied
           Position position = await _determinePosition();
 
-          googleMapController
-              .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(position.latitude, position.longitude), zoom: 14)));
+          googleMapController.animateCamera(CameraUpdate.newCameraPosition(
+              CameraPosition(
+                  target: LatLng(position.latitude, position.longitude),
+                  zoom: 14)));
 
+          markers.add(Marker(
+              markerId: const MarkerId('currentLocation'),
+              // yishun natura: 1.4304, 103.8449
+              position: LatLng(position.latitude, position.longitude),
+              infoWindow: const InfoWindow(title: 'Current Location'),
+              icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueRed,
+              )));
 
-          markers.clear();
-
-          markers.add(Marker(markerId: const MarkerId('currentLocation'),position: LatLng(position.latitude, position.longitude)));
-
+          // if not the current location marker wont come out
           setState(() {});
-
         },
         // button style
         label: const Text("Current Location"),
-        icon: const Icon(Icons.location_history), 
+        icon: const Icon(Icons.location_history),
       ),
     );
   }
+
   ////////////////////////////////////////////////////  LOCATION SERVICE PERMISSION  ////////////////////////////////////////////////////
   Future<Position> _determinePosition() async {
     bool serviceEnabled;

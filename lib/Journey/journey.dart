@@ -6,6 +6,7 @@ import 'package:r3grow/Journey/allVoucher.dart';
 import 'package:r3grow/Journey/voucherRedemption.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:r3grow/chatbot/chatbot.dart';
+import 'package:r3grow/main.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePageWidget extends StatefulWidget {
@@ -69,7 +70,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     Padding(
                       // space between acheievement badge and QR Code
                       // change 100 back to 270
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 100, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 250, 30),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,13 +91,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         // QR CODE ICON
-                        // Image.asset(
-                        //   'assets/images/scanner.png',
-                        //   width: 35,
-                        //   height: 35,
-                        //   fit: BoxFit.cover,
-                        // ),
-
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        HomePageWidget()));
+                          },
+                          child: Image.asset(
+                            'assets/images/scanner.png',
+                            width: 35,
+                            height: 35,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         // INSERT LINK TO DB
                         StreamBuilder<QuerySnapshot>(
                           stream: account,

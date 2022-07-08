@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -53,7 +54,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
     Marker myHouse = Marker(
       markerId: const MarkerId('yishun'),
       position: const LatLng(1.4304, 103.8449),
-      infoWindow: const InfoWindow(title: 'ktph'),
+      infoWindow: const InfoWindow(title: 'myHouse'),
       icon: BitmapDescriptor.defaultMarkerWithHue(
         BitmapDescriptor.hueBlue,
       ),
@@ -89,19 +90,24 @@ class _MapPageWidgetState extends State<MapPageWidget> {
       //////////////////////////////////////////////////// BUTTON FOR CURRENT LOCATION ////////////////////////////////////////////////////
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          // position is returned here if it's not denied
+          // position is returned here if it's not denied, call func _determinePosition
           Position position = await _determinePosition();
+
+          // A constant that is true if the application was compiled in debug mode.
+          if (kDebugMode) {
+            print("POS: " + position.toString());
+          }
 
           googleMapController.animateCamera(CameraUpdate.newCameraPosition(
               CameraPosition(
-                  target: LatLng(position.latitude, position.longitude),
+                  target: LatLng(position.latitude - 0.01871, position.longitude + 0.0264),
                   zoom: 14)));
 
           markers.add(Marker(
               markerId: const MarkerId('currentLocation'),
               // yishun natura: 1.4304, 103.8449
               // keep returning: 1.3303° N, 103.8913° 
-              position: LatLng(position.latitude, position.longitude),
+              position: LatLng(position.latitude - 0.01871, position.longitude + 0.0264),
               infoWindow: const InfoWindow(title: 'Current Location'),
               icon: BitmapDescriptor.defaultMarkerWithHue(
                 BitmapDescriptor.hueRed,

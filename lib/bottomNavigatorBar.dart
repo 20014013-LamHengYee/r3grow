@@ -57,7 +57,7 @@ class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
         ],
         onTap: (index) {
           setState(() {
-            _selectedIndex = 2;
+            _selectedIndex = index;
           });
         },
       ),

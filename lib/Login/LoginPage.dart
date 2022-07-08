@@ -4,10 +4,10 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:r3grow/Journey/journey.dart';
 import 'package:r3grow/Login/forgetPasswordPage.dart';
 import 'package:r3grow/Login/signUpPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:r3grow/bottomNavigatorBar.dart';
 
 class LoginPageWidget extends StatefulWidget {
   const LoginPageWidget({Key? key}) : super(key: key);
@@ -322,8 +322,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => HomePageWidget()))
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => BottomNavigatorBar()))
                 })
             .catchError((e) {
           emailController.clear();

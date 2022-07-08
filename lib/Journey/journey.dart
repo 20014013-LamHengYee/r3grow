@@ -1,10 +1,12 @@
-// ignore_for_file: unused_import, unused_field, prefer_const_constructors, unnecessary_new
+// ignore_for_file: unused_import, unused_field, prefer_const_constructors, unnecessary_new, prefer_const_literals_to_create_immutables
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:r3grow/Journey/allVoucher.dart';
 import 'package:r3grow/Journey/voucherRedemption.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:r3grow/Login/accountPage.dart';
+import 'package:r3grow/Map/map.dart';
 import 'package:r3grow/chatbot/chatbot.dart';
 import 'package:r3grow/main.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
@@ -36,16 +38,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       .where("email",
           isEqualTo: FirebaseAuth.instance.currentUser?.email.toString())
       .snapshots();
-
-  // For navigation Bar
-  int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -467,34 +459,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Nearest Bin',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today_sharp),
-            label: 'Events',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.document_scanner),
-            label: 'Identify Object',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.face),
-            label: 'Account',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        unselectedItemColor: Colors.black,
-        onTap: _onItemTapped,
       ),
     );
   }

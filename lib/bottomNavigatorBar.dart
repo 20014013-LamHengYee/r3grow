@@ -17,9 +17,9 @@ class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     // ignore: curly_braces_in_flow_control_structures
-    HomePageWidget(),
-    AllVoucherWidget(),
     ChatBot(),
+    AllVoucherWidget(),
+    HomePageWidget(),
     MapPageWidget(),
     accountPageWidget(),
   ];
@@ -57,7 +57,7 @@ class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
         ],
         onTap: (index) {
           setState(() {
-            _selectedIndex = index;
+            _selectedIndex = 2;
           });
         },
       ),

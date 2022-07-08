@@ -14,7 +14,7 @@ class BottomNavigatorBar extends StatefulWidget {
 }
 
 class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
   static const List<Widget> _widgetOptions = <Widget>[
     // ignore: curly_braces_in_flow_control_structures
     ChatBot(),

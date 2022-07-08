@@ -50,10 +50,19 @@ class _MapPageWidgetState extends State<MapPageWidget> {
         BitmapDescriptor.hueBlue,
       ),
     );
+    Marker myHouse = Marker(
+      markerId: const MarkerId('yishun'),
+      position: const LatLng(1.4304, 103.8449),
+      infoWindow: const InfoWindow(title: 'ktph'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(
+        BitmapDescriptor.hueBlue,
+      ),
+    );
 
     markers.add(firstM);
     markers.add(secondM);
     markers.add(thirdM);
+    markers.add(myHouse);
 
     setState(() {
       
@@ -91,6 +100,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
           markers.add(Marker(
               markerId: const MarkerId('currentLocation'),
               // yishun natura: 1.4304, 103.8449
+              // keep returning: 1.3303° N, 103.8913° 
               position: LatLng(position.latitude, position.longitude),
               infoWindow: const InfoWindow(title: 'Current Location'),
               icon: BitmapDescriptor.defaultMarkerWithHue(
@@ -133,7 +143,8 @@ class _MapPageWidgetState extends State<MapPageWidget> {
     }
 
     // GET USER CURRENT POSITION AND RETURN WHEN BUTTON IS CLICKED
-    Position position = await Geolocator.getCurrentPosition();
+    // get my location high accuracy
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
 
     return position;
   }

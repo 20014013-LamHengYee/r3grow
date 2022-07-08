@@ -2,6 +2,8 @@
     package="com.example.r3grow">
 
     <!-- The above line will be used to permission to access the location of the user -->
+    <!-- AndroidManifest.xml file. ACCESS_COARSE_LOCATION returns a location with an accuracy approximately equivalent to a city block, 
+    while ACCESS_FINE_LOCATION returns as precise a location as possible-->
     <uses-permission
 android:name="android.permission.ACCESS_FINE_LOCATION" />
    <uses-permission

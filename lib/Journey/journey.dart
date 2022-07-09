@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:r3grow/Journey/allVoucher.dart';
 import 'package:r3grow/Journey/voucherRedemption.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:r3grow/Login/accountPage.dart';
+import 'package:r3grow/Account/accountPage.dart';
 import 'package:r3grow/Map/map.dart';
 import 'package:r3grow/chatbot/chatbot.dart';
 import 'package:r3grow/main.dart';

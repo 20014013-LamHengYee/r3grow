@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:r3grow/Journey/allVoucher.dart';
 import 'package:r3grow/Journey/journey.dart';
-import 'package:r3grow/Login/accountPage.dart';
+import 'package:r3grow/Account/accountPage.dart';
 import 'package:r3grow/Map/map.dart';
 import 'package:r3grow/chatbot/chatbot.dart';
 

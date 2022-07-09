@@ -43,6 +43,7 @@ dependencies:
   geolocator: ^8.0.1
   flutter_google_places: ^0.3.0
   location: ^4.4.0
+  mobile_scanner: ^1.0.0
 
 dev_dependencies:
   flutter_test:

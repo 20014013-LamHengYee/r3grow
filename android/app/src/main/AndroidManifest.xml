@@ -5,9 +5,10 @@
     <!-- AndroidManifest.xml file. ACCESS_COARSE_LOCATION returns a location with an accuracy approximately equivalent to a city block, 
     while ACCESS_FINE_LOCATION returns as precise a location as possible-->
     <uses-permission
-android:name="android.permission.ACCESS_FINE_LOCATION" />
+    android:name="android.permission.ACCESS_FINE_LOCATION" />
    <uses-permission
-android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
    <application
         android:label="r3grow"

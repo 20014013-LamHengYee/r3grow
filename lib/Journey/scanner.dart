@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'dart:developer';
 import 'package:flutter/foundation.dart';
 
@@ -16,40 +15,6 @@ class Scanner extends StatefulWidget {
 }
 
 class _ScannerState extends State<Scanner> {
-  // final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  // late QRViewController controller;
-  // Barcode? result;
-
-  // @override
-  // void dispose() {
-  //   controller.dispose();
-  //   super.dispose();
-  // }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: AppBar(
-  //       title: Text("Scanner"),
-  //     ),
-  //     body: QRView(
-  //       key: qrKey,
-  //       onQRViewCreated: _onQRViewCreated,
-  //     ),
-  //   );
-  // }
-
-  // void _onQRViewCreated(QRViewController controller) {
-  //   this.controller = controller;
-  //   controller.scannedDataStream.listen((scanData) {
-  //     setState(() {
-  //       result = scanData;
-  //     });
-  //   });
-  // }
-
-//--------ANOTHER METHOD-----------
-
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -97,22 +62,6 @@ class _ScannerState extends State<Scanner> {
                     children: <Widget>[
                       Container(
                         margin: const EdgeInsets.all(8),
-                        // child: ElevatedButton(
-                        //     onPressed: () async {
-                        //       await controller?.flipCamera();
-                        //       setState(() {});
-                        //     },
-                        //     child: FutureBuilder(
-                        //       future: controller?.getCameraInfo(),
-                        //       builder: (context, snapshot) {
-                        //         if (snapshot.data != null) {
-                        //           return Text(
-                        //               'Camera facing ${describeEnum(snapshot.data!)}');
-                        //         } else {
-                        //           return const Text('loading');
-                        //         }
-                        //       },
-                        //     )),
                       )
                     ],
                   ),

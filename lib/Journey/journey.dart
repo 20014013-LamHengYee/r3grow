@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:r3grow/Journey/allVoucher.dart';
-import 'package:r3grow/Journey/qrCodeScanner.dart';
+import 'package:r3grow/Journey/scanner.dart';
 import 'package:r3grow/Journey/voucherRedemption.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:r3grow/Account/accountPage.dart';
@@ -90,7 +90,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (BuildContext context) => ScanQR()),
+                                  builder: (BuildContext context) => Scanner()),
                             );
                           },
                           child: Image.asset(

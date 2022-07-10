@@ -1,7 +1,9 @@
 // ignore_for_file: unused_import, unused_field, prefer_const_constructors, unnecessary_new, prefer_const_literals_to_create_immutables
 
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:r3grow/Journey/allVoucher.dart';
 import 'package:r3grow/Journey/scanner.dart';
@@ -26,6 +28,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   final Stream<QuerySnapshot> voucher =
       FirebaseFirestore.instance.collection('Voucher').snapshots();
 
+  String barcode = "R3grow.png";
   // PROGRESS BAR - STEPS
   late double steps;
   // 0.001 - 1 STEP
@@ -64,7 +67,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     Padding(
                       // space between acheievement badge and QR Code
                       // change 100 back to 270
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 250, 30),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 250, 0),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,22 +87,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        // QR CODE ICON
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) => Scanner()),
-                            );
-                          },
-                          child: Image.asset(
-                            'assets/images/scanner.png',
-                            width: 35,
-                            height: 35,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                        // // QR CODE ICON
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //           builder: (BuildContext context) => Scanner()),
+                        //     );
+                        //   },
+                        //   child: Image.asset(
+                        //     'assets/images/scanner.png',
+                        //     width: 35,
+                        //     height: 35,
+                        //     fit: BoxFit.cover,
+                        //   ),
+                        // ),
                         // INSERT LINK TO DB
                         StreamBuilder<QuerySnapshot>(
                           stream: account,
@@ -122,34 +125,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             point = data.docs[0]['points'];
 
                             // TEMPORARY ONLY
-                            return ButtonTheme(
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  // UPDATE DB PART
-                                  steps = steps + 0.001;
-                                  // steps = steps + 0.01;
-                                  point = point + 1;
-
-                                  FirebaseFirestore.instance
-                                      .collection('users')
-                                      .doc(FirebaseAuth
-                                          .instance.currentUser?.uid
-                                          .toString())
-                                      .update({'steps': steps});
-
-                                  FirebaseFirestore.instance
-                                      .collection('users')
-                                      .doc(FirebaseAuth
-                                          .instance.currentUser?.uid
-                                          .toString())
-                                      .update({'points': point});
-                                },
-                                child: Text('S' + point.toString(),
-                                    style: TextStyle(fontSize: 5)), // text
-                                style: ElevatedButton.styleFrom(
-                                  minimumSize: const Size(15, 15),
-                                  primary: Color(0xFF226E44),
-                                ),
+                            return // QR CODE ICON
+                                GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          Scanner()),
+                                );
+                              },
+                              child: Image.asset(
+                                'assets/images/scanner.png',
+                                width: 35,
+                                height: 35,
+                                fit: BoxFit.cover,
                               ),
                             );
                           },
@@ -463,5 +453,49 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         ),
       ),
     );
+  }
+
+  Future scan() async {
+    try {
+      String barcode = (await BarcodeScanner.scan()) as String;
+      setState(() => this.barcode = barcode);
+      print("scanned sucsessfully");
+      steps = steps + 0.001;
+      // steps = steps + 0.01;
+      point = point + 1;
+
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser?.uid.toString())
+          .update({'steps': steps});
+
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser?.uid.toString())
+          .update({'points': point});
+
+      //plus one to points when scanned
+      // String userId = (await FirebaseAuth.instance.currentUser!).uid;
+      // final CollectionReference pointsCollection = Firestore.instance.collection("users");
+      // await pointsCollection.document(userId).collection('points').document(userId)
+      // .updateData({
+      //   "points": FieldValue.increment(1),
+      //   "transactions": FieldValue.increment(-1)
+      //   });
+
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.cameraAccessDenied) {
+        setState(() {
+          barcode = 'The user did not grant the camera permission!';
+        });
+      } else {
+        setState(() => barcode = 'Unknown error: $e');
+      }
+    } on FormatException {
+      setState(() => barcode =
+          'null (User returned using the "back"-button before scanning anything. Result)');
+    } catch (e) {
+      setState(() => barcode = 'Unknown error: $e');
+    }
   }
 }

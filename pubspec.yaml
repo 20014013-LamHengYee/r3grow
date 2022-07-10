@@ -47,6 +47,7 @@ dependencies:
   url_launcher: ^6.0.10
   qr_code_scanner: ^0.7.0
   firebase_storage: ^10.3.1
+  barcode_scan2: ^4.2.1
 
 dev_dependencies:
   flutter_test:

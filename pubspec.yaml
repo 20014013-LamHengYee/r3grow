@@ -84,6 +84,7 @@ flutter:
   - assets/images/LoginPage.jpg
   # chatbot
   - assets/credentials.json
+  - assets/images/anonymousProfile.png
  
 
   # An image asset can refer to one or more resolution-specific "variants", see

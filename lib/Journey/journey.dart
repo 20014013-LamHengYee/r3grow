@@ -2,6 +2,7 @@
 
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -459,7 +460,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     try {
       String barcode = (await BarcodeScanner.scan()) as String;
       setState(() => this.barcode = barcode);
-      print("scanned sucsessfully");
+      if (kDebugMode) {
+        print("scanned sucsessfully");
+      }
       steps = steps + 0.001;
       // steps = steps + 0.01;
       point = point + 1;

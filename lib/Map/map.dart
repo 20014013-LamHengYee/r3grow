@@ -27,43 +27,47 @@ class _MapPageWidgetState extends State<MapPageWidget> {
 
   // add multiple markers to represent the recycle bin near them
   intilize() {
-    Marker firstM = Marker(
-      markerId: const MarkerId('yishun'),
-      position: const LatLng(1.3437459, 103.8240449),
-      infoWindow: const InfoWindow(title: 'Yishun Natura'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(
-        BitmapDescriptor.hueBlue,
-      ),
-    );
-    Marker secondM = Marker(
-      markerId: const MarkerId('thomson plaza'),
-      position: const LatLng(1.3548, 103.8308),
-      infoWindow: const InfoWindow(title: 'Yishun Boyf'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(
-        BitmapDescriptor.hueBlue,
-      ),
-    );
-    Marker thirdM = Marker(
-      markerId: const MarkerId('yishun'),
-      position: const LatLng(1.3637459, 103.8240449),
-      infoWindow: const InfoWindow(title: 'ktph'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(
-        BitmapDescriptor.hueBlue,
-      ),
-    );
-    Marker myHouse = Marker(
-      markerId: const MarkerId('yishun'),
-      position: const LatLng(1.4304, 103.8449),
-      infoWindow: const InfoWindow(title: 'myHouse'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(
-        BitmapDescriptor.hueBlue,
-      ),
-    );
+    // Marker firstM = Marker(
+    //   markerId: const MarkerId('yishun'),
+    //   position: const LatLng(1.3437459, 103.8240449),
+    //   infoWindow: const InfoWindow(
+    //     title: 'Collection Type',
+    //     snippet: 'Location, Postal'),
+    //   icon: BitmapDescriptor.defaultMarkerWithHue(
+    //     BitmapDescriptor.hueBlue,
+    //   ),
+    // );
+    // Marker secondM = Marker(
+    //   markerId: const MarkerId('thomson plaza'),
+    //   position: const LatLng(1.3548, 103.8308),
+    //   infoWindow: const InfoWindow(
+    //     title: 'Permanent E-bin',
+    //     snippet: '223 CHOA CHU KANG CENTRAL S680223'),
+    //   icon: BitmapDescriptor.defaultMarkerWithHue(
+    //     BitmapDescriptor.hueBlue,
+    //   ),
+    // );
+    // Marker thirdM = Marker(
+    //   markerId: const MarkerId('yishun'),
+    //   position: const LatLng(1.3637459, 103.8240449),
+    //   infoWindow: const InfoWindow(title: 'ktph'),
+    //   icon: BitmapDescriptor.defaultMarkerWithHue(
+    //     BitmapDescriptor.hueBlue,
+    //   ),
+    // );
+    // Marker myHouse = Marker(
+    //   markerId: const MarkerId('yishun'),
+    //   position: const LatLng(1.4304, 103.8449),
+    //   infoWindow: const InfoWindow(title: 'myHouse'),
+    //   icon: BitmapDescriptor.defaultMarkerWithHue(
+    //     BitmapDescriptor.hueBlue,
+    //   ),
+    // );
 
-    markers.add(firstM);
-    markers.add(secondM);
-    markers.add(thirdM);
-    markers.add(myHouse);
+    // markers.add(firstM);
+    // markers.add(secondM);
+    // markers.add(thirdM);
+    // markers.add(myHouse);
 
     setState(() {
       

@@ -87,6 +87,7 @@ flutter:
   # chatbot
   - assets/credentials.json
   - assets/images/anonymousProfile.png
+  - assets/images/recycle.png
  
 
   # An image asset can refer to one or more resolution-specific "variants", see

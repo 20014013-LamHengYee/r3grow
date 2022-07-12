@@ -1,0 +1,57 @@
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
+
+
+class MapPageWidget extends StatefulWidget {
+  const MapPageWidget({Key? key}) : super(key: key);
+
+  @override
+  _MapPageWidgetState createState() => _MapPageWidgetState();
+}
+
+class _MapPageWidgetState extends State<MapPageWidget> {
+
+  final LatLng _initialcameraposition = const  LatLng(1.3437459,103.8240449);
+  late GoogleMapController _controller;
+  final Location _location = Location();
+
+  void _onMapCreated(GoogleMapController _cntlr)
+  {
+    // declared a GoogleMap controller
+    _controller = _cntlr;
+    // whenever the location of the device is changed the camera will be a move to the new location.
+    _location.onLocationChanged.listen((l) { 
+      _controller.animateCamera(
+        CameraUpdate.newCameraPosition(
+          // Initial camera position will be pointing to the latitude and longitude that I already defined with LatLng datatype
+          CameraPosition(target: LatLng(l.latitude!, l.longitude!),zoom: 15),
+          ),
+      );
+    });
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        // based on height & width of the device
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Stack(
+          children: [
+            GoogleMap(
+              initialCameraPosition: CameraPosition(target: _initialcameraposition),
+              mapType: MapType.normal,
+              // After the map is created It will call the _onMapCreated function
+              onMapCreated: _onMapCreated,
+              myLocationEnabled: true,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  
+}

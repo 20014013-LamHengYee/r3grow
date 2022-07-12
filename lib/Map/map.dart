@@ -100,14 +100,14 @@ class _MapPageWidgetState extends State<MapPageWidget> {
 
           googleMapController.animateCamera(CameraUpdate.newCameraPosition(
               CameraPosition(
-                  target: LatLng(position.latitude - 0.01871, position.longitude + 0.0264),
+                  target: LatLng(position.latitude, position.longitude),
                   zoom: 14)));
 
           markers.add(Marker(
               markerId: const MarkerId('currentLocation'),
               // yishun natura: 1.4304, 103.8449
               // keep returning: 1.3303° N, 103.8913° 
-              position: LatLng(position.latitude - 0.01871, position.longitude + 0.0264),
+              position: LatLng(position.latitude, position.longitude),
               infoWindow: const InfoWindow(title: 'Current Location'),
               icon: BitmapDescriptor.defaultMarkerWithHue(
                 BitmapDescriptor.hueRed,

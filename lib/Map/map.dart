@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -17,65 +18,54 @@ class _MapPageWidgetState extends State<MapPageWidget> {
   static const CameraPosition initialCameraPosition =
       CameraPosition(target: LatLng(1.3437459, 103.8240449), zoom: 14);
 
-  List<Marker> markers = [];
+  Map <MarkerId, Marker> markers = <MarkerId, Marker> {};
 
-  @override
-  void initState() {
-    intilize();
-    super.initState();
+  // specify what data to take
+  void initMarker(specify, specifyId) async {
+    var markerIdVal = specifyId;
+    final MarkerId markerId = MarkerId(markerIdVal);
+    final Marker marker = Marker (
+      markerId: markerId,
+      position: LatLng(specify['coords'].latitude, specify['coords'].longitude),
+      infoWindow: InfoWindow(title: specify['title'], snippet: specify['location']),
+      );
+      setState(() {
+        markers[markerId] = marker;
+      });
   }
 
-  // add multiple markers to represent the recycle bin near them
-  intilize() {
-    // Marker firstM = Marker(
-    //   markerId: const MarkerId('yishun'),
-    //   position: const LatLng(1.3437459, 103.8240449),
-    //   infoWindow: const InfoWindow(
-    //     title: 'Collection Type',
-    //     snippet: 'Location, Postal'),
-    //   icon: BitmapDescriptor.defaultMarkerWithHue(
-    //     BitmapDescriptor.hueBlue,
-    //   ),
-    // );
-    // Marker secondM = Marker(
-    //   markerId: const MarkerId('thomson plaza'),
-    //   position: const LatLng(1.3548, 103.8308),
-    //   infoWindow: const InfoWindow(
-    //     title: 'Permanent E-bin',
-    //     snippet: '223 CHOA CHU KANG CENTRAL S680223'),
-    //   icon: BitmapDescriptor.defaultMarkerWithHue(
-    //     BitmapDescriptor.hueBlue,
-    //   ),
-    // );
-    // Marker thirdM = Marker(
-    //   markerId: const MarkerId('yishun'),
-    //   position: const LatLng(1.3637459, 103.8240449),
-    //   infoWindow: const InfoWindow(title: 'ktph'),
-    //   icon: BitmapDescriptor.defaultMarkerWithHue(
-    //     BitmapDescriptor.hueBlue,
-    //   ),
-    // );
-    // Marker myHouse = Marker(
-    //   markerId: const MarkerId('yishun'),
-    //   position: const LatLng(1.4304, 103.8449),
-    //   infoWindow: const InfoWindow(title: 'myHouse'),
-    //   icon: BitmapDescriptor.defaultMarkerWithHue(
-    //     BitmapDescriptor.hueBlue,
-    //   ),
-    // );
-
-    // markers.add(firstM);
-    // markers.add(secondM);
-    // markers.add(thirdM);
-    // markers.add(myHouse);
-
-    setState(() {
-      
+  // get data from firebase
+  getMarkerData() async {
+    FirebaseFirestore.instance.collection('Map').get().then((myMockData) {
+      if (myMockData.docs.isNotEmpty) {
+        for(int i = 0; i < myMockData.docs.length; i++) {
+          initMarker(myMockData.docs[i].data(), myMockData.docs[i].reference.id);
+        }
+      }
     });
   }
 
   @override
+  void initState () {
+    getMarkerData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // Set<Marker> getMarker() {
+    //   return <Marker>{
+    //     Marker(
+    //         markerId: const MarkerId('yishun'),
+    //         position: const LatLng(1.3437459, 103.8240449),
+    //         infoWindow: const InfoWindow(
+    //             title: 'Collection Type', snippet: 'Location, Postal'),
+    //         icon: BitmapDescriptor.defaultMarkerWithHue(
+    //           BitmapDescriptor.hueBlue,
+    //         ))
+    //   };
+    // }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("MAP"),
@@ -83,7 +73,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
       ),
       body: GoogleMap(
         initialCameraPosition: initialCameraPosition,
-        markers: markers.map((e) => e).toSet(),
+        markers: Set<Marker>.of(markers.values),
         // + /- button
         zoomControlsEnabled: true,
         mapType: MapType.normal,
@@ -107,18 +97,19 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                   target: LatLng(position.latitude, position.longitude),
                   zoom: 14)));
 
-          markers.add(Marker(
+          Marker(
               markerId: const MarkerId('currentLocation'),
-              // yishun natura: 1.4304, 103.8449
-              // keep returning: 1.3303° N, 103.8913° 
               position: LatLng(position.latitude, position.longitude),
               infoWindow: const InfoWindow(title: 'Current Location'),
               icon: BitmapDescriptor.defaultMarkerWithHue(
                 BitmapDescriptor.hueRed,
-              )));
+          ));
 
           // if not the current location marker wont come out
-          setState(() {});
+          setState(() {
+            
+          });
+          
         },
         // button style
         label: const Text("Current Location"),
@@ -154,7 +145,8 @@ class _MapPageWidgetState extends State<MapPageWidget> {
 
     // GET USER CURRENT POSITION AND RETURN WHEN BUTTON IS CLICKED
     // get my location high accuracy
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
 
     return position;
   }

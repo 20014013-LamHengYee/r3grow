@@ -22,8 +22,12 @@ class _MapPageWidgetState extends State<MapPageWidget> {
       CameraPosition(target: LatLng(1.3437459, 103.8240449), zoom: 14);
 
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+
+  // for the icon later on
   late BitmapDescriptor mapMaker;
 
+
+  // for the icon size 
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
     ui.Codec codec =
@@ -36,6 +40,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
   void initMarker(specify, specifyId) async {
     var markerIdVal = specifyId;
     final MarkerId markerId = MarkerId(markerIdVal);
+    // icon size
     final Uint8List markerIcon = await getBytesFromAsset('assets/images/recycle.png', 100);
     
     final Marker marker = Marker(

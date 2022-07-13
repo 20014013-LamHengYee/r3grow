@@ -17,10 +17,10 @@ class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
   int _selectedIndex = 2;
   static const List<Widget> _widgetOptions = <Widget>[
     // ignore: curly_braces_in_flow_control_structures
-    ChatBot(),
+    MapPageWidget(),
     AllVoucherWidget(),
     HomePageWidget(),
-    MapPageWidget(),
+    ChatBot(),
     accountPageWidget(),
   ];
 

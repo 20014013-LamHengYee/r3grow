@@ -3,6 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+import 'package:flutter/services.dart';
 
 class MapPageWidget extends StatefulWidget {
   const MapPageWidget({Key? key}) : super(key: key);
@@ -18,35 +21,50 @@ class _MapPageWidgetState extends State<MapPageWidget> {
   static const CameraPosition initialCameraPosition =
       CameraPosition(target: LatLng(1.3437459, 103.8240449), zoom: 14);
 
-  Map <MarkerId, Marker> markers = <MarkerId, Marker> {};
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+  late BitmapDescriptor mapMaker;
+
+  Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec =
+        await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+   }
 
   // specify what data to take
   void initMarker(specify, specifyId) async {
     var markerIdVal = specifyId;
     final MarkerId markerId = MarkerId(markerIdVal);
-    final Marker marker = Marker (
-      markerId: markerId,
-      position: LatLng(specify['coords'].latitude, specify['coords'].longitude),
-      infoWindow: InfoWindow(title: specify['title'], snippet: specify['location']),
-      );
-      setState(() {
-        markers[markerId] = marker;
-      });
+    final Uint8List markerIcon = await getBytesFromAsset('assets/images/recycle.png', 100);
+    
+    final Marker marker = Marker(
+        markerId: markerId,
+        position:
+            LatLng(specify['coords'].latitude, specify['coords'].longitude),
+        infoWindow:
+            InfoWindow(title: specify['title'], snippet: specify['location']),
+        icon: BitmapDescriptor.fromBytes(markerIcon));
+
+    setState(() {
+      markers[markerId] = marker;
+    });
   }
 
   // get data from firebase
   getMarkerData() async {
     FirebaseFirestore.instance.collection('Map').get().then((myMockData) {
       if (myMockData.docs.isNotEmpty) {
-        for(int i = 0; i < myMockData.docs.length; i++) {
-          initMarker(myMockData.docs[i].data(), myMockData.docs[i].reference.id);
+        for (int i = 0; i < myMockData.docs.length; i++) {
+          initMarker(
+              myMockData.docs[i].data(), myMockData.docs[i].reference.id);
         }
       }
     });
   }
 
   @override
-  void initState () {
+  void initState() {
     getMarkerData();
     super.initState();
   }
@@ -97,19 +115,18 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                   target: LatLng(position.latitude, position.longitude),
                   zoom: 14)));
 
-          Marker(
-              markerId: const MarkerId('currentLocation'),
-              position: LatLng(position.latitude, position.longitude),
-              infoWindow: const InfoWindow(title: 'Current Location'),
-              icon: BitmapDescriptor.defaultMarkerWithHue(
-                BitmapDescriptor.hueRed,
-          ));
+          // Marker(
+          //     markerId: const MarkerId('currentLocation'),
+          //     position: LatLng(position.latitude, position.longitude),
+          //     infoWindow: const InfoWindow(title: 'Current Location'),
+          //     icon: BitmapDescriptor.defaultMarkerWithHue(
+          //       BitmapDescriptor.hueRed,
+          // ));
 
-          // if not the current location marker wont come out
-          setState(() {
-            
-          });
-          
+          // // if not the current location marker wont come out
+          // setState(() {
+
+          // });
         },
         // button style
         label: const Text("Current Location"),

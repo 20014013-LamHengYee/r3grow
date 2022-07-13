@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'dart:developer';
-import 'package:flutter/foundation.dart';
 import 'package:r3grow/Journey/storageFirebase.dart';
 
 class Scanner extends StatefulWidget {

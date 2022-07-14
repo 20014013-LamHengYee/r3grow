@@ -38,14 +38,14 @@ class _AllVoucherWidgetState extends State<AllVoucherWidget> {
           style: TextStyle(
               fontSize: 30,
               color: Color(0xFF226E44),
-              fontWeight: FontWeight.w600),
+              fontWeight: FontWeight.normal),
         ),
         // actions: const [],
         centerTitle: true,
         elevation: 5,
       ),
       // BODY
-      backgroundColor: const Color(0xFFF1FDFB),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         // ensure scorllable
         child: GestureDetector(

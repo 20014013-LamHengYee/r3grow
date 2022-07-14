@@ -49,7 +49,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: const Color(0xFFF1FDFB),
+      backgroundColor: Colors.white,
       // body: Center(
       //   child: _widgetOptions.elementAt(_selectedIndex),
       // ),
@@ -68,7 +68,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     Padding(
                       // space between acheievement badge and QR Code
                       // change 100 back to 270
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 250, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 270, 0),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,8 +159,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 30,
-                        color: Colors.red,
-                        fontWeight: FontWeight.w600),
+                        color: Colors.brown,
+                        fontWeight: FontWeight.normal),
                   ),
                 ],
               ),

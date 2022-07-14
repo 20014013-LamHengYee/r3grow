@@ -57,7 +57,7 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
           style: TextStyle(
               fontSize: 30,
               color: Color(0xFF226E44),
-              fontWeight: FontWeight.w600),
+              fontWeight: FontWeight.normal),
         ),
         // actions: const [],
         centerTitle: true,

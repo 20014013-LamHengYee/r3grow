@@ -106,6 +106,7 @@ class _ChatBot extends State<ChatBot> {
         centerTitle: true,
         title: Text("CHATBOT"),
         backgroundColor: Colors.green,
+        automaticallyImplyLeading: false,
       ),
       body: Column(children: <Widget>[
         Flexible(

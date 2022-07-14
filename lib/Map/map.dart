@@ -26,23 +26,25 @@ class _MapPageWidgetState extends State<MapPageWidget> {
   // for the icon later on
   late BitmapDescriptor mapMaker;
 
-
-  // for the icon size 
+  // for the icon size
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
-    ui.Codec codec =
-        await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
-   }
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
+  }
 
   // specify what data to take
   void initMarker(specify, specifyId) async {
     var markerIdVal = specifyId;
     final MarkerId markerId = MarkerId(markerIdVal);
     // icon size
-    final Uint8List markerIcon = await getBytesFromAsset('assets/images/recycle.png', 100);
-    
+    final Uint8List markerIcon =
+        await getBytesFromAsset('assets/images/recycle.png', 100);
+
     final Marker marker = Marker(
         markerId: markerId,
         position:
@@ -90,54 +92,145 @@ class _MapPageWidgetState extends State<MapPageWidget> {
     // }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("MAP"),
-        centerTitle: true,
-      ),
-      body: GoogleMap(
-        initialCameraPosition: initialCameraPosition,
-        markers: Set<Marker>.of(markers.values),
-        // + /- button
-        zoomControlsEnabled: true,
-        mapType: MapType.normal,
-        onMapCreated: (GoogleMapController controller) {
-          googleMapController = controller;
-        },
-      ),
-      //////////////////////////////////////////////////// BUTTON FOR CURRENT LOCATION ////////////////////////////////////////////////////
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          // position is returned here if it's not denied, call func _determinePosition
-          Position position = await _determinePosition();
+        appBar: AppBar(
+          title: const Text("MAP"),
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+          backgroundColor:Colors.green,
+        ),
+        body: Stack(
+          children: <Widget>[
+            GoogleMap(
+              initialCameraPosition: initialCameraPosition,
+              markers: Set<Marker>.of(markers.values),
+              // + /- button [I use custom one]
+              zoomControlsEnabled: false,
+              zoomGesturesEnabled: true,
+              mapType: MapType.normal,
+              onMapCreated: (GoogleMapController controller) {
+                googleMapController = controller;
+              },
+            ),
+            //////////////////////////////////////////////////// BUTTON FOR CURRENT LOCATION ////////////////////////////////////////////////////
+            // floatingActionButton: FloatingActionButton.extended(
+            //   onPressed: () async {
+            //     // position is returned here if it's not denied, call func _determinePosition
+            //     Position position = await _determinePosition();
 
-          // A constant that is true if the application was compiled in debug mode.
-          if (kDebugMode) {
-            print("POS: " + position.toString());
-          }
+            //     // A constant that is true if the application was compiled in debug mode.
+            //     if (kDebugMode) {
+            //       print("POS: " + position.toString());
+            //     }
 
-          googleMapController.animateCamera(CameraUpdate.newCameraPosition(
-              CameraPosition(
-                  target: LatLng(position.latitude, position.longitude),
-                  zoom: 14)));
+            //     googleMapController.animateCamera(CameraUpdate.newCameraPosition(
+            //         CameraPosition(
+            //             target: LatLng(position.latitude, position.longitude),
+            //             zoom: 14)));
 
-          // Marker(
-          //     markerId: const MarkerId('currentLocation'),
-          //     position: LatLng(position.latitude, position.longitude),
-          //     infoWindow: const InfoWindow(title: 'Current Location'),
-          //     icon: BitmapDescriptor.defaultMarkerWithHue(
-          //       BitmapDescriptor.hueRed,
-          // ));
+            //     // Marker(
+            //     //     markerId: const MarkerId('currentLocation'),
+            //     //     position: LatLng(position.latitude, position.longitude),
+            //     //     infoWindow: const InfoWindow(title: 'Current Location'),
+            //     //     icon: BitmapDescriptor.defaultMarkerWithHue(
+            //     //       BitmapDescriptor.hueRed,
+            //     // ));
 
-          // // if not the current location marker wont come out
-          // setState(() {
+            //     // // if not the current location marker wont come out
+            //     // setState(() {
 
-          // });
-        },
-        // button style
-        label: const Text("Current Location"),
-        icon: const Icon(Icons.location_history),
-      ),
-    );
+            //     // });
+            //   },
+            //   // button style
+            //   label: const Text("Current Location"),
+            //   icon: const Icon(Icons.location_history),
+            // ),
+            //////////////////////////////////////////////////// BUTTON FOR ZOOM ////////////////////////////////////////////////////
+            SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    ClipOval(
+                      child: Material(
+                        color: const Color.fromARGB(255, 100, 179, 244), // button color
+                        child: InkWell(
+                          splashColor: Colors.blue, // inkwell color
+                          child: const SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Icon(Icons.add),
+                          ),
+                          onTap: () {
+                            googleMapController.animateCamera(
+                              CameraUpdate.zoomIn(),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    ClipOval(
+                      child: Material(
+                        color: const Color.fromARGB(255, 100, 179, 244), // button color
+                        child: InkWell(
+                          splashColor: Colors.blue, // inkwell color
+                          child: const SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Icon(Icons.remove),
+                          ),
+                          onTap: () {
+                            googleMapController.animateCamera(
+                              CameraUpdate.zoomOut(),
+                            );
+                          },
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            //////////////////////////////////////////////////// BUTTON FOR CURRENT LOCATION ////////////////////////////////////////////////////
+            SafeArea(
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
+                  child: ClipOval(
+                    child: Material(
+                      color: Colors.white70,// button color
+                      child: InkWell(
+                        splashColor: Colors.grey, // inkwell color
+                        child: const SizedBox(
+                          width: 56,
+                          height: 56,
+                          child: Icon(Icons.my_location),
+                        ),
+                        onTap: () async {
+                          // position is returned here if it's not denied, call func _determinePosition
+                          Position position = await _determinePosition();
+
+                          // A constant that is true if the application was compiled in debug mode.
+                          if (kDebugMode) {
+                            print("POS: " + position.toString());
+                          }
+
+                          googleMapController.animateCamera(
+                              CameraUpdate.newCameraPosition(CameraPosition(
+                                  target: LatLng(
+                                      position.latitude, position.longitude),
+                                  zoom: 14)));
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 
   ////////////////////////////////////////////////////  LOCATION SERVICE PERMISSION  ////////////////////////////////////////////////////

@@ -88,6 +88,29 @@ flutter:
   - assets/credentials.json
   - assets/images/anonymousProfile.png
   - assets/images/recycle.png
+    #badges
+  - assets/images/1badge.png
+  - assets/images/2badge.png
+  - assets/images/3badge.png
+  - assets/images/4badge.png
+  - assets/images/5badge.png
+  - assets/images/6badge.png
+  - assets/images/7badge.png
+  - assets/images/8badge.png
+  - assets/images/9badge.png
+  - assets/images/10badge.png
+  - assets/images/noBadge.png
+  - assets/images/Hero.png
+  - assets/images/dbadge1.png
+  - assets/images/dbadge2.png
+  - assets/images/dbadge3.png
+  - assets/images/dbadge4.png
+  - assets/images/dbadge5.png
+  - assets/images/dbadge6.png
+  - assets/images/dbadge7.png
+  - assets/images/dbadge8.png
+  - assets/images/dbadge9.png
+  - assets/images/dbadge10.png
  
 
   # An image asset can refer to one or more resolution-specific "variants", see

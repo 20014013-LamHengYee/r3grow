@@ -70,7 +70,7 @@ class _accountPageWidgetState extends State<accountPageWidget> {
 
     // email address field
     final emailAddress = Text(
-      'username@gmail.com',
+      "${userLogIn.email}",
       style: TextStyle(
         fontFamily: 'Poppins',
         fontWeight: FontWeight.w500,

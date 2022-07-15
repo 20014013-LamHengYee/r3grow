@@ -13,7 +13,7 @@ class EditProfilePageWidget extends StatefulWidget {
 
 class _EditProfilePageWidgetState extends State<EditProfilePageWidget> {
   TextEditingController userNameController = TextEditingController();
-  late TextEditingController emailAddressController;
+  TextEditingController emailAddressController = TextEditingController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   UserModel user = UserModel();
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -21,8 +21,8 @@ class _EditProfilePageWidgetState extends State<EditProfilePageWidget> {
   @override
   void initState() {
     super.initState();
-    userNameController = user.username as TextEditingController;
-    emailAddressController = TextEditingController();
+    userNameController.text = widget.currentUser.username!;
+    emailAddressController.text = widget.currentUser.email!;
   }
 
   @override
@@ -153,7 +153,7 @@ class _EditProfilePageWidgetState extends State<EditProfilePageWidget> {
                 readOnly: true,
                 obscureText: false,
                 decoration: InputDecoration(
-                  labelText: 'Username@gmail.com',
+                  labelText: "Email Address",
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Color(0xFFBDBDBDBD),
@@ -271,25 +271,27 @@ class _EditProfilePageWidgetState extends State<EditProfilePageWidget> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                profilePic,
-                changePhotoBtt,
-                userName,
-                emailAddress,
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      cancelBtt,
-                      saveBtt,
-                    ],
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  profilePic,
+                  changePhotoBtt,
+                  userName,
+                  emailAddress,
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        cancelBtt,
+                        saveBtt,
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

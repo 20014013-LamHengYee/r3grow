@@ -1,7 +1,10 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, use_full_hex_values_for_flutter_colors, prefer_const_constructors_in_immutables, use_key_in_widget_constructors
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:r3grow/Journey/journey.dart';
 import 'package:r3grow/databaseModel/user_model.dart';
+import 'package:r3grow/bottomNavigatorBar.dart';
 
 class EditProfilePageWidget extends StatefulWidget {
   final UserModel currentUser;
@@ -23,6 +26,12 @@ class _EditProfilePageWidgetState extends State<EditProfilePageWidget> {
     super.initState();
     userNameController.text = widget.currentUser.username!;
     emailAddressController.text = widget.currentUser.email!;
+  }
+
+  @override
+  void dispose() {
+    userNameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -98,11 +107,6 @@ class _EditProfilePageWidgetState extends State<EditProfilePageWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
               child: TextFormField(
                 controller: userNameController,
-                // onChanged: (_) => EasyDebounce.debounce(
-                //   'textController1',
-                //   Duration(milliseconds: 2000),
-                //   () => setState(() {}),
-                // ),
                 autofocus: false,
                 keyboardType: TextInputType.name,
                 obscureText: false,
@@ -199,10 +203,19 @@ class _EditProfilePageWidgetState extends State<EditProfilePageWidget> {
 
     //saveBtt
     final saveBtt = ElevatedButton(
-      onPressed: () async {
+      onPressed: () {
         // user.username = userNameController.text;
         // final uid = user.uid;
         // Navigator.of(context).pop();
+        if (widget.currentUser.username != userNameController.text) {
+          final user = UserModel(
+              uid: widget.currentUser.uid,
+              email: widget.currentUser.email,
+              username: userNameController.text);
+          updateUser(user);
+        }
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => BottomNavigatorBar()));
       },
       child: Text(
         "Save",
@@ -297,5 +310,11 @@ class _EditProfilePageWidgetState extends State<EditProfilePageWidget> {
         ),
       ),
     );
+  }
+
+  Future updateUser(UserModel user) async {
+    final docUser =
+        FirebaseFirestore.instance.collection('users').doc(user.uid);
+    await docUser.update(user.toMap());
   }
 }

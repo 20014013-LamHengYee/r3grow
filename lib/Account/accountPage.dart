@@ -86,11 +86,10 @@ class _accountPageWidgetState extends State<accountPageWidget> {
             child: Text(
               'Account Settings',
               style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 30,
-                fontWeight: FontWeight.normal,
-                color: Color(0xFF48240C)
-              ),
+                  fontFamily: 'Poppins',
+                  fontSize: 30,
+                  fontWeight: FontWeight.normal,
+                  color: Color(0xFF48240C)),
             ),
           ),
         ],
@@ -203,58 +202,58 @@ class _accountPageWidgetState extends State<accountPageWidget> {
       ],
     );
 
-    //TwoFactorA
-    final twoFactorA = Row(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: 60,
-          decoration: BoxDecoration(
-            color: Color(0xFFF8F4EC),
-            shape: BoxShape.rectangle,
-            border: Border.all(
-              color: Color(0xFF9E9E9E),
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
-                child: Text(
-                  'Two Factor Authentication',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 17,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Align(
-                  alignment: AlignmentDirectional(0.75, 0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                HomePageWidget()),
-                      );
-                    },
-                    child: Icon(
-                      Icons.arrow_forward_ios,
-                      color: Color(0xFF95A1AC),
-                      size: 18,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
+    // //TwoFactorA
+    // final twoFactorA = Row(
+    //   mainAxisSize: MainAxisSize.max,
+    //   children: [
+    //     Container(
+    //       width: MediaQuery.of(context).size.width,
+    //       height: 60,
+    //       decoration: BoxDecoration(
+    //         color: Color(0xFFF8F4EC),
+    //         shape: BoxShape.rectangle,
+    //         border: Border.all(
+    //           color: Color(0xFF9E9E9E),
+    //         ),
+    //       ),
+    //       child: Row(
+    //         mainAxisSize: MainAxisSize.max,
+    //         children: [
+    //           Padding(
+    //             padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
+    //             child: Text(
+    //               'Two Factor Authentication',
+    //               style: TextStyle(
+    //                 fontFamily: 'Poppins',
+    //                 fontSize: 17,
+    //               ),
+    //             ),
+    //           ),
+    //           Expanded(
+    //             child: Align(
+    //               alignment: AlignmentDirectional(0.75, 0),
+    //               child: GestureDetector(
+    //                 onTap: () {
+    //                   Navigator.push(
+    //                     context,
+    //                     MaterialPageRoute(
+    //                         builder: (BuildContext context) =>
+    //                             HomePageWidget()),
+    //                   );
+    //                 },
+    //                 child: Icon(
+    //                   Icons.arrow_forward_ios,
+    //                   color: Color(0xFF95A1AC),
+    //                   size: 18,
+    //                 ),
+    //               ),
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //   ],
+    // );
 
     //LogOutBtt
     final logOutBtt = Padding(
@@ -276,9 +275,9 @@ class _accountPageWidgetState extends State<accountPageWidget> {
               ),
             ),
             style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              primary: Color(0xFFA7C474)
-            ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                primary: Color(0xFFA7C474)),
           ),
         ],
       ),
@@ -322,7 +321,6 @@ class _accountPageWidgetState extends State<accountPageWidget> {
                     children: [
                       redeemedHistory,
                       editProfile,
-                      twoFactorA,
                     ],
                   ),
                   logOutBtt,

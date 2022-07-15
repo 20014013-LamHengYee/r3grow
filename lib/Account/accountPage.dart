@@ -187,7 +187,9 @@ class _accountPageWidgetState extends State<accountPageWidget> {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                EditProfilePageWidget()),
+                                EditProfilePageWidget(
+                                  currentUser: userLogIn,
+                                )),
                       );
                     },
                     child: Icon(

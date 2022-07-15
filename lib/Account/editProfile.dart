@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:r3grow/databaseModel/user_model.dart';
 
 class EditProfilePageWidget extends StatefulWidget {
-  EditProfilePageWidget({Key? key}) : super(key: key);
+  final UserModel currentUser;
+  EditProfilePageWidget({required this.currentUser});
 
   @override
   _EditProfilePageWidgetState createState() => _EditProfilePageWidgetState();

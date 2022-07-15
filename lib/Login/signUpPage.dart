@@ -309,7 +309,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
             ),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              primary: Color(0xFF00e5FF),
+              primary: Color(0xFFA7C474)
             ),
           ),
         ),
@@ -321,7 +321,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(100),
         child: AppBar(
-          backgroundColor: Color(0xFFF1FDFB),
+          backgroundColor: Color(0xFFF8F4EC),
           iconTheme: IconThemeData(color: Color(0xFF212121)),
           automaticallyImplyLeading: true,
           flexibleSpace: Column(
@@ -355,6 +355,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 32,
+                    color: Color(0xFF48240C)
                   ),
                 ),
               ),
@@ -364,7 +365,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
           elevation: 0,
         ),
       ),
-      backgroundColor: Color(0xFFF1FDFB),
+      backgroundColor: Color(0xFFF8F4EC),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),

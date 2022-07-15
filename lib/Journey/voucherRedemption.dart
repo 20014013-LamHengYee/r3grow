@@ -56,14 +56,14 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 30,
-              color: Color(0xFF226E44),
+              color: Color(0xFF48240C),
               fontWeight: FontWeight.normal),
         ),
         // actions: const [],
         centerTitle: true,
         elevation: 5,
       ),
-      backgroundColor: const Color(0xFFF1FDFB),
+      backgroundColor: const Color(0xFFF8F4EC),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -497,7 +497,7 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                                   style: TextStyle(fontSize: 20)), // text
                               style: ElevatedButton.styleFrom(
                                 minimumSize: const Size(350, 40),
-                                primary: Color(0xFF226E44),
+                                primary: Color(0xFFA7C474),
                               ),
                             );
                           },

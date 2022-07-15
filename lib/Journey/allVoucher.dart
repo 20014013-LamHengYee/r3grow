@@ -37,7 +37,7 @@ class _AllVoucherWidgetState extends State<AllVoucherWidget> {
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 30,
-              color: Color(0xFF226E44),
+              color: Color(0xFF48240C),
               fontWeight: FontWeight.normal),
         ),
         // actions: const [],
@@ -45,7 +45,7 @@ class _AllVoucherWidgetState extends State<AllVoucherWidget> {
         elevation: 5,
       ),
       // BODY
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF8F4EC),
       body: SingleChildScrollView(
         // ensure scorllable
         child: GestureDetector(

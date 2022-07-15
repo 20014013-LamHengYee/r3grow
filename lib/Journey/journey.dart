@@ -49,7 +49,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF8F4EC),
       // body: Center(
       //   child: _widgetOptions.elementAt(_selectedIndex),
       // ),
@@ -159,7 +159,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 30,
-                        color: Colors.brown,
+                        color: Color(0xFF48240C),
                         fontWeight: FontWeight.normal),
                   ),
                 ],
@@ -312,7 +312,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 style: TextStyle(fontSize: 18)), // text
                             style: ElevatedButton.styleFrom(
                                 minimumSize: const Size(130, 40),
-                                primary: Color(0xFF226E44),
+                                primary: Color(0xFFA7C474),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(500))),
                           ),
@@ -370,7 +370,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           GestureDetector(
                             child: Text("See All",
                                 style: TextStyle(
-                                    color: Colors.grey, fontSize: 15)),
+                                    color: Color(0xFFA7C474), fontSize: 15, fontWeight: FontWeight.bold)),
                             onTap: () async {
                               // go to
                               await Navigator.push(

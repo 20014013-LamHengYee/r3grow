@@ -87,8 +87,9 @@ class _accountPageWidgetState extends State<accountPageWidget> {
               'Account Settings',
               style: TextStyle(
                 fontFamily: 'Poppins',
-                fontSize: 25,
+                fontSize: 30,
                 fontWeight: FontWeight.normal,
+                color: Color(0xFF48240C)
               ),
             ),
           ),
@@ -104,7 +105,7 @@ class _accountPageWidgetState extends State<accountPageWidget> {
           width: MediaQuery.of(context).size.width,
           height: 60,
           decoration: BoxDecoration(
-            color: Color(0xFFF1FDFB),
+            color: Color(0xFFF8F4EC),
             shape: BoxShape.rectangle,
             border: Border.all(
               color: Color(0xFF9E9E9E),
@@ -157,7 +158,7 @@ class _accountPageWidgetState extends State<accountPageWidget> {
           width: MediaQuery.of(context).size.width,
           height: 60,
           decoration: BoxDecoration(
-            color: Color(0xFFF1FDFB),
+            color: Color(0xFFF8F4EC),
             shape: BoxShape.rectangle,
             border: Border.all(
               color: Color(0xFF9E9E9E),
@@ -210,7 +211,7 @@ class _accountPageWidgetState extends State<accountPageWidget> {
           width: MediaQuery.of(context).size.width,
           height: 60,
           decoration: BoxDecoration(
-            color: Color(0xFFF1FDFB),
+            color: Color(0xFFF8F4EC),
             shape: BoxShape.rectangle,
             border: Border.all(
               color: Color(0xFF9E9E9E),
@@ -276,7 +277,7 @@ class _accountPageWidgetState extends State<accountPageWidget> {
             ),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              primary: Color(0xFF00e5FF),
+              primary: Color(0xFFA7C474)
             ),
           ),
         ],
@@ -285,7 +286,7 @@ class _accountPageWidgetState extends State<accountPageWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFFF1FDFB),
+      backgroundColor: Color(0xFFF8F4EC),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),

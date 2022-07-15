@@ -96,7 +96,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
           title: const Text("MAP"),
           centerTitle: true,
           automaticallyImplyLeading: false,
-          backgroundColor:Colors.green,
+          backgroundColor:const Color(0xFFA7C474),
         ),
         body: Stack(
           children: <Widget>[

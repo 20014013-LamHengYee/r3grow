@@ -105,7 +105,7 @@ class _ChatBot extends State<ChatBot> {
       appBar: AppBar(
         centerTitle: true,
         title: Text("CHATBOT"),
-        backgroundColor: Colors.green,
+        backgroundColor: Color(0xFFA7C474),
         automaticallyImplyLeading: true,
       ),
       body: Column(children: <Widget>[

@@ -205,7 +205,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
       ),
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-        primary: Color(0xFF00e5FF),
+        primary: Color(0xFFA7C474),
       ),
     );
 
@@ -232,7 +232,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFFF1FDFB),
+      backgroundColor: Color(0xFFF8F4EC),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -250,7 +250,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         alignment: AlignmentDirectional(0, 0),
                         child: Image.asset(
                           'assets/images/LoginPage.jpg',
-                          width: 380,
+                          width: 390,
                           height: 280,
                           fit: BoxFit.fill,
                         ),
@@ -278,6 +278,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 style: const TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 40,
+                                  color: Color(0xFF48240C)
                                 ),
                               ),
                             ),

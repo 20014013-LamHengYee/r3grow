@@ -114,7 +114,7 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
           // ignore: prefer_const_constructors
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           // ignore: prefer_const_constructors
-          primary: Color(0xFF00e5FF),
+          primary: Color(0xFFA7C474),
         ),
       ),
     );
@@ -126,7 +126,7 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
         preferredSize: Size.fromHeight(100),
         child: AppBar(
           // ignore: prefer_const_constructors
-          backgroundColor: Color(0xFFF1FDFB),
+          backgroundColor: Color(0xFFF8F4EC),
           // ignore: prefer_const_constructors
           iconTheme: IconThemeData(color: Color(0xFF212121)),
           automaticallyImplyLeading: true,
@@ -180,7 +180,7 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
         ),
       ),
       // ignore: prefer_const_constructors
-      backgroundColor: Color(0xFFF1FDFB),
+      backgroundColor: Color(0xFFF8F4EC),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),

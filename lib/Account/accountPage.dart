@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -23,6 +23,7 @@ class accountPageWidget extends StatefulWidget {
 class _accountPageWidgetState extends State<accountPageWidget> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel userLogIn = UserModel();
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   @override
   void initState() {
@@ -60,7 +61,7 @@ class _accountPageWidgetState extends State<accountPageWidget> {
 
     // username field
     final username = Text(
-      'Username',
+      "${userLogIn.username}",
       style: TextStyle(
         fontFamily: 'Poppins',
         fontSize: 28,

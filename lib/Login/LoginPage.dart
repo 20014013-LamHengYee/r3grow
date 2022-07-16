@@ -276,10 +276,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 'LOGIN',
                                 textAlign: TextAlign.start,
                                 style: const TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 40,
-                                  color: Color(0xFF48240C)
-                                ),
+                                    fontFamily: 'Poppins',
+                                    fontSize: 40,
+                                    color: Color(0xFF48240C)),
                               ),
                             ),
                           ],

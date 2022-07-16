@@ -1,6 +1,6 @@
 // ignore: file_names
 // ignore: file_names
-// ignore_for_file: use_full_hex_values_for_flutter_colors, file_names, duplicate_ignore
+// ignore_for_file: use_full_hex_values_for_flutter_colors, file_names, duplicate_ignore, prefer_const_constructors
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -170,6 +170,7 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 32,
+                    color: Color(0xFF48240C),
                   ),
                 ),
               ),

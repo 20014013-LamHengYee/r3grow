@@ -2,7 +2,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:r3grow/Journey/journey.dart';
 import 'package:r3grow/databaseModel/user_model.dart';
 import 'package:r3grow/bottomNavigatorBar.dart';
 
@@ -68,32 +67,32 @@ class _EditProfilePageWidgetState extends State<EditProfilePageWidget> {
     );
 
     //changePhotoBtt
-    final changePhotoBtt = Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              //
-            },
-            child: Text(
-              "Change Photo",
-              style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              primary: Color(0xFFA7C474),
-            ),
-          ),
-        ],
-      ),
-    );
+    // final changePhotoBtt = Padding(
+    //   padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+    //   child: Row(
+    //     mainAxisSize: MainAxisSize.max,
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: [
+    //       ElevatedButton(
+    //         onPressed: () {
+    //           //
+    //         },
+    //         child: Text(
+    //           "Change Photo",
+    //           style: TextStyle(
+    //               fontFamily: 'Poppins',
+    //               fontSize: 17,
+    //               fontWeight: FontWeight.bold,
+    //               color: Colors.white),
+    //         ),
+    //         style: ElevatedButton.styleFrom(
+    //           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    //           primary: Color(0xFFA7C474),
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
 
     //userName field
     final userName = Padding(
@@ -267,9 +266,9 @@ class _EditProfilePageWidgetState extends State<EditProfilePageWidget> {
                 child: Text(
                   'Edit Profile',
                   style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 32,
-                  ),
+                      fontFamily: 'Poppins',
+                      fontSize: 32,
+                      color: Color(0xFF48240C)),
                 ),
               ),
             ],
@@ -289,7 +288,7 @@ class _EditProfilePageWidgetState extends State<EditProfilePageWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   profilePic,
-                  changePhotoBtt,
+                  // changePhotoBtt,
                   userName,
                   emailAddress,
                   Padding(

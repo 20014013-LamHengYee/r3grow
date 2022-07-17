@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:r3grow/Account/editProfile.dart';
-import 'package:r3grow/Journey/journey.dart';
+import 'package:r3grow/Account/redeemedHistory.dart';
 import 'package:r3grow/Login/LoginPage.dart';
 import 'package:r3grow/databaseModel/user_model.dart';
 
@@ -134,7 +134,7 @@ class _accountPageWidgetState extends State<accountPageWidget> {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                HomePageWidget()),
+                                RedeemHistoryPageWidget()),
                       );
                     },
                     child: Icon(

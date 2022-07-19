@@ -6,6 +6,9 @@ import 'package:r3grow/Account/accountPage.dart';
 import 'package:r3grow/Map/map.dart';
 import 'package:r3grow/chatbot/chatbot.dart';
 
+
+import 'Event/eventMain.dart';
+
 class BottomNavigatorBar extends StatefulWidget {
   const BottomNavigatorBar({Key? key}) : super(key: key);
 
@@ -20,7 +23,8 @@ class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
     MapPageWidget(),
     AllVoucherWidget(),
     HomePageWidget(),
-    ChatBot(),
+    //ChatBot(),
+    //EventPage(),
     accountPageWidget(),
   ];
 

@@ -111,6 +111,9 @@ flutter:
   - assets/images/dbadge8.png
   - assets/images/dbadge9.png
   - assets/images/dbadge10.png
+  # evennt 
+  - assets/images/location.png
+  - assets/images/calender.png
  
 
   # An image asset can refer to one or more resolution-specific "variants", see

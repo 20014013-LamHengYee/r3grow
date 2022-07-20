@@ -1,15 +1,12 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors, avoid_print, await_only_futures, unrelated_type_equality_checks
 
 import 'dart:io';
-import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'dart:developer';
-import 'package:r3grow/Journey/storageFirebase.dart';
 
 class Scanner1 extends StatefulWidget {
   const Scanner1({Key? key}) : super(key: key);
@@ -21,12 +18,18 @@ class Scanner1 extends StatefulWidget {
 class _Scanner1State extends State<Scanner1> {
   late double steps;
   late int point;
-  String barcode = "R3grow.png";
+  String result = "R3grow.png";
   final storage = FirebaseStorage.instance;
-  Barcode? result;
+  Barcode? barcode;
 
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+
+  final Stream<QuerySnapshot> account = FirebaseFirestore.instance
+      .collection('users')
+      .where("email",
+          isEqualTo: FirebaseAuth.instance.currentUser?.email.toString())
+      .snapshots();
 
   @override
   void dispose() {
@@ -70,7 +73,10 @@ class _Scanner1State extends State<Scanner1> {
           Column(
         children: <Widget>[
           Expanded(flex: 4, child: _buildQrView(context)),
-          Expanded(child: buidResult()),
+          Positioned(
+            child: buildResult(),
+            bottom: 10,
+          ),
           Expanded(
             flex: 1,
             child: FittedBox(
@@ -114,18 +120,58 @@ class _Scanner1State extends State<Scanner1> {
     );
   }
 
-  Widget buidResult() => Text(
-        barcode != null ? 'Result : ${barcode!.code}' : 'Scan a code!',
-        maxLines: 3,
+  Widget buildResult() => StreamBuilder<QuerySnapshot>(
+        stream: account,
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<QuerySnapshot> snapshot,
+        ) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text('Loading');
+          }
+
+          final data = snapshot.requireData; // take data from the snapshot
+          steps = (data.docs[0]['steps']).toDouble();
+          point = data.docs[0]['points'];
+
+          if (barcode != null) {
+            // if ('${barcode!.code}' == 'Point(s) added successfully') {
+            steps + 0.001;
+            // steps = steps + 0.01;
+            point = point + 1;
+
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(FirebaseAuth.instance.currentUser?.uid.toString())
+                .update({'steps': steps});
+
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(FirebaseAuth.instance.currentUser?.uid.toString())
+                .update({'points': point});
+            return Text('Successfully added');
+            // }
+          }
+          return Text(' Not successfully added');
+        },
       );
+
+  // Text(
+  //   barcode != null ? 'Result : ${barcode!.code}' : 'Scan a code!',
+  //   maxLines: 3,
+  // );
 
   void _onQRViewCreated(QRViewController controller) {
     setState(() {
       this.controller = controller;
     });
-    controller.scannedDataStream.listen((scanData) {
+    controller.scannedDataStream.listen((barcode) {
       setState(() {
-        result = scanData;
+        this.barcode = barcode;
       });
     });
   }
@@ -136,50 +182,6 @@ class _Scanner1State extends State<Scanner1> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('no Permission')),
       );
-    }
-  }
-
-  Future scan() async {
-    try {
-      String barcode = (await BarcodeScanner.scan()) as String;
-      setState(() => this.barcode = barcode);
-      print("scanned sucsessfully");
-      steps = steps + 0.001;
-      // steps = steps + 0.01;
-      point = point + 1;
-
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser?.uid.toString())
-          .update({'steps': steps});
-
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser?.uid.toString())
-          .update({'points': point});
-
-      //plus one to points when scanned
-      // String userId = (await FirebaseAuth.instance.currentUser!).uid;
-      // final CollectionReference pointsCollection = Firestore.instance.collection("users");
-      // await pointsCollection.document(userId).collection('points').document(userId)
-      // .updateData({
-      //   "points": FieldValue.increment(1),
-      //   "transactions": FieldValue.increment(-1)
-      //   });
-
-    } on PlatformException catch (e) {
-      if (e.code == BarcodeScanner.cameraAccessDenied) {
-        setState(() {
-          barcode = 'The user did not grant the camera permission!';
-        });
-      } else {
-        setState(() => barcode = 'Unknown error: $e');
-      }
-    } on FormatException {
-      setState(() => barcode =
-          'null (User returned using the "back"-button before scanning anything. Result)');
-    } catch (e) {
-      setState(() => barcode = 'Unknown error: $e');
     }
   }
 }

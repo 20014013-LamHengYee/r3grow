@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart'; // fo
+// fo
 
 class HistoryWidget extends StatefulWidget {
   const HistoryWidget({Key? key}) : super(key: key);
@@ -87,10 +87,10 @@ class _HistoryState extends State<HistoryWidget> {
                             // generate document id > so can know which voucher is selected
                             // var historyDocumentID =
                             //     snapshot.data!.docs[index].reference.id;
-                            Timestamp t = data['DateR'];
-                            DateTime d = t.toDate();
-                            DateFormat formatter = DateFormat('dd/MM/yyyy');
-                            final String formattedDate = formatter.format(d);
+                            // Timestamp t = data['DateR'];
+                            // DateTime d = t.toDate();
+                            // DateFormat formatter = DateFormat('dd/MM/yyyy');
+                            // final String formattedDate = formatter.format(d);
 
                             if (FirebaseAuth.instance.currentUser?.uid
                                     .toString() ==
@@ -130,9 +130,9 @@ class _HistoryState extends State<HistoryWidget> {
                                       child: SizedBox(
                                         width: 190,
                                         child: Text(
-                                          'Date Redemeed: ${formattedDate.toString()}\nDecription: ${data['Desc']}\nPoints Deducted: ${data['PointsDeducted']} points\nBalance Points: ${data['Balance']}',
+                                          'Date Redemeed: ${data['DateR']}\nDecription: ${data['Desc']}\nPoints Deducted: ${data['PointsDeducted']} points\nBalance Points: ${data['Balance']}',
                                           overflow: TextOverflow.clip,
-                                          maxLines: 5,
+                                          maxLines: 7,
                                           softWrap: true,
                                           style: TextStyle(
                                               fontSize: 16,

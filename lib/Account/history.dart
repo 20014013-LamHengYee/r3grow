@@ -15,6 +15,7 @@ class HistoryWidget extends StatefulWidget {
 class _HistoryState extends State<HistoryWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   late String currentAcc;
+  User? user = FirebaseAuth.instance.currentUser;
 
   final Stream<QuerySnapshot> history =
       FirebaseFirestore.instance.collection('History').snapshots();
@@ -70,9 +71,9 @@ class _HistoryState extends State<HistoryWidget> {
                   }
 
                   final data =
-                      snapshot.requireData.docs; // take data from the snapshot
+                      snapshot.requireData; // take data from the snapshot
 
-                  currentAcc = (data[0]['userid']).toString();
+                  currentAcc = (data.docs[0]['userid']);
 
                   return (snapshot.connectionState == ConnectionState.waiting)
                       ? const Center(child: CircularProgressIndicator())
@@ -92,9 +93,10 @@ class _HistoryState extends State<HistoryWidget> {
                             // DateFormat formatter = DateFormat('dd/MM/yyyy');
                             // final String formattedDate = formatter.format(d);
 
-                            if (FirebaseAuth.instance.currentUser?.uid
-                                    .toString() ==
-                                currentAcc) {
+                            // ignore: unrelated_type_equality_checks
+                            if (currentAcc ==
+                                FirebaseAuth.instance.currentUser!.uid
+                                    .toString()) {
                               return Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     10, 20, 10, 0),
@@ -132,7 +134,7 @@ class _HistoryState extends State<HistoryWidget> {
                                         child: Text(
                                           'Date Redemeed: ${data['DateR']}\nDecription: ${data['Desc']}\nPoints Deducted: ${data['PointsDeducted']} points\nBalance Points: ${data['Balance']}',
                                           overflow: TextOverflow.clip,
-                                          maxLines: 7,
+                                          maxLines: 8,
                                           softWrap: true,
                                           style: TextStyle(
                                               fontSize: 16,

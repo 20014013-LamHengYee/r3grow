@@ -136,7 +136,7 @@ class _ScannerState extends State<Scanner> {
           point = data.docs[0]['points'];
 
           if (barcode != null) {
-            Fluttertoast.showToast(msg: 'Successfully added');
+            Fluttertoast.showToast(msg: 'Successfull');
           }
           return Text('Not successfully added');
         },

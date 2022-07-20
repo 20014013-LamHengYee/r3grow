@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 
 import 'package:firebase_storage/firebase_storage.dart';
+=======
+>>>>>>> e7d8579a67624afb16476f5d7a67f5245d12ed74
 import 'package:flutter/cupertino.dart';
 import 'package:r3grow/Achievement/badgeController.dart';
 import 'package:r3grow/main.dart';
@@ -31,15 +34,13 @@ class _AchievementPageState extends State<AchievementPage> {
   String userBadge = 'noBadge.png';
   String badgeName = 'Badges yet to unlock!';
 
-  
-
   final Stream<QuerySnapshot> account = FirebaseFirestore.instance
       .collection('users')
       .where("email",
           isEqualTo: FirebaseAuth.instance.currentUser?.email.toString())
       .snapshots();
 
-    //get 
+  //get
   // Future getDoc() async {
   //   await FirebaseFirestore.instance.collection('users').get().then(
   //     (snapshot) =>snapshot.docs.forEach((document) {
@@ -49,7 +50,7 @@ class _AchievementPageState extends State<AchievementPage> {
   //     }),);
   // }
 
-  final  _bList = [
+  final _bList = [
     'assets/images/1badge.png',
     'assets/images/2badge.png',
     'assets/images/3badge.png',
@@ -60,8 +61,7 @@ class _AchievementPageState extends State<AchievementPage> {
     'assets/images/8badge.png',
     'assets/images/9badge.png',
     'assets/images/10badge.png',
-    ];
-
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -106,20 +106,20 @@ class _AchievementPageState extends State<AchievementPage> {
               ),
             ),
             StreamBuilder<QuerySnapshot>(
-                      stream: account,
-                      builder: (
-                      BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot,) 
-                      {
-                        if (snapshot.hasError) {
-                          return Text('Something went wrong');
-                        }
+                stream: account,
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot,
+                ) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
 
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Text('Loading');
-                        }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text('Loading');
+                  }
 
+<<<<<<< HEAD
                         final data =
                             snapshot.requireData; // take data from the snapshot
                         steps = (data.docs[0]['steps']).toDouble();
@@ -204,6 +204,66 @@ class _AchievementPageState extends State<AchievementPage> {
             //     textAlign: TextAlign.center,
             //   ),
             // ),
+=======
+                  final data =
+                      snapshot.requireData; // take data from the snapshot
+                  steps = (data.docs[0]['steps']).toDouble();
+
+                  if (steps >= 100 && steps < 200) {
+                    userBadge = '1badge.png';
+                    badgeName = 'Seedly';
+                  } else if (steps >= 200 && steps < 300) {
+                    userBadge = '2badge.png';
+                    badgeName = 'Grower';
+                  } else if (steps >= 300 && steps < 400) {
+                    userBadge = '3badge.png';
+                    badgeName = 'Veteran';
+                  } else if (steps >= 400 && steps < 500) {
+                    userBadge = '4badge.png';
+                    badgeName = 'Elite';
+                  } else if (steps >= 500 && steps < 600) {
+                    userBadge = '5badge.png';
+                    badgeName = 'Master';
+                  } else if (steps >= 600 && steps < 700) {
+                    userBadge = '6badge.png';
+                    badgeName = 'Grandmaster';
+                  } else if (steps >= 700 && steps < 800) {
+                    userBadge = '7badge.png';
+                    badgeName = 'Legend';
+                  } else if (steps >= 800 && steps < 900) {
+                    userBadge = '8badge.png';
+                    badgeName = 'Guardian';
+                  } else if (steps >= 900 && steps < 1000) {
+                    userBadge = '9badge.png';
+                    badgeName = 'Fairy';
+                  } else if (steps >= 1000) {
+                    userBadge = '10badge.png';
+                    badgeName = 'Hero';
+                  }
+
+                  return Padding(
+                    padding: EdgeInsets.all(30.0),
+                    child: Container(
+                        height: 200,
+                        width: 200,
+                        child: const CircleAvatar(
+                          backgroundImage:
+                              AssetImage('assets/images/1badge.png'),
+                          backgroundColor: Colors.transparent,
+                          radius: 80,
+                        )),
+                  );
+                }),
+            //badge name
+            Padding(
+              padding: EdgeInsets.all(5.0),
+              child: Text(
+                '$badgeName',
+                style: TextStyle(color: Colors.black, fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+            ),
+>>>>>>> e7d8579a67624afb16476f5d7a67f5245d12ed74
             //badges to display
             const SizedBox(
               height: 30,
@@ -220,14 +280,10 @@ class _AchievementPageState extends State<AchievementPage> {
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
                       child: Container(
-                        
-                        child: 
-                          CircleAvatar(
-                            backgroundColor: Colors.blue,
-                            backgroundImage: AssetImage(_bList[index]),
-                           
-                          )
-                      ),
+                          child: CircleAvatar(
+                        backgroundColor: Colors.blue,
+                        backgroundImage: AssetImage(_bList[index]),
+                      )),
                     );
                   }),
             ),

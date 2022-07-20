@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart'; // fo
+// fo
 
 class HistoryWidget extends StatefulWidget {
   const HistoryWidget({Key? key}) : super(key: key);
@@ -15,9 +15,14 @@ class HistoryWidget extends StatefulWidget {
 class _HistoryState extends State<HistoryWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   late String currentAcc;
+  User? user = FirebaseAuth.instance.currentUser;
 
-  final Stream<QuerySnapshot> history =
-      FirebaseFirestore.instance.collection('History').snapshots();
+  final Stream<QuerySnapshot> history = FirebaseFirestore.instance
+      .collection('History')
+      .where("userid",
+          isEqualTo: FirebaseAuth.instance.currentUser?.uid.toString())
+      // .orderBy("DateR", descending: true)
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +75,9 @@ class _HistoryState extends State<HistoryWidget> {
                   }
 
                   final data =
-                      snapshot.requireData.docs; // take data from the snapshot
+                      snapshot.requireData; // take data from the snapshot
 
-                  currentAcc = (data[0]['userid']).toString();
+                  // currentAcc = (data.docs[0]['userid']);
 
                   return (snapshot.connectionState == ConnectionState.waiting)
                       ? const Center(child: CircularProgressIndicator())
@@ -87,14 +92,12 @@ class _HistoryState extends State<HistoryWidget> {
                             // generate document id > so can know which voucher is selected
                             // var historyDocumentID =
                             //     snapshot.data!.docs[index].reference.id;
-                            Timestamp t = data['DateR'];
-                            DateTime d = t.toDate();
-                            DateFormat formatter = DateFormat('dd/MM/yyyy');
-                            final String formattedDate = formatter.format(d);
+                            // Timestamp t = data['DateR'];
+                            // DateTime d = t.toDate();
+                            // DateFormat formatter = DateFormat('dd/MM/yyyy');
+                            // final String formattedDate = formatter.format(d);
 
-                            if (FirebaseAuth.instance.currentUser?.uid
-                                    .toString() ==
-                                currentAcc) {
+                            // ignore: unrelated_type_equality_checks
                               return Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     10, 20, 10, 0),
@@ -130,9 +133,9 @@ class _HistoryState extends State<HistoryWidget> {
                                       child: SizedBox(
                                         width: 190,
                                         child: Text(
-                                          'Date Redemeed: ${formattedDate.toString()}\nDecription: ${data['Desc']}\nPoints Deducted: ${data['PointsDeducted']} points\nBalance Points: ${data['Balance']}',
+                                          'Date Redemeed: ${data['DateR']}\nDescription: ${data['Desc']}\nDeducted Points: ${data['PointsDeducted']}\nBalance Points: ${data['Balance']}',
                                           overflow: TextOverflow.clip,
-                                          maxLines: 5,
+                                          maxLines: 8,
                                           softWrap: true,
                                           style: TextStyle(
                                               fontSize: 16,
@@ -144,8 +147,6 @@ class _HistoryState extends State<HistoryWidget> {
                                   ],
                                 ),
                               );
-                            }
-                            return Text('');
                           });
                 },
               ),

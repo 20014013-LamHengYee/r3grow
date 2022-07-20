@@ -17,8 +17,12 @@ class _HistoryState extends State<HistoryWidget> {
   late String currentAcc;
   User? user = FirebaseAuth.instance.currentUser;
 
-  final Stream<QuerySnapshot> history =
-      FirebaseFirestore.instance.collection('History').snapshots();
+  final Stream<QuerySnapshot> history = FirebaseFirestore.instance
+      .collection('History')
+      .where("userid",
+          isEqualTo: FirebaseAuth.instance.currentUser?.uid.toString())
+      // .orderBy("DateR", descending: true)
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +77,7 @@ class _HistoryState extends State<HistoryWidget> {
                   final data =
                       snapshot.requireData; // take data from the snapshot
 
-                  currentAcc = (data.docs[0]['userid']);
+                  // currentAcc = (data.docs[0]['userid']);
 
                   return (snapshot.connectionState == ConnectionState.waiting)
                       ? const Center(child: CircularProgressIndicator())
@@ -94,9 +98,6 @@ class _HistoryState extends State<HistoryWidget> {
                             // final String formattedDate = formatter.format(d);
 
                             // ignore: unrelated_type_equality_checks
-                            if (currentAcc ==
-                                FirebaseAuth.instance.currentUser!.uid
-                                    .toString()) {
                               return Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     10, 20, 10, 0),
@@ -132,7 +133,7 @@ class _HistoryState extends State<HistoryWidget> {
                                       child: SizedBox(
                                         width: 190,
                                         child: Text(
-                                          'Date Redemeed: ${data['DateR']}\nDecription: ${data['Desc']}\nPoints Deducted: ${data['PointsDeducted']} points\nBalance Points: ${data['Balance']}',
+                                          'Date Redemeed: ${data['DateR']}\nDescription: ${data['Desc']}\nDeducted Points: ${data['PointsDeducted']}\nBalance Points: ${data['Balance']}',
                                           overflow: TextOverflow.clip,
                                           maxLines: 8,
                                           softWrap: true,
@@ -146,8 +147,6 @@ class _HistoryState extends State<HistoryWidget> {
                                   ],
                                 ),
                               );
-                            }
-                            return Text('');
                           });
                 },
               ),

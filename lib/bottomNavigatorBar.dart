@@ -7,6 +7,7 @@ import 'package:r3grow/Map/map.dart';
 import 'package:r3grow/chatbot/chatbot.dart';
 
 
+import 'Achievement/achievementMain.dart';
 import 'Event/eventMain.dart';
 
 class BottomNavigatorBar extends StatefulWidget {
@@ -25,6 +26,7 @@ class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
     HomePageWidget(),
     //ChatBot(),
     //EventPage(),
+    AchievementPage(),
     accountPageWidget(),
   ];
 

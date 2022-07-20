@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:r3grow/Account/accountPage.dart';
 import 'package:r3grow/databaseModel/user_model.dart';
 import 'package:r3grow/bottomNavigatorBar.dart';
 
@@ -184,7 +185,11 @@ class _EditProfilePageWidgetState extends State<EditProfilePageWidget> {
     //cancelBtt
     final cancelBtt = ElevatedButton(
       onPressed: () {
-        // print('Button pressed ...');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => accountPageWidget()),
+        );
       },
       child: Text(
         "Cancel",

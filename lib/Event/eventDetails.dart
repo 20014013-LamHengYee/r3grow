@@ -1,10 +1,8 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class EventDetailsWidget extends StatefulWidget {
-  
   String eventDocId;
   EventDetailsWidget(this.eventDocId, {Key? key}) : super(key: key);
 
@@ -19,7 +17,6 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
   _EventDetailsWidgetState(this.eventDocId);
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
 
   final Stream<QuerySnapshot> event =
       FirebaseFirestore.instance.collection('Event').snapshots();
@@ -73,8 +70,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                       StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                           stream: FirebaseFirestore.instance
                               .collection('Event')
-                              .doc(
-                                  eventDocId) 
+                              .doc(eventDocId)
                               .snapshots(),
                           builder: (_, snapshot) {
                             if (snapshot.hasError) {
@@ -84,8 +80,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                 ConnectionState.waiting) {
                               return const Text('Loading');
                             }
-                            final data = snapshot
-                                .requireData; 
+                            final data = snapshot.requireData;
 
                             return Image.network(
                               '${data['image']}',
@@ -102,8 +97,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                   child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                       stream: FirebaseFirestore.instance
                           .collection('Event')
-                          .doc(
-                              eventDocId) // based on specific document id.
+                          .doc(eventDocId) // based on specific document id.
                           .snapshots(),
                       builder: (_, snapshot) {
                         if (snapshot.hasError) {
@@ -120,8 +114,8 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
-                                padding:
-                                    const EdgeInsetsDirectional.fromSTEB(0, 0, 90, 0),
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0, 0, 90, 0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,14 +140,13 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             ]);
                       }),
                 ),
-            //event desc
+                //event desc
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
                   child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                       stream: FirebaseFirestore.instance
                           .collection('Event')
-                          .doc(
-                              eventDocId) 
+                          .doc(eventDocId)
                           .snapshots(),
                       builder: (_, snapshot) {
                         if (snapshot.hasError) {
@@ -171,8 +164,8 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
-                                padding:
-                                    const EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0, 0, 15, 0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -191,8 +184,8 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0, 0, 15, 0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -213,14 +206,13 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             ]);
                       }),
                 ),
-                // location of event 
+                // location of event
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
                   child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                       stream: FirebaseFirestore.instance
                           .collection('Event')
-                          .doc(
-                              eventDocId) // based on specific document id.
+                          .doc(eventDocId) // based on specific document id.
                           .snapshots(),
                       builder: (_, snapshot) {
                         if (snapshot.hasError) {

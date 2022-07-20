@@ -8,7 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:r3grow/Journey/allVoucher.dart';
 import 'package:r3grow/Journey/scanner.dart';
-import 'package:r3grow/Journey/scanner1.dart';
 import 'package:r3grow/Journey/voucherRedemption.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:r3grow/Account/accountPage.dart';

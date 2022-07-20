@@ -22,7 +22,7 @@ class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
   static const List<Widget> _widgetOptions = <Widget>[
     // ignore: curly_braces_in_flow_control_structures
     MapPageWidget(),
-    AllVoucherWidget(),
+    EventPage(),
     HomePageWidget(),
     //ChatBot(),
     //EventPage(),

@@ -385,7 +385,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           GestureDetector(
                             child: Text("See All",
                                 style: TextStyle(
-                                    color: Color(0xFFA7C474),
+                                    color: Colors.grey,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold)),
                             onTap: () async {

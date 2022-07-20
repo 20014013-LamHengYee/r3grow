@@ -105,45 +105,60 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         //   ),
                         // ),
                         // INSERT LINK TO DB
-                        StreamBuilder<QuerySnapshot>(
-                          stream: account,
-                          builder: (
-                            BuildContext context,
-                            AsyncSnapshot<QuerySnapshot> snapshot,
-                          ) {
-                            if (snapshot.hasError) {
-                              return Text('Something went wrong');
-                            }
+                        // StreamBuilder<QuerySnapshot>(
+                        //   stream: account,
+                        //   builder: (
+                        //     BuildContext context,
+                        //     AsyncSnapshot<QuerySnapshot> snapshot,
+                        //   ) {
+                        //     if (snapshot.hasError) {
+                        //       return Text('Something went wrong');
+                        //     }
 
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Text('Loading');
-                            }
+                        //     if (snapshot.connectionState ==
+                        //         ConnectionState.waiting) {
+                        //       return Text('Loading');
+                        //     }
 
-                            final data = snapshot
-                                .requireData; // take data from the snapshot
-                            steps = (data.docs[0]['steps']).toDouble();
-                            point = data.docs[0]['points'];
+                        //     final data = snapshot
+                        //         .requireData; // take data from the snapshot
+                        //     steps = (data.docs[0]['steps']).toDouble();
+                        //     point = data.docs[0]['points'];
 
-                            // TEMPORARY ONLY
-                            return // QR CODE ICON
-                                GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          Scanner()),
-                                );
-                              },
-                              child: Image.asset(
-                                'assets/images/scanner.png',
-                                width: 35,
-                                height: 35,
-                                fit: BoxFit.cover,
-                              ),
+                        //     // TEMPORARY ONLY
+                        //     return // QR CODE ICON
+                        //         GestureDetector(
+                        //       onTap: () {
+                        //         Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(
+                        //               builder: (BuildContext context) =>
+                        //                   Scanner()),
+                        //         );
+                        //       },
+                        //       child: Image.asset(
+                        //         'assets/images/scanner.png',
+                        //         width: 35,
+                        //         height: 35,
+                        //         fit: BoxFit.cover,
+                        //       ),
+                        //     );
+                        //   },
+                        // ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => Scanner()),
                             );
                           },
+                          child: Image.asset(
+                            'assets/images/scanner.png',
+                            width: 35,
+                            height: 35,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ],
                     ),

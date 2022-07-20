@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'dart:developer';
+import 'package:r3grow/bottomNavigatorBar.dart';
 
 class Scanner extends StatefulWidget {
   const Scanner({Key? key}) : super(key: key);
@@ -64,13 +65,7 @@ class _ScannerState extends State<Scanner> {
               icon: Icon(Icons.cameraswitch_outlined))
         ],
       ),
-      body:
-          // FutureBuilder(
-          //   future: FireStoreDataBase().getData(),
-          // builder: (context, snapshot) async {
-
-          // },
-          Column(
+      body: Column(
         children: <Widget>[
           Expanded(flex: 4, child: _buildQrView(context)),
           Positioned(
@@ -139,24 +134,53 @@ class _ScannerState extends State<Scanner> {
           point = data.docs[0]['points'];
 
           if (barcode != null) {
-            // if ('${barcode!.code}' == 'Point(s) added successfully') {
-            steps + 0.001;
-            // steps = steps + 0.01;
-            point = point + 1;
+            // TO ENSURE THAT IT ONLY ADDS WHEN IT'S SUCCESSFUL (W ALERT BOX)
+            Widget okButton = TextButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => BottomNavigatorBar()),
+                );
+              },
+            );
 
-            FirebaseFirestore.instance
-                .collection('users')
-                .doc(FirebaseAuth.instance.currentUser?.uid.toString())
-                .update({'steps': steps});
+            AlertDialog alert = AlertDialog(
+              title: Text("Congratulation"),
+              content: Text("Points added Successfully."),
+              actions: [okButton],
+            );
 
-            FirebaseFirestore.instance
-                .collection('users')
-                .doc(FirebaseAuth.instance.currentUser?.uid.toString())
-                .update({'points': point});
-            return Text('Successfully added');
+            // show the dialog
+            Future.delayed(Duration(), () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                // if ('${barcode!.code}' == 'Point(s) added successfully') {
+                steps = steps + 0.001;
+                // steps = steps + 0.01;
+                point = point + 1;
+
+                FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(FirebaseAuth.instance.currentUser?.uid.toString())
+                    .update({'steps': steps});
+
+                FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(FirebaseAuth.instance.currentUser?.uid.toString())
+                    .update({'points': point});
+
+                  return alert;
+                },
+              );
+            });
+
+            // return Text('Successfully added');
             // }
           }
-          return Text(' Not successfully added');
+          return Text('Not successfully added');
         },
       );
 

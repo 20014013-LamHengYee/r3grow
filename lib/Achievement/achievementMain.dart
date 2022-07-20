@@ -1,4 +1,5 @@
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:r3grow/Achievement/badgeController.dart';
 import 'package:r3grow/main.dart';
@@ -93,7 +94,7 @@ class _AchievementPageState extends State<AchievementPage> {
         body: Column(
           children: [
             //message
-            const Padding(
+             const Padding(
               padding: EdgeInsets.all(10.0),
               child: Text(
                 'Your current badge level',
@@ -122,9 +123,10 @@ class _AchievementPageState extends State<AchievementPage> {
                         final data =
                             snapshot.requireData; // take data from the snapshot
                         steps = (data.docs[0]['steps']).toDouble();
+                        steps = steps * 1000;
 
                         if(steps >= 100 && steps < 200){
-                          userBadge = '1badge.png';
+                          userBadge = "1badge.png";
                           badgeName = 'Seedly';
                         }
                         else if(steps >= 200 && steps < 300){
@@ -163,35 +165,48 @@ class _AchievementPageState extends State<AchievementPage> {
                           userBadge = '10badge.png';
                           badgeName = 'Hero';
                         }
-      
-
                         return Padding(
-                          padding: EdgeInsets.all(30.0),
-                          child: Container(
-                              height: 200,
-                              width: 200,
-                              child: const CircleAvatar(
-                                backgroundImage: AssetImage(
-                                    'assets/images/${userBadge}'),
-                                backgroundColor: Colors.transparent,
-                                radius: 80,
-                              )),
+                          padding: EdgeInsets.all(25.0),
+                          child: Column(
+                            children: [
+                              Container(
+                                  height: 200,
+                                  width: 200,
+                                  child: CircleAvatar(
+                                    //backgroundImage: AssetImage(Image.asset('assets/images/$userBadge').toString()),
+                                    child: Image.asset('assets/images/$userBadge'),
+                                    backgroundColor: Colors.transparent,
+                                    radius: 80,
+                                  )
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(30.0),
+                                  child: Text(
+                                    badgeName,
+                                    style: TextStyle(color: Colors.black, fontSize: 25),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                            ],
+                          ),
+                            
                         );
                         
-                        }
+                      }
               ),
-            //badge name
-             Padding(
-              padding: EdgeInsets.all(5.0),
-              child: Text(
-                '$badgeName',
-                style: TextStyle(color: Colors.black, fontSize: 20),
-                textAlign: TextAlign.center,
-              ),
-            ),
+            // //badge name
+            //  Padding(
+            //   padding: EdgeInsets.all(5.0),
+            //   child: Text(
+                
+            //     '$badgeName',
+            //     style: TextStyle(color: Colors.black, fontSize: 20),
+            //     textAlign: TextAlign.center,
+            //   ),
+            // ),
             //badges to display
             const SizedBox(
-              height: 70,
+              height: 30,
             ),
             Expanded(
               child: GridView.builder(
@@ -219,66 +234,29 @@ class _AchievementPageState extends State<AchievementPage> {
           ], //
         ));
   }
-}
+  
+  // Future<Widget> _getImage(BuildContext context, String imageName) async {
+  //   Image image;
+  //   await FireStorageService.loadImage(context, imageName).then((value) {
+  //     image = Image.network(
+  //       value.toString(),
+  //       fit: BoxFit.scaleDown
+  //     );
+  //     return image;
+  //   }
+  //   );
+    
+  // }
 
-class Badges {
-  String image = "";
-  //String name = "";
-} // class ends here
+}//
 
-// class BadgeWidget extends StatelessWidget {
-//   final String image ;
-//   final VoidCallback onClicked;
+// class Badges {
+//   String image = "";
+// } // class ends here
 
-//    const BadgeWidget({
-//     Key? key,
-//     required this.onClicked,
-//      required this.image,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final color = Theme.of(context).colorScheme.primary;
-
-//     return Center(
-//       child: buildImage(),
-
-//     );
-//   }
-
-//   Widget buildImage() {
-//     final image = Image.asset('assets/images/noBadge.png');
-
-//     return ClipOval(
-//       child: Material(
-//         color: Colors.transparent,
-//         child: Ink.image(
-//           image: image.image ,
-//           fit: BoxFit.cover,
-//           width: 128,
-//           height: 128,
-//           child: InkWell(onTap: onClicked),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// //widgit for display all badges
-// class badgeDisplay extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return GridView.builder(
-//         itemCount: 3,
-//         gridDelegate:
-//             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-//         itemBuilder: (context, index) {
-//           return Padding(
-//             padding: const EdgeInsets.all(2.0),
-//             child: Container(
-//               color: Colors.grey[200],
-//             ),
-//           );
-//         });
+// class FireStorageService extends ChangeNotifier{
+//   FireStorageService();
+//   static Future<dynamic> loadImage(BuildContext context, String Image) async{
+//     return await FirebaseStorage.instance.ref().child(Image).getDownloadURL();
 //   }
 // }

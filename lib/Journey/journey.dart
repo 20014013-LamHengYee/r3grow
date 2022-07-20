@@ -134,7 +134,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          Scanner1()),
+                                          Scanner()),
                                 );
                               },
                               child: Image.asset(

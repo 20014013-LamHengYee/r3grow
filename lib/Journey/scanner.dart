@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'dart:developer';
 import 'package:r3grow/bottomNavigatorBar.dart';
@@ -22,6 +23,7 @@ class _ScannerState extends State<Scanner> {
   String result = "R3grow.png";
   final storage = FirebaseStorage.instance;
   Barcode? barcode;
+  int counter = 0;
 
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -134,66 +136,41 @@ class _ScannerState extends State<Scanner> {
           point = data.docs[0]['points'];
 
           if (barcode != null) {
-            // TO ENSURE THAT IT ONLY ADDS WHEN IT'S SUCCESSFUL (W ALERT BOX)
-            Widget okButton = TextButton(
-              child: Text("OK"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => BottomNavigatorBar()),
-                );
-              },
-            );
-
-            AlertDialog alert = AlertDialog(
-              title: Text("Congratulation"),
-              content: Text("Points added Successfully."),
-              actions: [okButton],
-            );
-
-            // show the dialog
-            Future.delayed(Duration(), () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                // if ('${barcode!.code}' == 'Point(s) added successfully') {
-                steps = steps + 0.001;
-                // steps = steps + 0.01;
-                point = point + 1;
-
-                FirebaseFirestore.instance
-                    .collection('users')
-                    .doc(FirebaseAuth.instance.currentUser?.uid.toString())
-                    .update({'steps': steps});
-
-                FirebaseFirestore.instance
-                    .collection('users')
-                    .doc(FirebaseAuth.instance.currentUser?.uid.toString())
-                    .update({'points': point});
-
-                  return alert;
-                },
-              );
-            });
-
-            // return Text('Successfully added');
-            // }
+            Fluttertoast.showToast(msg: 'Successfully added');
           }
           return Text('Not successfully added');
         },
       );
 
-  // Text(
-  //   barcode != null ? 'Result : ${barcode!.code}' : 'Scan a code!',
-  //   maxLines: 3,
-  // );
-
   void _onQRViewCreated(QRViewController controller) {
     setState(() {
       this.controller = controller;
     });
-    controller.scannedDataStream.listen((barcode) {
+
+    controller.scannedDataStream.listen((barcode) async {
+      counter++;
+      await controller.pauseCamera();
+      if (counter == 1) {
+        // if ('${barcode!.code}' == 'Point(s) added successfully') {
+        steps = steps + 0.001;
+        // steps = steps + 0.01;
+        point = point + 1;
+
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser?.uid.toString())
+            .update({'steps': steps});
+
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser?.uid.toString())
+            .update({'points': point});
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => BottomNavigatorBar()),
+        );
+      }
       setState(() {
         this.barcode = barcode;
       });

@@ -5,8 +5,6 @@ import 'package:r3grow/Journey/journey.dart';
 import 'package:r3grow/Account/accountPage.dart';
 import 'package:r3grow/Map/map.dart';
 import 'package:r3grow/chatbot/chatbot.dart';
-
-
 import 'Event/eventMain.dart';
 
 class BottomNavigatorBar extends StatefulWidget {
@@ -21,10 +19,9 @@ class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
   static const List<Widget> _widgetOptions = <Widget>[
     // ignore: curly_braces_in_flow_control_structures
     MapPageWidget(),
-    AllVoucherWidget(),
+    EventPage(),
     HomePageWidget(),
-    //ChatBot(),
-    //EventPage(),
+    ChatBot(),
     accountPageWidget(),
   ];
 

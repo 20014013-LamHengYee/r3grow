@@ -25,8 +25,12 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
   late int points;
   late int voucherPoints;
   late int pointsUpdated;
+  late String voucherDesc;
+  late String voucherImage;
   late int numOfVoucher;
   late int numOfVoucherBalance;
+  Timestamp todayDate = Timestamp.now();
+  final _firestore = FirebaseFirestore.instance;
 
   final Stream<QuerySnapshot> voucher =
       FirebaseFirestore.instance.collection('Voucher').snapshots();
@@ -343,6 +347,8 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
 
                         voucherPoints = data['voucherPoints'];
                         numOfVoucher = data['noOfVoucher'];
+                        voucherDesc = data['voucherShortDesc'];
+                        voucherImage = data['image'];
 
                         // ACCOUNT
                         return StreamBuilder<QuerySnapshot>(
@@ -373,8 +379,7 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                                   onPressed: () async {
                                     // ensure there is sufficient points
                                     if (points >= voucherPoints) {
-                                      numOfVoucherBalance = numOfVoucher -
-                                          1; 
+                                      numOfVoucherBalance = numOfVoucher - 1;
                                       // UPDATE DATABASE
                                       FirebaseFirestore.instance
                                           .collection('Voucher')
@@ -386,14 +391,34 @@ class _VoucherRedemptionWidgetState extends State<VoucherRedemptionWidget> {
                                       // ensure there is sufficient vouchers
                                       if (numOfVoucherBalance >= 0) {
                                         points = points - voucherPoints;
-                                      // UPDATE DATABASE
-                                      FirebaseFirestore.instance
-                                          .collection('users')
-                                          .doc(FirebaseAuth.instance.currentUser?.uid.toString())
-                                          .update({
-                                        'points': points
-                                      });
+                                        // UPDATE DATABASE
+                                        FirebaseFirestore.instance
+                                            .collection('users')
+                                            .doc(FirebaseAuth
+                                                .instance.currentUser?.uid
+                                                .toString())
+                                            .update({'points': points});
 
+                                        // ADD TO DATABASE HISTORY
+                                        DateTime todayd =
+                                            todayDate.toDate(); // today's date
+                                        // ensure that both is in the same format before comparing
+                                        DateFormat formatter =
+                                            DateFormat('dd-MM-yyyy');
+                                        final String formattedtodayDate =
+                                            formatter.format(todayd);
+
+                                        // adding to firebase
+                                        _firestore.collection('History').add({
+                                          'DateR': formattedtodayDate,
+                                          'Balance': points,
+                                          'Desc': voucherDesc,
+                                          'PointsDeducted': voucherPoints,
+                                          'userid': FirebaseAuth
+                                              .instance.currentUser?.uid
+                                              .toString(),
+                                          'voucherImage': voucherImage
+                                        });
 
                                         Widget okButton = TextButton(
                                           child: Text("OK"),

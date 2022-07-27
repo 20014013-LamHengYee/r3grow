@@ -1,13 +1,9 @@
 // ignore_for_file: file_names, prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:r3grow/Journey/allVoucher.dart';
 import 'package:r3grow/Journey/journey.dart';
 import 'package:r3grow/Account/accountPage.dart';
 import 'package:r3grow/Map/map.dart';
-import 'package:r3grow/chatbot/chatbot.dart';
-
-
-import 'Achievement/achievementMain.dart';
+import 'package:r3grow/ObjectIdentification/scanObjectMain.dart';
 import 'Event/eventMain.dart';
 
 class BottomNavigatorBar extends StatefulWidget {
@@ -26,7 +22,7 @@ class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
     HomePageWidget(),
     //ChatBot(),
     //EventPage(),
-    AchievementPage(),
+    ScanObjectWidget(),
     accountPageWidget(),
   ];
 

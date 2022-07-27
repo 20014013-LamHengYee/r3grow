@@ -1,6 +1,4 @@
-0 can
-1 glass
-2 paper
-3 plastic
-4 styrofoam
-5 E-Waste
+0 metal
+1 paper
+2 plastic
+3 E-Waste

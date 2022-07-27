@@ -34,7 +34,7 @@ class _ScanObjectWidgetState extends State<ScanObjectWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 55),
+                      padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 60),
                       child: Text(
                         'Back',
                         style: TextStyle(

@@ -52,7 +52,7 @@ class _CameraState extends State<Camera> {
 
   @override
   void dispose() {
-    cameraController?.dispose();
+    cameraController.dispose();
     super.dispose();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

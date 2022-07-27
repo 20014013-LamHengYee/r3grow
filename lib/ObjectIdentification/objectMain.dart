@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: true,
-        title: Text(
+        title: const Text(
           "Object Identification",
         ),
         backgroundColor: Colors.blueAccent,
@@ -72,14 +72,14 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Container(
               child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 260),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 260),
                   child: Camera(widget.cameras, setRecognitions))),
           // Card
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 child: Card(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             //////////////////////////// METAL ////////////////////////////
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text(
                                     'Metal',
@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         fontSize: 20.0),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 16.0,
                                 ),
                                 Expanded(
@@ -113,8 +113,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       children: [
                                         LinearProgressIndicator(
                                           valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                                  Colors.blueGrey),
+                                              const AlwaysStoppedAnimation<
+                                                  Color>(Colors.blueGrey),
                                           value: index == 0 ? confidence : 0.0,
                                           backgroundColor:
                                               Colors.blueGrey.withOpacity(0.2),
@@ -124,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           alignment: Alignment.centerRight,
                                           child: Text(
                                             '${index == 0 ? (confidence * 100).toStringAsFixed(0) : 0} %',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 20.0),
@@ -136,13 +136,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 16.0,
                             ),
                             /////////////////////////////// PAPER ////////////////////////////
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text(
                                     'Paper',
@@ -152,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         fontSize: 20.0),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 16.0,
                                 ),
                                 Expanded(
@@ -163,8 +163,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       children: [
                                         LinearProgressIndicator(
                                           valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                                  Colors.orange),
+                                              const AlwaysStoppedAnimation<
+                                                  Color>(Colors.orange),
                                           value: index == 1 ? confidence : 0.0,
                                           backgroundColor:
                                               Colors.orange.withOpacity(0.2),
@@ -174,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           alignment: Alignment.centerRight,
                                           child: Text(
                                             '${index == 1 ? (confidence * 100).toStringAsFixed(0) : 0} %',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 20.0),
@@ -186,13 +186,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 16.0,
                             ),
                             //////////////////////////// PLASTIC ////////////////////////////
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text(
                                     'Plastic',
@@ -202,7 +202,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         fontSize: 20.0),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 16.0,
                                 ),
                                 Expanded(
@@ -213,8 +213,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       children: [
                                         LinearProgressIndicator(
                                           valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                                  Colors.blueAccent),
+                                              const AlwaysStoppedAnimation<
+                                                  Color>(Colors.blueAccent),
                                           value: index == 2 ? confidence : 0.0,
                                           backgroundColor: Colors.blueAccent
                                               .withOpacity(0.2),
@@ -224,7 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           alignment: Alignment.centerRight,
                                           child: Text(
                                             '${index == 2 ? (confidence * 100).toStringAsFixed(0) : 0} %',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 20.0),
@@ -236,13 +236,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 16.0,
                             ),
                             //////////////////////////// EWASTE ////////////////////////////
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text(
                                     'Ewaste',
@@ -252,7 +252,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         fontSize: 20.0),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 16.0,
                                 ),
                                 Expanded(
@@ -263,8 +263,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       children: [
                                         LinearProgressIndicator(
                                           valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                                  Colors.green),
+                                              const AlwaysStoppedAnimation<
+                                                  Color>(Colors.green),
                                           value: index == 3 ? confidence : 0.0,
                                           backgroundColor:
                                               Colors.green.withOpacity(0.2),
@@ -274,7 +274,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           alignment: Alignment.centerRight,
                                           child: Text(
                                             '${index == 3 ? (confidence * 100).toStringAsFixed(0) : 0} %',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 20.0),
@@ -286,13 +286,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 16.0,
                             ),
                             //////////////////////////// RUBBISH ////////////////////////////
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text(
                                     'Invalid',
@@ -302,7 +302,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         fontSize: 20.0),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 16.0,
                                 ),
                                 Expanded(
@@ -313,8 +313,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       children: [
                                         LinearProgressIndicator(
                                           valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                                  Colors.red),
+                                              const AlwaysStoppedAnimation<
+                                                  Color>(Colors.red),
                                           value: index == 4 ? confidence : 0.0,
                                           backgroundColor:
                                               Colors.red.withOpacity(0.2),
@@ -324,7 +324,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           alignment: Alignment.centerRight,
                                           child: Text(
                                             '${index == 4 ? (confidence * 100).toStringAsFixed(0) : 0} %',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 20.0),
@@ -336,7 +336,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 16.0,
                             ),
                           ],

@@ -1,9 +1,12 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
+import 'package:r3grow/ObjectIdentification/objectMain.dart';
+import 'package:camera/camera.dart';
+import 'package:r3grow/ObjectIdentification/camera.dart';
 
 class ScanObjectWidget extends StatefulWidget {
   const ScanObjectWidget({Key? key}) : super(key: key);
+  // const ScanObjectWidget({Key? key, required this.cameras}) : super(key: key);
 
   @override
   _ScanObjectWidgetState createState() => _ScanObjectWidgetState();
@@ -11,6 +14,8 @@ class ScanObjectWidget extends StatefulWidget {
 
 class _ScanObjectWidgetState extends State<ScanObjectWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  List<CameraDescription>? cameras;
 
   @override
   Widget build(BuildContext context) {
@@ -84,8 +89,14 @@ class _ScanObjectWidgetState extends State<ScanObjectWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         // print('Button pressed ...');
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyHomePage(cameras!),
+                          ),
+                        );
                       },
                       child: Text(
                         'Can Recycle One ~',

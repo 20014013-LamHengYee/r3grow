@@ -119,6 +119,7 @@ flutter:
   - assets/images/calender.png
   #tf model
   - assets/
+  - assets/images/scanObject.png
  
 
   # An image asset can refer to one or more resolution-specific "variants", see

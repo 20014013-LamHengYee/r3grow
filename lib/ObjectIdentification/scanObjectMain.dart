@@ -60,59 +60,26 @@ class _ScanObjectWidgetState extends State<ScanObjectWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                 child: Text(
                   'Recycle Me!',
                   style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 32,
-                  ),
+                      fontFamily: 'Poppins',
+                      fontSize: 32,
+                      color: Color(0xFF48240C)),
                 ),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 0),
-                      child: Image.asset(
-                        "assets/images/heroImg.png",
-                        width: 250,
-                        height: 250,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 150),
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.asset(
-                                  "assets/images/heroImg.png",
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                child: Image.asset(
+                  "assets/images/scanObject.png",
+                  width: 350,
+                  height: 350,
+                  fit: BoxFit.cover,
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(90, 40, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(80, 40, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -121,11 +88,16 @@ class _ScanObjectWidgetState extends State<ScanObjectWidget> {
                         // print('Button pressed ...');
                       },
                       child: Text(
-                        'Can Recycle One',
+                        'Can Recycle One ~',
                         style: TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 25,
-                            color: Color(0xFF48240C)),
+                            color: Colors.white),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        primary: Color(0xFFA7C474),
                       ),
                     ),
                   ],

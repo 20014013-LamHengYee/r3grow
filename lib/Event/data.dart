@@ -1,8 +1,9 @@
+// ignore_for_file: unnecessary_new
+
 import 'date_model.dart';
 import 'events_model.dart';
 
-List<DateModel> getDates(){
-
+List<DateModel> getDates() {
   List<DateModel> dates = <DateModel>[];
   DateModel dateModel = new DateModel();
 
@@ -20,7 +21,6 @@ List<DateModel> getDates(){
 
   dateModel = new DateModel();
 
-
   //1
   dateModel.date = "19";
   dateModel.weekDay = "Tue";
@@ -35,7 +35,6 @@ List<DateModel> getDates(){
 
   dateModel = new DateModel();
 
-
   //1
   dateModel.date = "4";
   dateModel.weekDay = "Thu";
@@ -43,14 +42,12 @@ List<DateModel> getDates(){
 
   dateModel = new DateModel();
 
-
   //1
   dateModel.date = "5";
   dateModel.weekDay = "Fri";
   dates.add(dateModel);
 
   dateModel = new DateModel();
-
 
   //1
   dateModel.date = "6";
@@ -60,12 +57,9 @@ List<DateModel> getDates(){
   dateModel = new DateModel();
 
   return dates;
-
-  
-
 }
-List<EventsModel> getEvents(){
 
+List<EventsModel> getEvents() {
   List<EventsModel> events = <EventsModel>[];
   EventsModel eventsModel = new EventsModel();
 
@@ -82,13 +76,10 @@ List<EventsModel> getEvents(){
 
   eventsModel.date = "21-23 September 2022 ";
   eventsModel.desc = "ISWA World Congress 2022";
-      eventsModel.address = "Marina Bay Sands Expo & Convention Centre";
+  eventsModel.address = "Marina Bay Sands Expo & Convention Centre";
   events.add(eventsModel);
 
   eventsModel = new EventsModel();
-
-  
-
 
   return events;
 }

@@ -4,6 +4,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:r3grow/Login/LoginPage.dart';
 
 class ForgetPasswordPageWidget extends StatefulWidget {
   const ForgetPasswordPageWidget({Key? key}) : super(key: key);
@@ -242,7 +243,11 @@ class _ForgetPasswordPageWidgetState extends State<ForgetPasswordPageWidget> {
           .sendPasswordResetEmail(email: emailController.text.trim());
       Fluttertoast.showToast(
           msg: "Password reset email sent (TAKE A LOOK AT SPAM)");
-      Navigator.of(context).popUntil((route) => route.isFirst);
+      // Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) => LoginPageWidget()),
+      );
     } on FirebaseAuthException catch (e) {
       // ignore: avoid_print
       print(e.message);

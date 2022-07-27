@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_const_constructors
+// ignore_for_file: file_names, prefer_const_constructors, unused_local_variable
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -98,55 +98,55 @@ class _HistoryState extends State<HistoryWidget> {
                             // final String formattedDate = formatter.format(d);
 
                             // ignore: unrelated_type_equality_checks
-                              return Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10, 20, 10, 0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        InkWell(
-                                          // onTap: () async {
-                                          //   Navigator.of(context).push(
-                                          //       MaterialPageRoute(
-                                          //           builder: (context) =>
-                                          //               VoucherRedemptionWidget(
-                                          //                   historyDocumentID)));
-                                          //   // TEST IF IT CAN GET THEIR ID - YES
-                                          //   // ignore: avoid_print
-                                          //   print(historyDocumentID);
-                                          // },
-                                          child: Image.network(
-                                            '${data['voucherImage']}',
-                                            width: 165,
-                                            height: 165,
-                                            fit: BoxFit.fitWidth,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10, 0, 0, 0),
-                                      child: SizedBox(
-                                        width: 190,
-                                        child: Text(
-                                          'Date Redemeed: ${data['DateR']}\nDescription: ${data['Desc']}\nDeducted Points: ${data['PointsDeducted']}\nBalance Points: ${data['Balance']}',
-                                          overflow: TextOverflow.clip,
-                                          maxLines: 8,
-                                          softWrap: true,
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.normal),
+                            return Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  10, 20, 10, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      InkWell(
+                                        // onTap: () async {
+                                        //   Navigator.of(context).push(
+                                        //       MaterialPageRoute(
+                                        //           builder: (context) =>
+                                        //               VoucherRedemptionWidget(
+                                        //                   historyDocumentID)));
+                                        //   // TEST IF IT CAN GET THEIR ID - YES
+                                        //   // ignore: avoid_print
+                                        //   print(historyDocumentID);
+                                        // },
+                                        child: Image.network(
+                                          '${data['voucherImage']}',
+                                          width: 165,
+                                          height: 165,
+                                          fit: BoxFit.fitWidth,
                                         ),
                                       ),
-                                    )
-                                  ],
-                                ),
-                              );
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 0, 0, 0),
+                                    child: SizedBox(
+                                      width: 190,
+                                      child: Text(
+                                        'Date Redemeed: ${data['DateR']}\nDescription: ${data['Desc']}\nDeducted Points: ${data['PointsDeducted']}\nBalance Points: ${data['Balance']}',
+                                        overflow: TextOverflow.clip,
+                                        maxLines: 8,
+                                        softWrap: true,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
                           });
                 },
               ),

@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:r3grow/Achievement/achievementMain.dart';
 import 'package:r3grow/Journey/allVoucher.dart';
 import 'package:r3grow/Journey/scanner.dart';
 import 'package:r3grow/Journey/voucherRedemption.dart';
@@ -73,13 +74,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          //  BADGE ICON
-                          Image.asset(
-                            'assets/images/achievement.png',
-                            width: 50,
-                            height: 50,
-                            fit: BoxFit.cover,
-                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        AchievementPage()),
+                              );
+                            },
+                            child: Image.asset(
+                              'assets/images/achievement.png',
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.cover,
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -88,63 +98,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        // // QR CODE ICON
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //           builder: (BuildContext context) => Scanner()),
-                        //     );
-                        //   },
-                        //   child: Image.asset(
-                        //     'assets/images/scanner.png',
-                        //     width: 35,
-                        //     height: 35,
-                        //     fit: BoxFit.cover,
-                        //   ),
-                        // ),
-                        // INSERT LINK TO DB
-                        // StreamBuilder<QuerySnapshot>(
-                        //   stream: account,
-                        //   builder: (
-                        //     BuildContext context,
-                        //     AsyncSnapshot<QuerySnapshot> snapshot,
-                        //   ) {
-                        //     if (snapshot.hasError) {
-                        //       return Text('Something went wrong');
-                        //     }
-
-                        //     if (snapshot.connectionState ==
-                        //         ConnectionState.waiting) {
-                        //       return Text('Loading');
-                        //     }
-
-                        //     final data = snapshot
-                        //         .requireData; // take data from the snapshot
-                        //     steps = (data.docs[0]['steps']).toDouble();
-                        //     point = data.docs[0]['points'];
-
-                        //     // TEMPORARY ONLY
-                        //     return // QR CODE ICON
-                        //         GestureDetector(
-                        //       onTap: () {
-                        //         Navigator.push(
-                        //           context,
-                        //           MaterialPageRoute(
-                        //               builder: (BuildContext context) =>
-                        //                   Scanner()),
-                        //         );
-                        //       },
-                        //       child: Image.asset(
-                        //         'assets/images/scanner.png',
-                        //         width: 35,
-                        //         height: 35,
-                        //         fit: BoxFit.cover,
-                        //       ),
-                        //     );
-                        //   },
-                        // ),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(

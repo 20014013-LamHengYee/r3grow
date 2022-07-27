@@ -74,11 +74,11 @@ class _AchievementPageState extends State<AchievementPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFF8F4EC),
+        backgroundColor: const Color(0xFFF8F4EC),
         appBar: AppBar(
-          backgroundColor: const Color(0xFF2CBC9C),
+          backgroundColor: const Color(0xFFA7C474),
           automaticallyImplyLeading: false,
-          title: const Text('Achievements'),
+          title: const Text('ACHIEVEMENTS'),
           centerTitle: true,
           shadowColor: Colors.greenAccent,
           leading: IconButton(

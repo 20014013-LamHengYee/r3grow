@@ -8,8 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:r3grow/Journey/journey.dart';
 import 'package:r3grow/Login/LoginPage.dart';
+import 'package:r3grow/bottomNavigatorBar.dart';
 
 class VerifyEmailPageWidget extends StatefulWidget {
   const VerifyEmailPageWidget({Key? key}) : super(key: key);
@@ -49,7 +49,7 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
     final user = FirebaseAuth.instance.currentUser;
     user!.sendEmailVerification();
     // ignore: prefer_const_constructors
-    timer = Timer.periodic(Duration(seconds: 5), (timer) {
+    timer = Timer.periodic(Duration(seconds: 15), (timer) {
       checkEmailVerify();
     });
   }
@@ -97,7 +97,7 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
   Widget build(BuildContext context) {
     if (user?.emailVerified == true) {
       // ignore: prefer_const_constructors
-      return HomePageWidget();
+      return BottomNavigatorBar();
     } else {
       //reset email button
       final resentEmailBtt = Padding(
@@ -128,7 +128,7 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
       final cancelBtt = Padding(
         // ignore: prefer_const_constructors
         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 200),
-        child: TextButton(
+        child: ElevatedButton(
           onPressed: () {
             Navigator.push(
               context,
@@ -136,18 +136,22 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
               MaterialPageRoute(builder: (context) => LoginPageWidget()),
             );
           },
-          child: const Text(
-            "Cancel",
+          // ignore: prefer_const_constructors
+          child: Text(
+            "OK",
+            // ignore: prefer_const_constructors
             style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF212121)),
+              fontFamily: 'Poppins',
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          style: TextButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-              // ignore: prefer_const_constructors
-              primary: Color(0xFFF1FDFB)),
+          style: ElevatedButton.styleFrom(
+            // ignore: prefer_const_constructors
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            // ignore: prefer_const_constructors
+            primary: Color(0xFF00e5FF),
+          ),
         ),
       );
 
@@ -234,7 +238,7 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
                         ],
                       ),
                       //resent email button
-                      resentEmailBtt,
+                      // resentEmailBtt,
                       //cancel button
                       cancelBtt,
                     ],

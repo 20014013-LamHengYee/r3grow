@@ -1,5 +1,8 @@
 // ignore_for_file: unnecessary_new
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'date_model.dart';
 import 'events_model.dart';
 
@@ -8,49 +11,49 @@ List<DateModel> getDates() {
   DateModel dateModel = new DateModel();
 
   //1
-  dateModel.date = "7";
+  dateModel.date = "31";
   dateModel.weekDay = "Sun";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
   //1
-  dateModel.date = "1";
+  dateModel.date = "25";
   dateModel.weekDay = "Mon";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
   //1
-  dateModel.date = "19";
+  dateModel.date = "26";
   dateModel.weekDay = "Tue";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
   //1
-  dateModel.date = "3";
+  dateModel.date = "27";
   dateModel.weekDay = "Wed";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
   //1
-  dateModel.date = "4";
+  dateModel.date = "28";
   dateModel.weekDay = "Thu";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
   //1
-  dateModel.date = "5";
+  dateModel.date = "29";
   dateModel.weekDay = "Fri";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
   //1
-  dateModel.date = "6";
+  dateModel.date = "30";
   dateModel.weekDay = "Sat";
   dates.add(dateModel);
 
@@ -59,27 +62,4 @@ List<DateModel> getDates() {
   return dates;
 }
 
-List<EventsModel> getEvents() {
-  List<EventsModel> events = <EventsModel>[];
-  EventsModel eventsModel = new EventsModel();
 
-  //1
-
-  eventsModel.date = "23 July 2022, 9am to 6pm";
-  eventsModel.desc = "GreenFest 2022";
-  eventsModel.address = "PAssion Wave @Jurong Lake Gardens";
-  events.add(eventsModel);
-
-  eventsModel = new EventsModel();
-
-  //2
-
-  eventsModel.date = "21-23 September 2022 ";
-  eventsModel.desc = "ISWA World Congress 2022";
-  eventsModel.address = "Marina Bay Sands Expo & Convention Centre";
-  events.add(eventsModel);
-
-  eventsModel = new EventsModel();
-
-  return events;
-}

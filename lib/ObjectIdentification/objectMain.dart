@@ -1,4 +1,7 @@
+// ignore_for_file: file_names
+
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
 import 'package:r3grow/ObjectIdentification/camera.dart';
@@ -10,6 +13,7 @@ class ObjectDetectMain extends StatefulWidget {
     cameras = await availableCameras();
   }
   
+  // ignore: use_key_in_widget_constructors, prefer_const_constructors_in_immutables
   ObjectDetectMain(this.cameras);
   @override
   _ObjectDetectMainState createState() => _ObjectDetectMainState();
@@ -32,11 +36,15 @@ class _ObjectDetectMainState extends State<ObjectDetectMain> {
     String res;
     res = (await Tflite.loadModel(
         model: "assets/model_unquant.tflite", labels: "assets/labels.txt"))!;
-    print(res);
+    if (kDebugMode) {
+      print(res);
+    }
   }
 
   setRecognitions(outputs) {
-    print(outputs);
+    if (kDebugMode) {
+      print(outputs);
+    }
 
     if (outputs[0]['index'] == 0) {
       // metal
@@ -76,6 +84,7 @@ class _ObjectDetectMainState extends State<ObjectDetectMain> {
       ),
       body: Stack(
         children: [
+          // ignore: avoid_unnecessary_containers
           Container(
               child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 260),
@@ -83,6 +92,7 @@ class _ObjectDetectMainState extends State<ObjectDetectMain> {
           // Card
           Align(
             alignment: Alignment.bottomCenter,
+            // ignore: avoid_unnecessary_containers
             child: Container(
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),

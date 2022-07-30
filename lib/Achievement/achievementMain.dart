@@ -1,4 +1,6 @@
 
+// ignore_for_file: file_names
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -121,11 +123,11 @@ class _AchievementPageState extends State<AchievementPage> {
                   AsyncSnapshot<QuerySnapshot> snapshot,
                 ) {
                   if (snapshot.hasError) {
-                    return Text('Something went wrong');
+                    return const Text('Something went wrong');
                   }
 
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Text('Loading');
+                    return const Text('Loading');
                   }
 
                   final data =
@@ -213,10 +215,11 @@ class _AchievementPageState extends State<AchievementPage> {
                   //   }
                   // }
                   return Padding(
-                    padding: EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        // ignore: sized_box_for_whitespace
                         Container(
                             height: 200,
                             width: 200,
@@ -231,7 +234,7 @@ class _AchievementPageState extends State<AchievementPage> {
                               ),
                             )),
                         Padding(
-                          padding: EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.all(20.0),
                           child: Text(
                             badgeName,
                             style: const TextStyle(
@@ -267,6 +270,7 @@ class _AchievementPageState extends State<AchievementPage> {
                                 return Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(3, 0, 3, 0),
+                                  // ignore: avoid_unnecessary_containers
                                   child: Container(
                                       child: CircleAvatar(
                                         backgroundColor: Colors.blue,

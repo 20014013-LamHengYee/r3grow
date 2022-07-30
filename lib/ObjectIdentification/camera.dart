@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
 import 'package:flutter/services.dart';
 
-typedef void Callback(List<dynamic> list);
+// typedef void Callback(List<dynamic> list);
+typedef Callback = void Function(List<dynamic> list);
 
 class Camera extends StatefulWidget {
   final List<CameraDescription> cameras;
   final Callback setRecognitions;
 
-  Camera(this.cameras, this.setRecognitions);
+  const Camera(this.cameras, this.setRecognitions, {Key? key}) : super(key: key);
+  // Camera(this.cameras, this.setRecognitions);
   @override
   _CameraState createState() => _CameraState();
 }

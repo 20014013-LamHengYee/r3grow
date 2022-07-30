@@ -1,10 +1,7 @@
 // ignore_for_file: unnecessary_new
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'date_model.dart';
-import 'events_model.dart';
 
 List<DateModel> getDates() {
   List<DateModel> dates = <DateModel>[];

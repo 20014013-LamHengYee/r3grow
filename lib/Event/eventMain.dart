@@ -1,11 +1,11 @@
+// ignore_for_file: file_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'package:intl/intl.dart';
 import 'package:r3grow/Event/eventDetails.dart';
 import 'data.dart';
 import 'date_model.dart';
-import 'events_model.dart';
 
 class EventPage extends StatefulWidget {
   const EventPage({Key? key}) : super(key: key);
@@ -32,6 +32,7 @@ class _EventPageState extends State<EventPage> {
 
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     dates = getDates();
@@ -40,11 +41,12 @@ class _EventPageState extends State<EventPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // ignore: avoid_unnecessary_containers
       body: Container(
         child: Stack(
           children: <Widget>[
             Container(
-              decoration: const BoxDecoration(color: const Color(0xFFF8F4EC)),
+              decoration: const BoxDecoration(color: Color(0xFFF8F4EC)),
             ),
             SingleChildScrollView(
               child: Container(
@@ -85,6 +87,7 @@ class _EventPageState extends State<EventPage> {
                     ),
 
                     /// Dates
+                    // ignore: sized_box_for_whitespace
                     Container(
                       height: 60,
                       child: ListView.builder(
@@ -108,6 +111,7 @@ class _EventPageState extends State<EventPage> {
                       "Upcoming Events",
                       style: TextStyle(color: Colors.black, fontSize: 20),
                     ),
+                    // ignore: avoid_unnecessary_containers
                     Container(
                       child: ListView.builder(
                           itemCount: 2,
@@ -287,12 +291,13 @@ class _EventPageState extends State<EventPage> {
   }
 }
 
+// ignore: must_be_immutable
 class DateTile extends StatelessWidget {
   String weekDay;
   String date;
   bool isSelected;
   DateTile(
-      {required this.weekDay, required this.date, required this.isSelected});
+      {Key? key, required this.weekDay, required this.date, required this.isSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

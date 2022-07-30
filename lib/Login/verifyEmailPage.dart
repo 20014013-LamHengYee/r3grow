@@ -100,29 +100,6 @@ class _VerifyEmailPageWidgetState extends State<VerifyEmailPageWidget> {
       return BottomNavigatorBar();
     } else {
       //reset email button
-      final resentEmailBtt = Padding(
-        // ignore: prefer_const_constructors
-        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-        child: ElevatedButton(
-          onPressed: sendVerificationLink,
-          // ignore: prefer_const_constructors
-          child: Text(
-            "Resent Email",
-            // ignore: prefer_const_constructors
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          style: ElevatedButton.styleFrom(
-            // ignore: prefer_const_constructors
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            // ignore: prefer_const_constructors
-            primary: Color(0xFF00e5FF),
-          ),
-        ),
-      );
 
       //cancel button
       final cancelBtt = Padding(

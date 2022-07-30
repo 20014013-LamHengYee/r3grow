@@ -1,9 +1,7 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:r3grow/ObjectIdentification/objectMain.dart';
 
-import '../Journey/journey.dart';
 
 class ScanObjectWidget extends StatefulWidget {
   const ScanObjectWidget({
@@ -37,7 +35,7 @@ class _ScanObjectWidgetState extends State<ScanObjectWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Text(
-                      'Your Hero Journey',
+                      'Recycle Me',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 30,

@@ -1,3 +1,6 @@
+
+// ignore_for_file: file_names, must_be_immutable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,6 +11,7 @@ class EventDetailsWidget extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
+    // ignore: unnecessary_this, no_logic_in_create_state
     return _EventDetailsWidgetState(this.eventDocId);
   }
 }
@@ -235,9 +239,9 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const Expanded(
-                                      child: const Text(
+                                  children: const [
+                                    Expanded(
+                                      child: Text(
                                         'Event Location',
                                         textAlign: TextAlign.start,
                                         style: TextStyle(

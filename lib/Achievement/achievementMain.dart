@@ -16,7 +16,7 @@ class _AchievementPageState extends State<AchievementPage> {
   //final _badgeController = BadgeController();
 
   late double steps;
-  String userBadge = 'noBadge.png';
+  String userBadge = 'assets/images/noBadge.png';
   String badgeName = 'Badges yet to unlock!';
 
   final Stream<QuerySnapshot> account = FirebaseFirestore.instance
@@ -143,77 +143,6 @@ class _AchievementPageState extends State<AchievementPage> {
                     userBadge = _bList[i];
                     badgeName = badgeNames[i];
                   }
-                  // if(steps >= 100 && steps < 200){
-                  //   userBadge = "1badge.png";
-                  //   badgeName = 'Seedly';
-
-                  // }
-                  // else if(steps >= 200 && steps < 300){
-                  //   userBadge = '2badge.png';
-                  //   badgeName = 'Grower';
-
-                  // }
-                  // else if(steps >= 300 && steps < 400){
-                  //   userBadge = '3badge.png';
-                  //   badgeName = 'Veteran';
-
-                  //   for (var i in _dbList){
-                  //     _dbList[2] = 'assets/images/$userBadge';
-                  //   }
-                  // }
-                  // else if(steps >= 400 && steps < 500){
-                  //   userBadge = '4badge.png';
-                  //   badgeName = 'Elite';
-
-                  //   for (var i in _dbList){
-                  //     _dbList[3] = 'assets/images/$userBadge';
-                  //   }
-                  // }
-                  // else if(steps >= 500 && steps < 600){
-                  //   userBadge = '5badge.png';
-                  //   badgeName = 'Master';
-                  //   //_dbList[4] = 'assets/images/$userBadge';
-                  // }
-                  // else if(steps >= 600 && steps < 700){
-                  //   userBadge = '6badge.png';
-                  //   badgeName = 'Grandmaster';
-
-                  //   for (var i in _dbList){
-                  //     _dbList[5] = 'assets/images/$userBadge';
-                  //   }
-                  // }
-                  // else if(steps >=700 && steps < 800){
-                  //   userBadge = '7badge.png';
-                  //   badgeName = 'Legend';
-
-                  //   for (var i in _dbList){
-                  //     _dbList[6] = 'assets/images/$userBadge';
-                  //   }
-                  // }
-                  // else if(steps >= 800 && steps < 900){
-                  //   userBadge = '8badge.png';
-                  //   badgeName = 'Guardian';
-
-                  //   for (var i in _dbList){
-                  //     _dbList[7] = 'assets/images/$userBadge';
-                  //   }
-                  // }
-                  // else if(steps >= 900 && steps < 1000){
-                  //   userBadge = '9badge.png';
-                  //   badgeName = 'Fairy';
-
-                  //   for (var i in _dbList){
-                  //     _dbList[8] = 'assets/images/$userBadge';
-                  //   }
-                  // }
-                  // else if(steps >= 1000){
-                  //   userBadge = '10badge.png';
-                  //   badgeName = 'Hero';
-
-                  //   for (var i in _dbList){
-                  //     _dbList[9] = 'assets/images/$userBadge';
-                  //   }
-                  // }
                   return Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
@@ -280,110 +209,15 @@ class _AchievementPageState extends State<AchievementPage> {
                                 );
                               }),
                         )
-                        // const SizedBox(
-                        //   height: 30,
-                        // ),
-                        // Expanded(
-                        //   child: SizedBox(
-                        //     height: 100,
-                        //     child: GridView.builder(
-                        //       itemCount: 10,
-                        //       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        //         crossAxisCount: 5,
-                        //         mainAxisSpacing: 20,
-                        //         crossAxisSpacing: 5,
-                        //       ),
-                        //       itemBuilder: (context, index) {
-                        //         return Padding(
-                        //           padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
-                        //           child: Container(
-                        //               child: CircleAvatar(
-                        //             backgroundColor: Colors.blue,
-                        //             backgroundImage: AssetImage(_dbList[index]),
-                        //           )),
-                        //         );
-                        //       }),)
-                        // child: GridView.builder(
-                        //     itemCount: 10,
-                        //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        //       crossAxisCount: 5,
-                        //       mainAxisSpacing: 20,
-                        //       crossAxisSpacing: 5,
-                        //     ),
-                        //     itemBuilder: (context, index) {
-                        //       return Padding(
-                        //         padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
-                        //         child: Container(
-                        //             child: CircleAvatar(
-                        //           backgroundColor: Colors.blue,
-                        //           backgroundImage: AssetImage(_dbList[index]),
-                        //         )),
-                        //       );
-                        //     }),
-                        // ),
                       ],
                     ),
                   );
                 }),
-            // //badge name
-            //  Padding(
-            //   padding: EdgeInsets.all(5.0),
-            //   child: Text(
-
-            //     '$badgeName',
-            //     style: TextStyle(color: Colors.black, fontSize: 20),
-            //     textAlign: TextAlign.center,
-            //   ),
-            // ),
-            //badges to display
-            // const SizedBox(
-            //   height: 30,
-            // ),
-            // Expanded(
-            //   child: GridView.builder(
-            //       itemCount: 10,
-            //       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //         crossAxisCount: 5,
-            //         mainAxisSpacing: 20,
-            //         crossAxisSpacing: 5,
-            //       ),
-            //       itemBuilder: (context, index) {
-            //         return Padding(
-            //           padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
-            //           child: Container(
-            //               child: CircleAvatar(
-            //             backgroundColor: Colors.blue,
-            //             backgroundImage: AssetImage(_dbList[index]),
-            //           )),
-            //         );
-            //       }),
-            // ),
           ], //
         ));
   }
 
-  // Future<Widget> _getImage(BuildContext context, String imageName) async {
-  //   Image image;
-  //   await FireStorageService.loadImage(context, imageName).then((value) {
-  //     image = Image.network(
-  //       value.toString(),
-  //       fit: BoxFit.scaleDown
-  //     );
-  //     return image;
-  //   }
-  //   );
-
-  // }
 
 }//
 
-// class Badges {
-//   String image = "";
-// } // class ends here
 
-// class FireStorageService extends ChangeNotifier{
-//   FireStorageService();
-//   static Future<dynamic> loadImage(BuildContext context, String Image) async{
-//     return await FirebaseStorage.instance.ref().child(Image).getDownloadURL();
-//   }
-// }

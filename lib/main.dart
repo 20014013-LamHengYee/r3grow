@@ -1,13 +1,18 @@
 // ignore_for_file: prefer_const_constructors
 // cfm no onedrive
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:r3grow/Login/splashScreen.dart';
 
+import 'ObjectIdentification/objectMain.dart';
+
+late List<CameraDescription> cameras;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  cameras = await availableCameras();
   runApp(const MyApp());
 }
 
@@ -19,7 +24,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "R3GROW",
-      home: SplashScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => SplashScreen(),
+        '/object': (context) => ObjectDetectMain(cameras),
+      }
+       //SplashScreen(),
     );
     // return Scaffold(
     //   body: StreamBuilder<User?>(

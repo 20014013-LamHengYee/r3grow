@@ -8,7 +8,7 @@ Future<void> UserCamera() async {
   cameras = await availableCameras();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: MyHomePage(
+    home: ObjectDetectMain(
       cameras,
     ),
   ));

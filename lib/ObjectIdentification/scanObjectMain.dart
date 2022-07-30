@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:r3grow/ObjectIdentification/objectMain.dart';
 
+import '../Journey/journey.dart';
+
 class ScanObjectWidget extends StatefulWidget {
   const ScanObjectWidget({
     Key? key,
@@ -17,51 +19,49 @@ class _ScanObjectWidgetState extends State<ScanObjectWidget> {
 
   List<CameraDescription>? cameras;
 
-  // Future<void> main() async {
-  //   WidgetsFlutterBinding.ensureInitialized();
-  //   cameras = await availableCameras();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100),
-        child: AppBar(
-          backgroundColor: Color(0xFFF1FDFB),
-          iconTheme: IconThemeData(color: Color(0xFF212121)),
-          automaticallyImplyLeading: true,
-          flexibleSpace: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(42, 0, 2, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 60),
-                      child: Text(
-                        'Back',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          actions: [],
-          elevation: 0,
-        ),
-      ),
+      // appBar: PreferredSize(
+      //   preferredSize: Size.fromHeight(100),
+      //   child: AppBar(
+      //     backgroundColor: const Color(0xFFA7C474),
+      //     iconTheme: IconThemeData(color: Color(0xFF212121)),
+      //     automaticallyImplyLeading: false,
+      //     title: Text(
+      //       'Recycle Me!',
+      //       style: TextStyle(
+      //           fontFamily: 'Poppins', fontSize: 32, color: Color(0xFF48240C)),
+      //     ),
+      //     // flexibleSpace: Column(
+      //     //   mainAxisSize: MainAxisSize.max,
+      //     //   mainAxisAlignment: MainAxisAlignment.end,
+      //     //   crossAxisAlignment: CrossAxisAlignment.start,
+      //     //   children: [
+      //     //     Padding(
+      //     //       padding: EdgeInsetsDirectional.fromSTEB(42, 0, 2, 0),
+      //     //       child: Row(
+      //     //         mainAxisSize: MainAxisSize.max,
+      //     //         crossAxisAlignment: CrossAxisAlignment.center,
+      //     //         children: [
+      //     //           Padding(
+      //     //             padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 60),
+      //     //             child: Text(
+      //     //               'Back',
+      //     //               style: TextStyle(
+      //     //                 fontFamily: 'Poppins',
+      //     //                 fontSize: 20,
+      //     //               ),
+      //     //             ),
+      //     //           ),
+      //     //         ],
+      //     //       ),
+      //     //     ),
+      //     //   ],
+      //     // ),
+      //   ),
+      // ),
       backgroundColor: Color(0xFFF1FDFB),
       body: SafeArea(
         child: GestureDetector(
@@ -69,16 +69,6 @@ class _ScanObjectWidgetState extends State<ScanObjectWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                child: Text(
-                  'Recycle Me!',
-                  style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 32,
-                      color: Color(0xFF48240C)),
-                ),
-              ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 child: Image.asset(
@@ -95,12 +85,9 @@ class _ScanObjectWidgetState extends State<ScanObjectWidget> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  MyHomePage(cameras!)),
-                        );
+                        Navigator.pushNamed(
+                            context,
+                            '/object');
                       },
                       child: Text(
                         'Can Recycle One ~',

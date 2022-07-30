@@ -3,18 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
 import 'package:r3grow/ObjectIdentification/camera.dart';
 
-class MyHomePage extends StatefulWidget {
-  final List<CameraDescription> cameras;
-
-  MyHomePage(this.cameras);
+class ObjectDetectMain extends StatefulWidget {
+  late final List<CameraDescription> cameras;
+  Future<void> main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    cameras = await availableCameras();
+  }
+  
+  ObjectDetectMain(this.cameras);
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ObjectDetectMainState createState() => _ObjectDetectMainState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ObjectDetectMainState extends State<ObjectDetectMain> {
   String predOne = '';
   double confidence = 0;
   double index = 0;
+
+   
 
   @override
   void initState() {
@@ -64,9 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         automaticallyImplyLeading: true,
         title: const Text(
-          "Object Identification",
+          "Object Detection",
         ),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor:const Color(0xFFA7C474),
       ),
       body: Stack(
         children: [

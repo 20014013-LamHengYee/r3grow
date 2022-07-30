@@ -23,46 +23,7 @@ class _ScanObjectWidgetState extends State<ScanObjectWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      // appBar: PreferredSize(
-      //   preferredSize: Size.fromHeight(100),
-      //   child: AppBar(
-      //     backgroundColor: const Color(0xFFA7C474),
-      //     iconTheme: IconThemeData(color: Color(0xFF212121)),
-      //     automaticallyImplyLeading: false,
-      //     title: Text(
-      //       'Recycle Me!',
-      //       style: TextStyle(
-      //           fontFamily: 'Poppins', fontSize: 32, color: Color(0xFF48240C)),
-      //     ),
-      //     // flexibleSpace: Column(
-      //     //   mainAxisSize: MainAxisSize.max,
-      //     //   mainAxisAlignment: MainAxisAlignment.end,
-      //     //   crossAxisAlignment: CrossAxisAlignment.start,
-      //     //   children: [
-      //     //     Padding(
-      //     //       padding: EdgeInsetsDirectional.fromSTEB(42, 0, 2, 0),
-      //     //       child: Row(
-      //     //         mainAxisSize: MainAxisSize.max,
-      //     //         crossAxisAlignment: CrossAxisAlignment.center,
-      //     //         children: [
-      //     //           Padding(
-      //     //             padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 60),
-      //     //             child: Text(
-      //     //               'Back',
-      //     //               style: TextStyle(
-      //     //                 fontFamily: 'Poppins',
-      //     //                 fontSize: 20,
-      //     //               ),
-      //     //             ),
-      //     //           ),
-      //     //         ],
-      //     //       ),
-      //     //     ),
-      //     //   ],
-      //     // ),
-      //   ),
-      // ),
-      backgroundColor: Color(0xFFF1FDFB),
+      backgroundColor: const Color(0xFFF8F4EC),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -70,7 +31,24 @@ class _ScanObjectWidgetState extends State<ScanObjectWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 80, 0, 20),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Your Hero Journey',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Color(0xFF48240C),
+                          fontWeight: FontWeight.normal),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 child: Image.asset(
                   "assets/images/scanObject.png",
                   width: 350,
@@ -79,27 +57,22 @@ class _ScanObjectWidgetState extends State<ScanObjectWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(80, 40, 0, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(80, 40, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(
-                            context,
-                            '/object');
+                        Navigator.pushNamed(context, '/object');
                       },
-                      child: Text(
+                      child: const Text(
                         'Can Recycle One ~',
-                        style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 25,
-                            color: Colors.white),
+                        style: TextStyle(fontSize: 25, color: Colors.white),
                       ),
                       style: ElevatedButton.styleFrom(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        primary: Color(0xFFA7C474),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        primary: const Color(0xFFA7C474),
                       ),
                     ),
                   ],

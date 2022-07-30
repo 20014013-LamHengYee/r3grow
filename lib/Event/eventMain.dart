@@ -22,11 +22,6 @@ class _EventPageState extends State<EventPage> {
   final Stream<QuerySnapshot> event =
       FirebaseFirestore.instance.collection('Event').snapshots();
 
-  final String noDocuments = FirebaseFirestore.instance.collection('Event').snapshots().length.toString();
- 
-
-
- 
 
   late String desc;
   late String date;

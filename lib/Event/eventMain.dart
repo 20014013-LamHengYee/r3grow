@@ -1,9 +1,10 @@
 // ignore_for_file: file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:r3grow/Event/eventDetails.dart';
+import '../databaseModel/user_model.dart';
 import 'data.dart';
 import 'date_model.dart';
 
@@ -15,20 +16,19 @@ class EventPage extends StatefulWidget {
 
 class _EventPageState extends State<EventPage> {
   List<DateModel> dates = <DateModel>[];
-
+  List<String> numEvent = [];
 
   String todayDateIs = DateTime.now().day.toString();
 
   final Stream<QuerySnapshot> event =
       FirebaseFirestore.instance.collection('Event').snapshots();
 
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel userLogIn = UserModel();
 
   late String desc;
   late String date;
   late String address;
-  int count = 0;
- 
- 
 
   @override
   void initState() {
@@ -36,6 +36,15 @@ class _EventPageState extends State<EventPage> {
     // TODO: implement initState
     super.initState();
     dates = getDates();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      // ignore: unnecessary_this
+      this.userLogIn = UserModel.fromMap(value.data());
+      setState(() {});
+    });
   }
 
   @override
@@ -62,18 +71,18 @@ class _EventPageState extends State<EventPage> {
                       children: <Widget>[
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const <Widget>[
+                          children: <Widget>[
                             Text(
-                              "Hello, There!",
-                              style: TextStyle(
+                              "Hello, There ${userLogIn.username}!",
+                              style: const TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 21),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 6,
                             ),
-                            Text(
+                            const Text(
                               "Let's explore what’s happening",
                               style:
                                   TextStyle(color: Colors.black, fontSize: 15),
@@ -113,171 +122,188 @@ class _EventPageState extends State<EventPage> {
                     ),
                     // ignore: avoid_unnecessary_containers
                     Container(
-                      child: ListView.builder(
-                          itemCount: 2,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return Container(
-                                height: 100,
-                                margin: const EdgeInsets.only(bottom: 16),
-                                decoration: BoxDecoration(
-                                    color: const Color(0xff29404E),
-                                    borderRadius: BorderRadius.circular(8)),
-                                child: StreamBuilder<QuerySnapshot>(
-                                    stream: event,
-                                    builder: (
-                                      BuildContext context,
-                                      AsyncSnapshot<QuerySnapshot> snapshot,
-                                    ) {
-                                      if (snapshot.hasError) {
-                                        return const Text(
-                                            'Something went wrong');
-                                      }
+                      child: StreamBuilder<QuerySnapshot>(
+                          stream: event,
+                          builder: (
+                            BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot,
+                          ) {
+                            if (snapshot.hasError) {
+                              return const Text('Something went wrong');
+                            }
 
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return const Text('Loading');
-                                      }
-                                      if (!snapshot.hasData ||
-                                          snapshot.data!.docs.isEmpty) {
-                                        return const Text(
-                                          'There are no Upcoming Events',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 25,
-                                              ),
-                                        );
-                                      }
-                                      final getData = snapshot
-                                          .requireData; // take data from the snapshot
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Text('Loading');
+                            }
+                            if (!snapshot.hasData ||
+                                snapshot.data!.docs.isEmpty) {
+                              desc =
+                                  "There are no upcoming events at the moment  :(";
+                              return Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Container(
+                                  height: 100,
+                                  width: 400,
+                                  margin: const EdgeInsets.only(bottom: 20),
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xff29404E),
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(25.0),
+                                    child: Text(
+                                      desc,
+                                      style: const TextStyle(
+                                        color: Colors.redAccent,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+
+                            final getData = snapshot
+                                .requireData; // take data from the snapshot
+
+                            return (snapshot.connectionState ==
+                                    ConnectionState.waiting)
+                                ? const Center(
+                                    child: CircularProgressIndicator())
+                                : ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemCount: snapshot.data!.docs.length,
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, index) {
+                                      DocumentSnapshot data =
+                                          snapshot.data!.docs[index];
                                       desc = getData.docs[index]['Name'];
                                       date = getData.docs[index]['eventDate'];
                                       address = getData.docs[index]['Location'];
 
-                                      count = (snapshot.data!.docs.length);
-                              
-                                      DocumentSnapshot data =
-                                          snapshot.data!.docs[index];
+                                      // DocumentSnapshot data =
+                                      //     snapshot.data!.docs[index];
 
                                       var eventDocId = snapshot
                                           .data!.docs[index].reference.id;
 
-                                      return InkWell(
-                                          onTap: () async {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        EventDetailsWidget(
-                                                            eventDocId)));
-                                          },
-                                          child: Row(
-                                            children: <Widget>[
+                                      return Container(
+                                          height: 110,
+                                          margin:
+                                              const EdgeInsets.only(bottom: 18),
+                                          decoration: BoxDecoration(
+                                              color: const Color(0xff29404E),
+                                              borderRadius:
+                                                  BorderRadius.circular(8)),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          EventDetailsWidget(
+                                                              eventDocId)));
+                                            },
+                                            child: Row(children: <Widget>[
                                               Expanded(
-                                                child: Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 16),
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width -
-                                                      100,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: <Widget>[
-                                                      Text(
-                                                        desc,
-                                                        style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 18),
+                                                  child: Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        left: 10,
+                                                        top: 8,
                                                       ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Padding(
-                                                        padding: const EdgeInsets.fromLTRB(5, 0, 0, 5),
-                                                        child: Row(
-                                                          children: <Widget>[
-                                                            Image.asset(
-                                                              "assets/images/calender.png",
-                                                              height: 12,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width -
+                                                              110,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment.start,
+                                                        children: <Widget>[
+                                                          Text(
+                                                            desc,
+                                                            style: const TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 18),
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .fromLTRB(
+                                                                    3, 0, 0, 5),
+                                                            child: Row(
+                                                              children: <
+                                                                  Widget>[
+                                                                Image.asset(
+                                                                  "assets/images/calender.png",
+                                                                  height: 13,
+                                                                ),
+                                                                const SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Text(
+                                                                  date,
+                                                                  style: const TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          12),
+                                                                )
+                                                              ],
                                                             ),
-                                                            const SizedBox(
-                                                              width: 8,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(5.0),
+                                                            child: Row(
+                                                              children: <
+                                                                  Widget>[
+                                                                Image.asset(
+                                                                  "assets/images/location.png",
+                                                                  height: 13,
+                                                                ),
+                                                                const SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Text(
+                                                                  address,
+                                                                  style: const TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          10.5),
+                                                                )
+                                                              ],
                                                             ),
-                                                            Text(
-                                                              date,
-                                                              style: const TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 10),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      
-                                                      Padding(
-                                                        padding: const EdgeInsets.all(5.0),
-                                                        child: Row(
-                                                          children: <Widget>[
-                                                            Image.asset(
-                                                              "assets/images/location.png",
-                                                              height: 12,
-                                                            ),
-                                                            const SizedBox(
-                                                              width: 8,
-                                                            ),
-                                                            Text(
-                                                              address,
-                                                              style: const TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 10),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
+                                                          ),
+                                                        ],
+                                                      ))),
                                               ClipRRect(
                                                   borderRadius:
                                                       const BorderRadius.only(
-                                                          topRight: Radius
-                                                              .circular(8),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  8),
                                                           bottomRight:
                                                               Radius.circular(
                                                                   8)),
                                                   child: Image.network(
                                                     '${data['image']}',
-                                                    height: 100,
+                                                    height: 110,
                                                     width: 120,
                                                     fit: BoxFit.cover,
                                                   )),
-                                            ],
-                                          )
-
-                                          // child: Image.network(
-                                          //   '${data['image']}',
-                                          //   width: 180,
-                                          //   height: 200,
-                                          //   fit: BoxFit.fitWidth,
-                                          // ),
-                                          );
-                                    }));
-
-                            // return PopularEventTile(
-                            //   desc: events[index].desc,
-                            //   date: events[index].date,
-                            //   address: events[index].address,
-
-                            // );
+                                            ]),
+                                          ));
+                                    });
+                            //);
                           }),
                     ),
                   ],
@@ -297,7 +323,11 @@ class DateTile extends StatelessWidget {
   String date;
   bool isSelected;
   DateTile(
-      {Key? key, required this.weekDay, required this.date, required this.isSelected}) : super(key: key);
+      {Key? key,
+      required this.weekDay,
+      required this.date,
+      required this.isSelected})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

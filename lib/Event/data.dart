@@ -7,51 +7,52 @@ List<DateModel> getDates() {
   List<DateModel> dates = <DateModel>[];
   DateModel dateModel = new DateModel();
 
-  //1
-  dateModel.date = "31";
-  dateModel.weekDay = "Sun";
-  dates.add(dateModel);
 
-  dateModel = new DateModel();
 
   //1
-  dateModel.date = "25";
+  dateModel.date = "1";
   dateModel.weekDay = "Mon";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
-  //1
-  dateModel.date = "26";
+
+  dateModel.date = "2";
   dateModel.weekDay = "Tue";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
-  //1
-  dateModel.date = "27";
+ 
+  dateModel.date = "3";
   dateModel.weekDay = "Wed";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
-  //1
-  dateModel.date = "28";
+  
+  dateModel.date = "4";
   dateModel.weekDay = "Thu";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
-  //1
-  dateModel.date = "29";
+ 
+  dateModel.date = "5";
   dateModel.weekDay = "Fri";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
-  //1
-  dateModel.date = "30";
+  
+  dateModel.date = "6";
   dateModel.weekDay = "Sat";
+  dates.add(dateModel);
+
+  dateModel = new DateModel();
+
+  dateModel.date = "7";
+  dateModel.weekDay = "Sun";
   dates.add(dateModel);
 
   dateModel = new DateModel();

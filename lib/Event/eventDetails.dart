@@ -97,7 +97,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(15, 25, 0, 30),
+                  padding: const EdgeInsetsDirectional.fromSTEB(15, 25, 0, 25),
                   child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                       stream: FirebaseFirestore.instance
                           .collection('Event')
@@ -119,7 +119,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             children: [
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0, 0, 90, 0),
+                                    0, 0, 50, 0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,7 +146,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                 ),
                 //event desc
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 10, 0),
                   child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                       stream: FirebaseFirestore.instance
                           .collection('Event')
@@ -189,7 +189,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0, 0, 15, 0),
+                                    0, 0, 10, 0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -235,7 +235,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             children: [
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0, 25, 15, 0),
+                                    0, 20, 15, 0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -273,6 +273,9 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                   ],
                                 ),
                               ),
+                              // const SizedBox(
+                              //    height: 5.0,
+                              // )
                             ]);
                       }),
                 ),
